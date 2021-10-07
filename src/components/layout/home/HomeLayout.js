@@ -33,7 +33,7 @@ const HomeLayout = ({title, subtitle, image, ctaText, ctaLink, ...rest}) => {
                         as="h1"
                         size="xl"
                         fontWeight="bold"
-                        color="primary.500"
+                        color="primary.300"
                         textAlign={['center', 'center', "left", 'left']}
                     >
                         {title}
@@ -41,7 +41,7 @@ const HomeLayout = ({title, subtitle, image, ctaText, ctaLink, ...rest}) => {
                     <Heading
                         as="h2"
                         size="md"
-                        color="primary.300"
+                        color="primary.100"
                         opacity="0.8"
                         fontWeight="normal"
                         lineHeight={1.5}
@@ -50,12 +50,10 @@ const HomeLayout = ({title, subtitle, image, ctaText, ctaLink, ...rest}) => {
                     </Heading>
                     <Link to={ctaLink}>
                         <Button
-                            colorScheme="primary"
                             borderRadius="8px"
                             py="4"
                             px="4"
                             lineHeight="1"
-                            size="md"
                             >
                             {ctaText}
                         </Button>

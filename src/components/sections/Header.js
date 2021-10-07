@@ -30,8 +30,8 @@ const Header = (props) => {
             w="100%"
             mb={8}
             p={8}
-            bg={["primary.500", "primary.500", "transparent", "transparent"]}
-            color={["white", "white", "primary.500", "primary.500"]}
+            bg={["primary.300", "primary.300", "transparent", "transparent"]}
+            color={["white", "white", "primary.300", "primary.300"]}
             {...props}
         >
             <Flex align="center">
@@ -61,8 +61,8 @@ const Header = (props) => {
                         <Button
                             size="sm"
                             rounded="md"
-                            color={["primary.500", "primary.500", "white", "white"]}
-                            bg={["white", "white", "primary.500", "primary.500"]}
+                            color={["primary.300", "primary.300", "white", "white"]}
+                            bg={["white", "white", "primary.300", "primary.300"]}
                             _hover={{
                                 bg: [
                                     "primary.100",
