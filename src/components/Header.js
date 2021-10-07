@@ -6,10 +6,8 @@ import {
     Button, 
     Flex, 
     Heading,
-    Text,
-    useBreakpointValue, 
+    Text
 } from "@chakra-ui/react";
-import { Collapse } from "@chakra-ui/transition";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useAuthState } from "../utils/auth";
 import { auth } from "../index";
@@ -32,10 +30,6 @@ const MenuItems = (props) => {
 const Header = (props) => {
     const [show, setShow] = React.useState(false);
     const toggleMenu = () => setShow(!show);
-    const navigation = useBreakpointValue({
-        base: <Collapse in={show} animateOpacity><Navigation/></Collapse>,
-        md: <Navigation/>
-    })
 
     return (
         <Flex
@@ -61,7 +55,7 @@ const Header = (props) => {
             <Box
                 display={{ base: show ? "block" : "none", md: "block"}}
                 flexBasis={{base: "100%", md: "auto"}}>
-                {navigation}
+                <Navigation/>
             </Box>
         </Flex>
     )
