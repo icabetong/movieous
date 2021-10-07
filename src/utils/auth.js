@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, onSnapshot } from "firebase/firestore";
-import history from "./history";
-import { auth, firestore } from "../index";
+import { auth } from "../index";
 
 export const AuthContext = React.createContext({ status: "pending" })
 
@@ -11,15 +9,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                console.log(user);
-                setAuthState({status: "fetched"})
-                // onSnapshot(doc(firestore, "users", user.uid), (doc) => {
-                //     setAuthState({status: "fetched", user: doc.data()})
-                // });
-            } else {
-                setAuthState({status: "empty"})
-            }
+            setAuthState({ status: user ? "fetched" : "empty" })
         })
         return unsubscribe();
     }, [])

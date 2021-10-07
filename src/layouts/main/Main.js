@@ -7,7 +7,6 @@ import MovieLayout from "../movie/MovieLayout";
 import BlogLayout from "../blogs/BlogLayout";
 import AboutLayout from "../about/AboutLayout";
 import AccountLayout from "../account/AccountLayout";
-import GettingStartedLayout from "../auth/GettingStartedLayout";
 
 const Main = () => {
     return (

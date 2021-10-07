@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import {
     Button,
-    Flex,
     FormControl,
     FormErrorMessage,
     FormLabel,
@@ -12,53 +11,43 @@ import {
     Select,
     Stack,
 } from "@chakra-ui/react";
-import Page from "../../components/Page";
+import { doc, setDoc } from "firebase/firestore";
+import history from "../../utils/history";
+import { auth, firestore } from "../../index";
 
 const GettingStartedLayout = () => {
     const { t } = useTranslation();
 
     return (
-        <Page>
-            <Flex
-                align="center"
-                justify="center"
-                direction={{base: "column-reverse", md: "row"}}
-                wrap="no-wrap"
-                minW={{base: "90%", md: "60%", lg: "60%"}}
-                minH="70vh"
-                px={{base: 0, md: 6}}
-                mb={16}>
-                <Stack
-                    border="1px"
-                    borderColor="surface.400"
-                    borderRadius="md"
-                    bg="surface.700"
-                    spacing={{base: 2, md: 4}}
-                    w={{base: "90%", md: "60%"}}
-                    p={12}
-                    align="center">
-                    <Heading
-                        as="h1"
-                        size="lg"
-                        fontWeight="bold"
-                        color="primary.300"
-                        textAlign="center" >
-                        { t("auth.getting-started-title") }
-                    </Heading>
-                    <Heading
-                        as="h2"
-                        size="sm"
-                        color="text.secondary"
-                        opacity="0.8"
-                        fontWeight="normal"
-                        textAlign="center">
-                        { t("auth.getting-started-summary")}
-                    </Heading>
+        <Stack
+            border="1px"
+            borderColor="surface.400"
+            borderRadius="md"
+            bg="surface.700"
+            spacing={{base: 2, md: 4}}
+            w={{base: "90%", md: "60%"}}
+            p={12}
+            align="center">
+            <Heading
+                as="h1"
+                size="lg"
+                fontWeight="bold"
+                color="primary.300"
+                textAlign="center" >
+                { t("auth.getting-started-title") }
+            </Heading>
+            <Heading
+                as="h2"
+                size="sm"
+                color="text.secondary"
+                opacity="0.8"
+                fontWeight="normal"
+                textAlign="center">
+                { t("auth.getting-started-summary")}
+            </Heading>
 
-                    <InformationFormLayout/>
-                </Stack>
-            </Flex>
-        </Page>
+            <InformationFormLayout/>
+        </Stack>
     );
 }
 
@@ -69,6 +58,17 @@ const InformationFormLayout = () => {
 
     const onSubmit = (data) => {
         console.log(data);
+        setProcessing(true);
+        const uid = auth.currentUser.uid;
+        const email = auth.currentUser.email;
+
+        setDoc(doc(firestore, "users", uid), {
+            userId: uid,
+            email: email,
+            ...data
+        }).then(() => { history.push("/") })
+        .catch((error) => { console.log(error) })
+        .finally(() => { setProcessing(false) })
     }
 
     return (

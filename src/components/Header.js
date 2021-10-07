@@ -92,7 +92,7 @@ const Navigation = () => {
                                 "primary.600"
                             ]
                         }}>
-                        {t(hasUser ? "navigation.account" : "auth.sign-in")}
+                        {t(hasUser ? "navigation.account" : "button.sign-in")}
                     </Button>
                 </MenuItems>
             </Flex>

@@ -9,6 +9,7 @@ import {
 import Page from "../../components/Page";
 import SignInFormLayout from "./SignInFormLayout";
 import SignUpFormLayout from "./SignUpFormLayout";
+import GettingStartedLayout from "./GettingStartedLayout";
 
 const AuthLayout = () => {
     const [isSignIn, setSignIn] = useState(true);
@@ -26,7 +27,15 @@ const AuthLayout = () => {
                 px={{base: 0, md: 6}}
                 mb={16}>
                 
-                <AuthCoreLayout isSignIn={isSignIn} setSignIn={setSignIn}/>
+                { !isSignIn && hasCreatedAccount
+                   ? <GettingStartedLayout/>
+                   : <AuthCoreLayout 
+                        isSignIn={isSignIn} 
+                        setSignIn={setSignIn}
+                        hasCreatedAccount={hasCreatedAccount}
+                        setCreatedAccount={setCreatedAccount}
+                    />
+                }
             </Flex>
         </Page>
     )
@@ -65,7 +74,9 @@ const AuthCoreLayout = (props) => {
 
             {   props.isSignIn 
                 ? <SignInFormLayout />
-                : <SignUpFormLayout />
+                : <SignUpFormLayout 
+                    hasCreatedAccount={props.hasCreatedAccount} 
+                    setCreatedAccount={props.setCreatedAccount}/>
             }
             
             <Button 

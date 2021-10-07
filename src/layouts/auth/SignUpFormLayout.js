@@ -12,10 +12,9 @@ import {
     Stack,
 } from "@chakra-ui/react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import history from "../../utils/history";
 import { auth } from "../../index";
 
-const SignUpFormLayout = () => {
+const SignUpFormLayout = (props) => {
     const { t } = useTranslation();
     const { register, handleSubmit, formState: { errors }, getValues } = useForm();
     const [showPassword, setShowPassword] = React.useState(false);
@@ -26,7 +25,7 @@ const SignUpFormLayout = () => {
         setCreating(true);
 
         createUserWithEmailAndPassword(auth, email, password)
-            .then(() => { history.push("/"); })
+            .then(() => { props.setCreatedAccount(true) })
             .catch((error) => { console.log(error) })
             .finally(() => setCreating(false))
     }
