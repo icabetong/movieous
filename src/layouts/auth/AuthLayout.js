@@ -13,7 +13,10 @@ import {
     Heading,
     Stack,
 } from "@chakra-ui/react";
-import Page from "../../sections/Page";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import Page from "../../components/Page";
+import history from "../../utils/history";
+import { auth } from "../../index";
 
 const AuthLayout = () => {
     const { t } = useTranslation();
@@ -63,7 +66,7 @@ const AuthLayout = () => {
                     }
                     
                     <Button 
-                        variant="ghost" 
+                        variant="link" 
                         borderRadius="md"
                         onClick={() => setSignIn(!isSignIn)} >
                         {t(isSignIn ? "auth.sign-in-secondary-action" : "auth.sign-up-secondary-action")}
@@ -78,9 +81,15 @@ const SignInFormLayout = () => {
     const { t } = useTranslation();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = React.useState(false);
+    const [isAuthenticating, setAuthenticating] = React.useState(false);
 
     const onSubmit = (data) => {
-        console.log(data);
+        const { email, password } = data;
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then(() => { history.push("/") })
+            .catch((error) => { console.log(error); })
+            .finally(() => { setAuthenticating(false); })
     }
 
     return (
@@ -116,7 +125,7 @@ const SignInFormLayout = () => {
                 <FormErrorMessage>{t(errors.password && errors.password.message)}</FormErrorMessage>
             </FormControl>
 
-            <Button type="submit" mb="4" borderRadius="md">
+            <Button type="submit" mb="4" borderRadius="md" isLoading={isAuthenticating} loadingText={t("feedback.signing-in")}>
                 {t("auth.sign-in")}
             </Button>
         </Stack>
@@ -125,11 +134,18 @@ const SignInFormLayout = () => {
 
 const SignUpFormLayout = () => {
     const { t } = useTranslation();
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, getValues } = useForm();
     const [showPassword, setShowPassword] = React.useState(false);
+    const [isCreating, setCreating] = React.useState(false);
 
     const onSubmit = (data) => {
-        console.log(data);
+        const { email, password } = data;
+        setCreating(true);
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(() => { history.push("/"); })
+            .catch((error) => { console.log(error) })
+            .finally(() => setCreating(false))
     }
 
     return (
@@ -144,6 +160,7 @@ const SignUpFormLayout = () => {
                     type="email"
                     id="email"
                     placeholder={t("placeholder.email")}
+                    isDisabled={isCreating}
                     {...register("email", { required: "error.auth_empty_email" })}/>
                 <FormErrorMessage>{t(errors.email && errors.email.message)}</FormErrorMessage>
             </FormControl>
@@ -155,7 +172,12 @@ const SignUpFormLayout = () => {
                         id="password"
                         type={showPassword ? "text" : "password"}
                         placeholder={t("field.password")}
-                        {...register("password", { required: "error.auth_empty_password", min: 8 })}/>
+                        isDisabled={isCreating}
+                        {...register("password", { 
+                            required: "error.auth_empty_password", 
+                            min: 8,
+                            validate: value => value === getValues("confirm_password")
+                    })}/>
                     <InputRightElement width="4.5rem">
                         <Button variant="ghost" h="1.75rem" size="sm" onClick={() => setShowPassword(!showPassword)}>
                             { t(showPassword ? "button.hide" : "button.show") }
@@ -172,7 +194,12 @@ const SignUpFormLayout = () => {
                         id="confirm_password"
                         type={showPassword ? "text" : "password"}
                         placeholder={t("field.confirm-password")}
-                        {...register("confirm_password", { required: "error.auth_empty_confirm_password", min: 8 })}/>
+                        isDisabled={isCreating}
+                        {...register("confirm_password", { 
+                            required: "error.auth_empty_confirm_password", 
+                            min: 8,
+                            validate: value => value === getValues("password")
+                    })}/>
                     <InputRightElement width="4.5rem">
                         <Button variant="ghost" h="1.75rem" size="sm" onClick={() => setShowPassword(!showPassword)}>
                             { t(showPassword ? "button.hide" : "button.show") }
@@ -182,7 +209,7 @@ const SignUpFormLayout = () => {
                 <FormErrorMessage>{t(errors.confirm_password && errors.confirm_password)}</FormErrorMessage>
             </FormControl>
             
-            <Button type="submit" mb="4" borderRadius="md">
+            <Button type="submit" mb="4" borderRadius="md" isLoading={isCreating} loadingText={t("feedback.creating-account")}>
                 {t("auth.sign-up")}
             </Button>
         </Stack>

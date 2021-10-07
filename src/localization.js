@@ -15,7 +15,8 @@ i18n.use(initReactI18next)
                     movies: "Movies",
                     blogs: "Blogs",
                     contact: "Contact Us",
-                    about: "About"
+                    about: "About",
+                    account: "Account"
                 },
                 auth: {
                     "sign-in": "Sign-in",
@@ -39,12 +40,24 @@ i18n.use(initReactI18next)
                     "password": "password"
                 },
                 button: {
-                    show: "Show",
-                    hide: "Hide"
+                    "show": "Show",
+                    "hide": "Hide",
+                    "sign-in": "Sign-in",
+                    "sign-up": "Sign-up",
+                    "sign-out": "Sign-out",
+                    "cancel": "Cancel"
                 },
                 error: {
                     "auth_empty_email": "Email is required",
                     "auth_empty_password": "Password is required"
+                },
+                feedback: {
+                    "creating-account": "Creating Account...",
+                    "signing-in": "Signing-in..."
+                },
+                modal: {
+                    "sign-out-title": "Sign-out?",
+                    "sign-out-body": "You'll need to enter your information again next time you'll need to access the service."
                 }
             }
         }

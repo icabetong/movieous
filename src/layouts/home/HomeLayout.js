@@ -10,7 +10,7 @@ import {
     Stack,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import Page from "../../sections/Page";
+import Page from "../../components/Page";
 
 const HomeLayout = ({image, ctaLink, ...rest}) => {
     const { t } = useTranslation();
