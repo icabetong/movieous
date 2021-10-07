@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 
-import Main from "./main/Main";
+import Main from "./components/layout/main/Main";
 import reportWebVitals from './reportWebVitals';
 
 const config = {
@@ -10,17 +10,22 @@ const config = {
   useSystemColorMode: false,
 }
 
-const theme = extendTheme({
+const theme = extendTheme({ 
   config,
   colors: {
     primary: {
-      main: "#F0A500"
-    },
-    background: {
-      main: "#000000",
-      surface: "#082032"
+      50: "#fff7da",
+      100: "#ffe7ad",
+      200: "#ffd77d",
+      300: "#ffc74b",
+      400: "#ffb71a",
+      500: "#e69e00",
+      600: "#b37b00",
+      700: "#815800",
+      800: "#4e3500",
+      900: "#1e1100"
     }
-  },
+  }
 })
 
 ReactDOM.render(
