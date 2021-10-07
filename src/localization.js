@@ -33,6 +33,18 @@ i18n.use(initReactI18next)
                     "last-name": "Last Name",
                     "age": "Age",
                     "gender": "Gender"
+                },
+                placeholder: {
+                    "email": "someone@example.com",
+                    "password": "password"
+                },
+                button: {
+                    show: "Show",
+                    hide: "Hide"
+                },
+                error: {
+                    "auth_empty_email": "Email is required",
+                    "auth_empty_password": "Password is required"
                 }
             }
         }
