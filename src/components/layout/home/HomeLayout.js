@@ -9,9 +9,12 @@ import {
     Heading,
     Stack,
 } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 import Page from "../../sections/Page";
 
-const HomeLayout = ({title, subtitle, image, ctaText, ctaLink, ...rest}) => {
+const HomeLayout = ({image, ctaLink, ...rest}) => {
+    const { t } = useTranslation();
+
     return (
         <Page>
             <Flex
@@ -34,9 +37,8 @@ const HomeLayout = ({title, subtitle, image, ctaText, ctaLink, ...rest}) => {
                         size="xl"
                         fontWeight="bold"
                         color="primary.300"
-                        textAlign={['center', 'center', "left", 'left']}
-                    >
-                        {title}
+                        textAlign={['center', 'center', "left", 'left']}>
+                        {t("landing_title")}
                     </Heading>
                     <Heading
                         as="h2"
@@ -46,17 +48,10 @@ const HomeLayout = ({title, subtitle, image, ctaText, ctaLink, ...rest}) => {
                         fontWeight="normal"
                         lineHeight={1.5}
                         textAlign={["center", "center", "left", "left"]}>
-                        {subtitle}
+                        {t("landing_summary")}
                     </Heading>
                     <Link to={ctaLink}>
-                        <Button
-                            borderRadius="8px"
-                            py="4"
-                            px="4"
-                            lineHeight="1"
-                            >
-                            {ctaText}
-                        </Button>
+                        <Button borderRadius="8px" lineHeight="1" >{t("landing_action")}</Button>
                     </Link>
                 </Stack>
                 <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
@@ -68,20 +63,13 @@ const HomeLayout = ({title, subtitle, image, ctaText, ctaLink, ...rest}) => {
 }
 
 HomeLayout.propTypes = {
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
     image: PropTypes.string,
-    ctaText: PropTypes.string,
-    ctaLink: PropTypes.string,
-  }
+    ctaLink: PropTypes.string
+}
 
 HomeLayout.defaultProps = {
-    title: "The Gateway to your entertainment",
-    subtitle:
-      "This is the subheader section where you describe the basic benefits of your product",
     image: "https://images.unsplash.com/photo-1608170825938-a8ea0305d46c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1925&q=80",
-    ctaText: "Create your account now",
-    ctaLink: "/signup",
+    ctaLink: "/auth"
 }
 
 export default HomeLayout;

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next"; 
 import {
     Button,
     Flex,
@@ -9,6 +10,7 @@ import {
 import Page from "../../sections/Page";
 
 const AuthLayout = () => {
+    const { t } = useTranslation();
     const [isSignIn, setSignIn] = React.useState(true);
 
     return (
@@ -21,7 +23,7 @@ const AuthLayout = () => {
                 minW={{base: "100vw", md: "40vw"}}
                 minH="70vh"
                 px={8}
-                mb={16}
+                mb={16} 
             >
                 <Stack
                     border="1px"
@@ -38,9 +40,8 @@ const AuthLayout = () => {
                         size="lg"
                         fontWeight="bold"
                         color="primary.300"
-                        textAlign="center"
-                    >
-                    { isSignIn ? "Sign In" : "Sign Up" }
+                        textAlign="center" >
+                        { t(isSignIn ? "auth.sign-in" : "auth.sign-up") }
                     </Heading>
                     <Heading
                         as="h2"
@@ -48,9 +49,8 @@ const AuthLayout = () => {
                         color="text.secondary"
                         opacity="0.8"
                         fontWeight="normal"
-                        lineHeight={1.5}
                         textAlign="center">
-                        Enter your credentials to continue
+                        { t(isSignIn ? "auth.sign-in-summary" : "auth.sign-up-summary")}
                     </Heading>
 
                     {   isSignIn 
@@ -58,13 +58,14 @@ const AuthLayout = () => {
                         : <SignUpFormLayout/>
                     }
                     
-                    <Button
-                        borderRadius="8px"
-                        py="4"
-                        px="4"
-                        lineHeight="1"
-                        >
-                        {isSignIn ? "Sign-in" : "Sign-up"}
+                    <Button mb="4" borderRadius="md">
+                        {t(isSignIn ? "auth.sign-in" : "auth.sign-up")}
+                    </Button>
+                    <Button 
+                        variant="ghost" 
+                        borderRadius="md"
+                        onClick={() => setSignIn(!isSignIn)} >
+                        {t(isSignIn ? "auth.sign-in-secondary-action" : "auth.sign-up-secondary-action")}
                     </Button>
                 </Stack>
             </Flex>

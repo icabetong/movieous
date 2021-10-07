@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 
+import './localization';
 import Main from "./components/layout/main/Main";
 import reportWebVitals from './reportWebVitals';
 
@@ -17,7 +18,8 @@ const Input = {
     }
   },
   defaultProps: {
-    variant: "outline"
+    variant: "outline",
+    focusBorderColor: "primary.300"
   }
 }
 
@@ -27,7 +29,6 @@ const Button = {
       border: "2px solid",
       borderColor: "primary.300",
       color: "primary.300",
-      
     },
     solid: {
       bg: "primary.300",
@@ -35,7 +36,7 @@ const Button = {
       _hover: {
         bg: "primary.400"
       }
-    }
+    },
   },
   defaultProps: {
     size: "md",
@@ -50,6 +51,10 @@ const config = {
 
 const theme = extendTheme({ 
   config,
+  fonts: {
+    heading: "Rubik",
+    body: "Rubik"
+  },
   colors: {
     primary:  {
       50: '#ffe5e5',
