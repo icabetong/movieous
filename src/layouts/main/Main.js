@@ -4,6 +4,9 @@ import history from "../../utils/history";
 import AuthLayout from "../auth/AuthLayout";
 import HomeLayout from "../home/HomeLayout";
 import MovieLayout from "../movie/MovieLayout";
+import BlogLayout from "../blogs/BlogLayout";
+import AboutLayout from "../about/AboutLayout";
+import AccountLayout from "../account/AccountLayout";
 
 const Main = () => {
     return (
@@ -12,6 +15,9 @@ const Main = () => {
                 <Switch>
                     <Route path="/" component={HomeLayout} exact/>
                     <Route path="/movies" component={MovieLayout}/>
+                    <Route path="/blogs" component={BlogLayout}/>
+                    <Route path="/about" component={AboutLayout}/>
+                    <Route path="/account" component={AccountLayout}/>
                     <Route path="/auth" component={AuthLayout}/>
                 </Switch>
             </Router>

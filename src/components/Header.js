@@ -5,14 +5,7 @@ import {
     Box, 
     Button, 
     Flex, 
-    Heading, 
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
+    Heading,
     Text,
     useBreakpointValue, 
 } from "@chakra-ui/react";
@@ -78,7 +71,6 @@ const Navigation = () => {
     const { t } = useTranslation();
     const { status } = useAuthState();
     const hasUser = Boolean(auth.currentUser);
-    const [isSigningOut, setSigningOut] = React.useState(false);
 
     return (
         <>
@@ -87,12 +79,12 @@ const Navigation = () => {
                 justify={["center", "space-between", "flex-end", "flex-end"]}
                 direction={["column", "row", "row", "row"]}
                 pt={[4, 4, 0, 0]}>
-                <MenuItems to="/">Home</MenuItems>
-                <MenuItems to="/movies">Movies</MenuItems>
-                <MenuItems to="/blogs">Blogs</MenuItems>
-                <MenuItems to="/contact">Contact</MenuItems>
-                <MenuItems to="/about">About</MenuItems>
-                <MenuItems to={hasUser ? undefined : "/auth"}>
+                <MenuItems to="/">{t("navigation.home")}</MenuItems>
+                <MenuItems to="/movies">{t("navigation.movies")}</MenuItems>
+                <MenuItems to="/blogs">{t("navigation.blogs")}</MenuItems>
+                {/* <MenuItems to="/contact">Contact</MenuItems> */}
+                <MenuItems to="/about">{t("navigation.about")}</MenuItems>
+                <MenuItems to={hasUser ? "/account" : "/auth"}>
                     <Button
                         isLoading={status === "pending"}
                         size="sm"
@@ -106,44 +98,13 @@ const Navigation = () => {
                                 "primary.600",
                                 "primary.600"
                             ]
-                        }}
-                        onClick={() => {auth.currentUser && setSigningOut(true)}}
-                    >{t(hasUser ? "navigation.account" : "auth.sign-in")}
+                        }}>
+                        {t(hasUser ? "navigation.account" : "auth.sign-in")}
                     </Button>
                 </MenuItems>
             </Flex>
-            <SignOutModal 
-                isOpen={isSigningOut} 
-                onDismiss={() => setSigningOut(false)}/>
         </>
     )
 };
-
-const SignOutModal = (props) => {
-    const { t } = useTranslation();
-
-    const onSignOutConfirmed = () => {
-        auth.signOut();
-        props.onDismiss();
-    }
-
-    return (
-        <Modal blockScrollOnMount={false} isOpen={props.isOpen} onClose={props.onDismiss}>
-            <ModalOverlay />
-            <ModalContent>
-            <ModalHeader>{t("modal.sign-out-title")}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody> {t("modal.sign-out-body")}</ModalBody>
-
-            <ModalFooter>
-                <Button mr={3} onClick={onSignOutConfirmed}>
-                    {t("button.sign-out")}
-                </Button>
-                <Button variant="ghost" onClick={props.onDismiss}>{t("button.cancel")}</Button>
-            </ModalFooter>
-            </ModalContent>
-        </Modal>
-    )
-}
 
 export default Header;
