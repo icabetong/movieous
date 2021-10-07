@@ -5,10 +5,10 @@ import {
     Box, 
     Button, 
     Flex, 
-    Heading,
     Text
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { ReactComponent as Logo } from "../assets/Logo.svg" 
 import { useAuthState } from "../utils/auth";
 import { auth } from "../index";
 
@@ -42,10 +42,9 @@ const Header = (props) => {
             p={8}
             bg={["primary.300", "primary.300", "transparent", "transparent"]}
             color={["white", "white", "primary.300", "primary.300"]}
-            {...props}
-        >
+            {...props} >
             <Flex align="center">
-                <Heading size="md">Movieous</Heading>
+                <Logo/>
             </Flex>
 
             <Box display={{base: "block", md: "none"}} onClick={toggleMenu}>

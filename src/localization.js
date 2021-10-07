@@ -19,25 +19,30 @@ i18n.use(initReactI18next)
                     account: "Account"
                 },
                 auth: {
-                    "sign-in": "Sign-in",
-                    "sign-up": "Sign-up",
-                    "sign-in-summary": "Enter your credentials to continue.",
-                    "sign-up-summary": "Enter your information",
+                    "sign-in": "Let's get you signed-in",
+                    "sign-up": "Let's create your account",
+                    "sign-in-summary": "You'll need to enter your valid email and password to access your account",
+                    "sign-up-summary": "You'll need to enter valid information to create an account",
                     "sign-in-secondary-action": "Create an account",
-                    "sign-up-secondary-action": "Sign-in with existing account"
+                    "sign-up-secondary-action": "Sign-in with existing account",
+                    "getting-started-title": "Mind telling us about you?",
+                    "getting-started-summary": "We'll need a few basic details to know you."
                 },
                 field: {
                     "email": "Email",
                     "password": "Password",
                     "confirm-password": "Confirm Password",
-                    "first-name": "First Name",
-                    "last-name": "Last Name",
-                    "age": "Age",
+                    "firstname": "First Name",
+                    "lastname": "Last Name",
+                    "birthday": "Birthday",
                     "gender": "Gender"
                 },
                 placeholder: {
                     "email": "someone@example.com",
-                    "password": "password"
+                    "password": "password",
+                    "firstname": "John",
+                    "lastname": "Doe",
+                    "gender": "Select one"
                 },
                 button: {
                     "show": "Show",
@@ -45,6 +50,7 @@ i18n.use(initReactI18next)
                     "sign-in": "Sign-in",
                     "sign-up": "Sign-up",
                     "sign-out": "Sign-out",
+                    "continue": "Continue",
                     "cancel": "Cancel"
                 },
                 error: {
@@ -58,7 +64,10 @@ i18n.use(initReactI18next)
                 modal: {
                     "sign-out-title": "Sign-out?",
                     "sign-out-body": "You'll need to enter your information again next time you'll need to access the service."
-                }
+                },
+                "gender-option-male": "Male",
+                "gender-option-female": "Female",
+                "gender-option-unspecified": "Unspecified"
             }
         }
     },

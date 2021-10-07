@@ -1,27 +1,19 @@
-import React from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next"; 
-import { useForm } from "react-hook-form";
 import {
     Button,
     Flex,
-    FormControl,
-    FormErrorMessage,
-    FormLabel,
-    Input,
-    InputGroup,
-    InputRightElement,
     Heading,
     Stack,
 } from "@chakra-ui/react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import Page from "../../components/Page";
-import history from "../../utils/history";
-import { auth } from "../../index";
+import SignInFormLayout from "./SignInFormLayout";
+import SignUpFormLayout from "./SignUpFormLayout";
 
 const AuthLayout = () => {
-    const { t } = useTranslation();
-    const [isSignIn, setSignIn] = React.useState(true);
-
+    const [isSignIn, setSignIn] = useState(true);
+    const [hasCreatedAccount, setCreatedAccount] = useState(false);
+    
     return (
         <Page>
             <Flex
@@ -33,184 +25,54 @@ const AuthLayout = () => {
                 minH="70vh"
                 px={{base: 0, md: 6}}
                 mb={16}>
-                <Stack
-                    border="1px"
-                    borderColor="surface.400"
-                    borderRadius="md"
-                    bg="surface.700"
-                    spacing={{base: 2, md: 4}}
-                    w={{base: "90%", md: "60%"}}
-                    p={12}
-                    align="center">
-                    <Heading
-                        as="h1"
-                        size="lg"
-                        fontWeight="bold"
-                        color="primary.300"
-                        textAlign="center" >
-                        { t(isSignIn ? "auth.sign-in" : "auth.sign-up") }
-                    </Heading>
-                    <Heading
-                        as="h2"
-                        size="sm"
-                        color="text.secondary"
-                        opacity="0.8"
-                        fontWeight="normal"
-                        textAlign="center">
-                        { t(isSignIn ? "auth.sign-in-summary" : "auth.sign-up-summary")}
-                    </Heading>
-
-                    {   isSignIn 
-                        ? <SignInFormLayout />
-                        : <SignUpFormLayout />
-                    }
-                    
-                    <Button 
-                        variant="link" 
-                        borderRadius="md"
-                        onClick={() => setSignIn(!isSignIn)} >
-                        {t(isSignIn ? "auth.sign-in-secondary-action" : "auth.sign-up-secondary-action")}
-                    </Button>
-                </Stack>
+                
+                <AuthCoreLayout isSignIn={isSignIn} setSignIn={setSignIn}/>
             </Flex>
         </Page>
     )
 }
 
-const SignInFormLayout = () => {
+const AuthCoreLayout = (props) => {
     const { t } = useTranslation();
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [isAuthenticating, setAuthenticating] = React.useState(false);
-
-    const onSubmit = (data) => {
-        const { email, password } = data;
-
-        signInWithEmailAndPassword(auth, email, password)
-            .then(() => { history.push("/") })
-            .catch((error) => { console.log(error); })
-            .finally(() => { setAuthenticating(false); })
-    }
 
     return (
-        <Stack 
-            as="form"
-            spacing={4}
-            align="center"
-            onSubmit={handleSubmit(onSubmit)}>
-            <FormControl isInvalid={errors.email && errors.email} isRequired>
-                <FormLabel htmlFor="email">{t("field.email")}</FormLabel>
-                <Input
-                    type="email"
-                    id="email"
-                    placeholder={t("placeholder.email")}
-                    {...register("email", { required: "error.auth_empty_email" })}/>
-                <FormErrorMessage>{t(errors.email && errors.email.message)}</FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={errors.password && errors.password} isRequired>
-                <FormLabel htmlFor="password">{t("field.password")}</FormLabel>
-                <InputGroup>
-                    <Input 
-                        pr="4.5rem"
-                        id="password"
-                        type={showPassword ? "text" : "password"}
-                        placeholder={t("placeholder.password")}
-                        {...register("password", { required: "error.auth_empty_password", min: 8 })}/>
-                    <InputRightElement width="4.5rem">
-                        <Button variant="ghost" h="1.75rem" size="sm" onClick={() => setShowPassword(!showPassword)}>
-                            { t(showPassword ? "button.hide" : "button.show") }
-                        </Button>
-                    </InputRightElement>
-                </InputGroup>
-                <FormErrorMessage>{t(errors.password && errors.password.message)}</FormErrorMessage>
-            </FormControl>
+        <Stack
+            border="1px"
+            borderColor="surface.400"
+            borderRadius="md"
+            bg="surface.700"
+            spacing={{base: 2, md: 4}}
+            w={{base: "90%", md: "60%"}}
+            p={12}
+            align="center">
+            <Heading
+                as="h1"
+                size="lg"
+                fontWeight="bold"
+                color="primary.300"
+                textAlign="center" >
+                { t(props.isSignIn ? "auth.sign-in" : "auth.sign-up") }
+            </Heading>
+            <Heading
+                as="h2"
+                size="sm"
+                color="text.secondary"
+                opacity="0.8"
+                fontWeight="normal"
+                textAlign="center">
+                { t(props.isSignIn ? "auth.sign-in-summary" : "auth.sign-up-summary")}
+            </Heading>
 
-            <Button type="submit" mb="4" borderRadius="md" isLoading={isAuthenticating} loadingText={t("feedback.signing-in")}>
-                {t("auth.sign-in")}
-            </Button>
-        </Stack>
-    )
-}
-
-const SignUpFormLayout = () => {
-    const { t } = useTranslation();
-    const { register, handleSubmit, formState: { errors }, getValues } = useForm();
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [isCreating, setCreating] = React.useState(false);
-
-    const onSubmit = (data) => {
-        const { email, password } = data;
-        setCreating(true);
-
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(() => { history.push("/"); })
-            .catch((error) => { console.log(error) })
-            .finally(() => setCreating(false))
-    }
-
-    return (
-        <Stack 
-            as="form"
-            spacing={4}
-            align="center"
-            onSubmit={handleSubmit(onSubmit)}>
-            <FormControl isInvalid={errors.email && errors.email} isRequired>
-                <FormLabel htmlFor="email">{t("field.email")}</FormLabel>
-                <Input
-                    type="email"
-                    id="email"
-                    placeholder={t("placeholder.email")}
-                    isDisabled={isCreating}
-                    {...register("email", { required: "error.auth_empty_email" })}/>
-                <FormErrorMessage>{t(errors.email && errors.email.message)}</FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={errors.password && errors.password} isRequired>
-                <FormLabel htmlFor="password">{t("field.password")}</FormLabel>
-                <InputGroup>
-                    <Input 
-                        pr="4.5rem"
-                        id="password"
-                        type={showPassword ? "text" : "password"}
-                        placeholder={t("field.password")}
-                        isDisabled={isCreating}
-                        {...register("password", { 
-                            required: "error.auth_empty_password", 
-                            min: 8,
-                            validate: value => value === getValues("confirm_password")
-                    })}/>
-                    <InputRightElement width="4.5rem">
-                        <Button variant="ghost" h="1.75rem" size="sm" onClick={() => setShowPassword(!showPassword)}>
-                            { t(showPassword ? "button.hide" : "button.show") }
-                        </Button>
-                    </InputRightElement>
-                </InputGroup>
-                <FormErrorMessage>{t(errors.password && errors.password.message)}</FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={errors.confirm_password && errors.confirm_password} isRequired>
-                <FormLabel htmlFor="password">{t("field.confirm-password")}</FormLabel>
-                <InputGroup>
-                    <Input 
-                        pr="4.5rem"
-                        id="confirm_password"
-                        type={showPassword ? "text" : "password"}
-                        placeholder={t("field.confirm-password")}
-                        isDisabled={isCreating}
-                        {...register("confirm_password", { 
-                            required: "error.auth_empty_confirm_password", 
-                            min: 8,
-                            validate: value => value === getValues("password")
-                    })}/>
-                    <InputRightElement width="4.5rem">
-                        <Button variant="ghost" h="1.75rem" size="sm" onClick={() => setShowPassword(!showPassword)}>
-                            { t(showPassword ? "button.hide" : "button.show") }
-                        </Button>
-                    </InputRightElement>
-                </InputGroup>
-                <FormErrorMessage>{t(errors.confirm_password && errors.confirm_password)}</FormErrorMessage>
-            </FormControl>
+            {   props.isSignIn 
+                ? <SignInFormLayout />
+                : <SignUpFormLayout />
+            }
             
-            <Button type="submit" mb="4" borderRadius="md" isLoading={isCreating} loadingText={t("feedback.creating-account")}>
-                {t("auth.sign-up")}
+            <Button 
+                variant="link" 
+                borderRadius="md"
+                onClick={() => props.setSignIn(!props.isSignIn)} >
+                {t(props.isSignIn ? "auth.sign-in-secondary-action" : "auth.sign-up-secondary-action")}
             </Button>
         </Stack>
     )
