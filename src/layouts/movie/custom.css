@@ -3,18 +3,21 @@
     margin-bottom: var(--chakra-space-12);
 }
 .selected {
-    color: var(--chakra-colors-primary-300);
+    color: var(--chakra-colors-primary-200);
 }
-
-ul { display: inline-block; }
-
-li {
+ul, li { 
     display: inline-block;
 }
 li > a {
+    min-width: var(--chakra-space-6);
+    min-height: var(--chakra-space-6);
+    border: 1px solid transparent;
     border-radius: var(--chakra-space-2);
-    padding: var(--chakra-space-4);
+    padding-left: var(--chakra-space-4);
+    padding-right: var(--chakra-space-4);
+    padding-top: var(--chakra-space-2);
+    padding-bottom: var(--chakra-space-2);
 }
 li > a:hover {
-    background-color: var(--chakra-colors-primary-300);
+    border: 1px solid var(--chakra-colors-primary-300);
 }

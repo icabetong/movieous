@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import ReactPaginate from "react-paginate";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, useBreakpointValue } from "@chakra-ui/react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import Page from "../../components/Page";
 import { fetch } from "../../infrastructure/Movie";
 import MovieList from "./Movie";
@@ -12,6 +13,8 @@ const MovieLayout = () => {
     const { t } = useTranslation();
     const [response, setResponse] = useState({ movies: [], pages: 0, items: 0 });
     const [currentPage, setCurrentPage] = useState(1);
+    const range = useBreakpointValue({ base: 2, md: 5 });
+    const breakRange = useBreakpointValue({ base: 1, md: 2 });
     
     useEffect(() => {
         fetch(currentPage)
@@ -36,12 +39,13 @@ const MovieLayout = () => {
             <MovieList movies={response.movies}/>
             <Box>
                 <ReactPaginate
+                    previousLabel={<ChevronLeftIcon/>}
+                    nextLabel={<ChevronRightIcon/>}
                     onPageChange={onPageChange}
                     pageCount={response.pages}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={10}
-                    containerClassName="container"
-                    nextClassName="next-button"/>
+                    marginPagesDisplayed={breakRange}
+                    pageRangeDisplayed={range}
+                    containerClassName="container"/>
             </Box>
         </Page>
     )
