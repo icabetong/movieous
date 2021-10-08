@@ -1,0 +1,20 @@
+.container {
+    margin-top: var(--chakra-space-8);
+    margin-bottom: var(--chakra-space-12);
+}
+.selected {
+    color: var(--chakra-colors-primary-300);
+}
+
+ul { display: inline-block; }
+
+li {
+    display: inline-block;
+}
+li > a {
+    border-radius: var(--chakra-space-2);
+    padding: var(--chakra-space-4);
+}
+li > a:hover {
+    background-color: var(--chakra-colors-primary-300);
+}

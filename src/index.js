@@ -10,6 +10,8 @@ import theme from "./utils/theme";
 import Main from "./layouts/main/Main";
 import reportWebVitals from './reportWebVitals';
 
+require('dotenv').config();
+
 const config = {
   apiKey: "AIzaSyCCMTRXgsYXw5DV7mXsklEXleorRVlhcA0",
   authDomain: "movieous-clsu.firebaseapp.com",

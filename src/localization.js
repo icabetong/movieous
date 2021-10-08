@@ -51,7 +51,8 @@ i18n.use(initReactI18next)
                     "sign-up": "Sign-up",
                     "sign-out": "Sign-out",
                     "continue": "Continue",
-                    "cancel": "Cancel"
+                    "cancel": "Cancel",
+                    "book": "Book"
                 },
                 error: {
                     "auth_empty_email": "Email is required",
@@ -65,6 +66,7 @@ i18n.use(initReactI18next)
                     "sign-out-title": "Sign-out?",
                     "sign-out-body": "You'll need to enter your information again next time you'll need to access the service."
                 },
+                "rating-and-votes": "Rating {{rating}} &bull; {{votes}} Votes",
                 "gender-option-male": "Male",
                 "gender-option-female": "Female",
                 "gender-option-unspecified": "Unspecified"

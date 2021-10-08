@@ -57,7 +57,6 @@ const InformationFormLayout = () => {
     const [isProcessing, setProcessing] = React.useState(false);
 
     const onSubmit = (data) => {
-        console.log(data);
         setProcessing(true);
         const uid = auth.currentUser.uid;
         const email = auth.currentUser.email;
