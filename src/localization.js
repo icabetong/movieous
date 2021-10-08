@@ -54,7 +54,8 @@ i18n.use(initReactI18next)
                     "cancel": "Cancel",
                     "book": "Book",
                     "read-more": "Read More",
-                    "learn-more": "Learn more"
+                    "learn-more": "Learn more",
+                    "sign-in-with-google": "Sign-in with Google"
                 },
                 error: {
                     "auth_empty_email": "Email is required",

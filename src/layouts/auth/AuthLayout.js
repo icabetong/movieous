@@ -1,19 +1,12 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next"; 
-import {
-    Button,
-    Flex,
-    Heading,
-    Stack,
-} from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import Page from "../../components/Page";
-import SignInFormLayout from "./SignInFormLayout";
-import SignUpFormLayout from "./SignUpFormLayout";
-import GettingStartedLayout from "./GettingStartedLayout";
+import SignInForm from "./SignInForm";
+import SignUpForm from "./SignUpForm";
+import UserInformationForm from "./UserInformationForm";
 
 const AuthLayout = () => {
-    const [isSignIn, setSignIn] = useState(true);
-    const [hasCreatedAccount, setCreatedAccount] = useState(false);
+    const [mode, setMode] = useState("sign-in");
     
     return (
         <Page>
@@ -26,67 +19,19 @@ const AuthLayout = () => {
                 minH="70vh"
                 px={{base: 0, md: 6}}
                 mb={16}>
-                
-                { !isSignIn && hasCreatedAccount
-                   ? <GettingStartedLayout/>
-                   : <AuthCoreLayout 
-                        isSignIn={isSignIn} 
-                        setSignIn={setSignIn}
-                        hasCreatedAccount={hasCreatedAccount}
-                        setCreatedAccount={setCreatedAccount}
-                    />
-                }
+                <AuthInnerLayout mode={mode} setMode={setMode}/>
             </Flex>
         </Page>
     )
 }
 
-const AuthCoreLayout = (props) => {
-    const { t } = useTranslation();
-
-    return (
-        <Stack
-            border="1px"
-            borderColor="surface.400"
-            borderRadius="md"
-            bg="surface.700"
-            spacing={{base: 2, md: 4}}
-            w={{base: "90%", md: "60%"}}
-            p={12}
-            align="center">
-            <Heading
-                as="h1"
-                size="lg"
-                fontWeight="bold"
-                color="primary.300"
-                textAlign="center" >
-                { t(props.isSignIn ? "auth.sign-in" : "auth.sign-up") }
-            </Heading>
-            <Heading
-                as="h2"
-                size="sm"
-                color="text.secondary"
-                opacity="0.8"
-                fontWeight="normal"
-                textAlign="center">
-                { t(props.isSignIn ? "auth.sign-in-summary" : "auth.sign-up-summary")}
-            </Heading>
-
-            {   props.isSignIn 
-                ? <SignInFormLayout />
-                : <SignUpFormLayout 
-                    hasCreatedAccount={props.hasCreatedAccount} 
-                    setCreatedAccount={props.setCreatedAccount}/>
-            }
-            
-            <Button 
-                variant="link" 
-                borderRadius="md"
-                onClick={() => props.setSignIn(!props.isSignIn)} >
-                {t(props.isSignIn ? "auth.sign-in-secondary-action" : "auth.sign-up-secondary-action")}
-            </Button>
-        </Stack>
-    )
+const AuthInnerLayout = (props) => {
+    switch(props.mode) {
+        case "sign-in": return <SignInForm setMode={props.setMode}/>
+        case "sign-up": return <SignUpForm setMode={props.setMode}/>
+        case "enter-info": return <UserInformationForm setMode={props.setMode}/>
+        default: return <div></div>
+    }
 }
 
 export default AuthLayout;

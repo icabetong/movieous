@@ -1,60 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
 
-const Select = {
-	variants: {
-		outline: {
-			field: {
-				_focus: {
-					borderColor: "primary.300",
-					boxShadow: "none"
-				}
-			}
-		}
-	},
-	defaultProps: {
-		variant: "outline",
-		focusBorderColor: "primary.300"
-	}
-}
-
-const Input = {
-	variants: {
-		outline: {
-			field: {
-				_focus: {
-					borderColor: "primary.300",
-					boxShadow: "none"
-				}
-			}
-		}
-	},
-	defaultProps: {
-		variant: "outline",
-		focusBorderColor: "primary.300"
-	}
-}
-
-const Button = {
-	variants: {
-		outline: {
-		border: "2px solid",
-		borderColor: "primary.300",
-		color: "primary.300",
-		},
-		solid: {
-		bg: "primary.300",
-		color: "text.main",
-		_hover: {
-			bg: "primary.400"
-		}
-		},
-	},
-	defaultProps: {
-		size: "md",
-		variant: "solid"
-	}
-}
-
 const config = {
 	initialColorMode: "dark",
 	useSystemColorMode: false,
@@ -108,14 +53,11 @@ const theme = extendTheme({
 		secondary: "#DDDDDD"
 		},
 	},
-	components: {
-		Button, Input, Select
-	},
 	styles: {
 		global: {
-		"body": {
-			bg: "surface.800",
-		}
+			"body": {
+				bg: "surface.800",
+			}
 		}
 	}
 })
