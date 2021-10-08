@@ -1,54 +1,88 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import ReactPaginate from "react-paginate";
-import { Box, Heading, useBreakpointValue } from "@chakra-ui/react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { 
+    Box,
+    Button,
+    Flex,
+    Heading,
+    Image,
+    Stack,
+    Text
+} from "@chakra-ui/react";
 import Page from "../../components/Page";
-import { fetch } from "../../infrastructure/Movie";
-import MovieList from "./Movie";
-
-import "./custom.css";
+import { fetchSingle, buildImageUrl } from "../../infrastructure/Movie";
 
 const MovieLayout = () => {
     const { t } = useTranslation();
-    const [response, setResponse] = useState({ movies: [], pages: 0, items: 0 });
-    const [currentPage, setCurrentPage] = useState(1);
-    const range = useBreakpointValue({ base: 2, md: 5 });
-    const breakRange = useBreakpointValue({ base: 1, md: 2 });
-    
-    useEffect(() => {
-        fetch(currentPage)
-            .then((data) => { 
-                setResponse({
-                    movies: data.results,
-                    pages: data.total_pages,
-                    items: data.total_results
-                });
-            }).catch((error) => { 
-                console.log(error)
-            })
-    }, [currentPage]);
+    const { id } = useParams();
+    const [movie, setMovie] = useState({});
 
-    const onPageChange = (page) => {
-        setCurrentPage(page.selected);
-    }
+    useEffect(() => {
+        fetchSingle(id)
+            .then((response) => {setMovie(response.data) })
+            .catch((error) => console.log(error))
+    }, [id]);
 
     return (
         <Page>
-            <Heading as="h2" size="xl">{t("navigation.movies")}</Heading>
-            <MovieList movies={response.movies}/>
-            <Box>
-                <ReactPaginate
-                    previousLabel={<ChevronLeftIcon/>}
-                    nextLabel={<ChevronRightIcon/>}
-                    onPageChange={onPageChange}
-                    pageCount={response.pages}
-                    marginPagesDisplayed={breakRange}
-                    pageRangeDisplayed={range}
-                    containerClassName="container"/>
-            </Box>
+            <Flex
+                align="center"
+                justify={{base: "center", md: "space-around", xl: "space-between"}}
+                direction={{base: "column-reverse", md: "row"}}
+                wrap="no-wrap"
+                minH="70vh"
+                px={8}
+                mb={16}>
+                <Stack
+                    spacing={4}
+                    w={{base: "80%", md: "40%"}}
+                    align={['center', 'center', 'flex-start', 'flex-start']} >
+                    <Heading
+                        as="h1"
+                        size="xl"
+                        fontWeight="bold"
+                        color="primary.300"
+                        textAlign={['center', 'center', "left", 'left']}>
+                        {movie.title}
+                    </Heading>
+                    <Box
+                        color="gray.500"
+                        fontWeight="semibold"
+                        letterSpacing="wide"
+                        fontSize="xs"
+                        textTransform="uppercase"
+                        ml="2">
+                        {t("concat.rating", { rating: movie.vote_average})}
+                    </Box>
+                    <Heading
+                        as="h2"
+                        size="md"
+                        color="gray.200"
+                        opacity="0.8"
+                        fontWeight="normal"
+                        lineHeight={1.5}
+                        textAlign={["center", "center", "left", "left"]}>
+                        {movie.overview}
+                    </Heading>
+                    <Text>{t("concat.release-date", { date: movie.release_date })}</Text>
+                    
+                    <Flex direction="row">
+                        <Link to="/booking">
+                            <Button borderRadius="8px" lineHeight="1" >{t("button.book")}</Button>
+                        </Link>
+                        <Button variant="ghost" mx={4} onClick={(e) => { e.preventDefault();window.location.href = movie.homepage}}>
+                            {t("button.learn-more")}
+                        </Button>
+                    </Flex>
+                </Stack>
+                <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
+                    <Image loading="lazy" src={buildImageUrl(movie.poster_path)} size="100%" rounded="1rem" shadow="2xl" />
+                </Box>
+            </Flex>
         </Page>
-    )
+    );
 }
 
 export default MovieLayout;

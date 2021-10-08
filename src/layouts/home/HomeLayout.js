@@ -25,13 +25,11 @@ const HomeLayout = ({image, ctaLink, ...rest}) => {
                 minH="70vh"
                 px={8}
                 mb={16}
-                {...rest}
-            >
+                {...rest} >
                 <Stack
                     spacing={4}
                     w={{base: "80%", md: "40%"}}
-                    align={['center', 'center', 'flex-start', 'flex-start']}
-                >
+                    align={['center', 'center', 'flex-start', 'flex-start']} >
                     <Heading
                         as="h1"
                         size="xl"

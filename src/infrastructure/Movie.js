@@ -13,3 +13,14 @@ export const fetch = async (page) => {
 
     return response.data;
 }
+
+export const fetchSingle = async (id) => {
+    const response = await api.get(`/movie/${id}`, { params: {
+        api_key: API_KEY
+    }})
+    return response;
+}
+
+export const buildImageUrl = (url) => {
+    return `${IMAGE_URL}${url}`
+}
