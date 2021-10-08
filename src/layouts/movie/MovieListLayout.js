@@ -31,7 +31,7 @@ const MovieListLayout = () => {
     }, [currentPage]);
 
     const onPageChange = (page) => {
-        setCurrentPage(page.selected);
+        setCurrentPage(page.selected + 1);
     }
 
     const onMovieSelected = (movie) => {
