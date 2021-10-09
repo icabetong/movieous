@@ -1,21 +1,19 @@
-import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import {
-    Box, 
+    Box,
     Button,
     Flex,
-    Image,
     Heading,
-    Stack,
+    Stack
 } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
+import { ReactComponent as Figure } from "../../assets/error.svg";
 import Page from "../../components/Page";
 
-const HomeLayout = ({image, ctaLink, ...rest}) => {
+const UnauthorizedErrorLayout = () => {
     const { t } = useTranslation();
 
-    return (
+    return ( 
         <Page>
             <Flex
                 align="center"
@@ -24,8 +22,7 @@ const HomeLayout = ({image, ctaLink, ...rest}) => {
                 wrap="no-wrap"
                 minH="70vh"
                 px={8}
-                mb={16}
-                {...rest} >
+                mb={16} >
                 <Stack
                     spacing={4}
                     w={{base: "80%", md: "40%"}}
@@ -36,38 +33,28 @@ const HomeLayout = ({image, ctaLink, ...rest}) => {
                         fontWeight="bold"
                         color="primary.300"
                         textAlign={['center', 'center', "left", 'left']}>
-                        {t("landing_title")}
+                        {t("error.unauthorized-title")}
                     </Heading>
                     <Heading
                         as="h2"
                         size="md"
-                        color="primary.100"
+                        color="gray.100"
                         opacity="0.8"
                         fontWeight="normal"
                         lineHeight={1.5}
                         textAlign={["center", "center", "left", "left"]}>
-                        {t("landing_summary")}
+                        {t("error.unauthorized-message")}
                     </Heading>
-                    <Link to={ctaLink}>
-                        <Button colorScheme="primary" borderRadius="8px" lineHeight="1" >{t("button.browse-movies")}</Button>
+                    <Link to="/">
+                        <Button colorScheme="primary" borderRadius="8px" lineHeight="1" >{t("button.back-to-home")}</Button>
                     </Link>
                 </Stack>
-                <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
-                    <Image src={image} size="100%" rounded="1rem" shadow="2xl" />
+                <Box w="80%" mb={{ base: 12, md: 0 }}>
+                    <Figure/>
                 </Box>
             </Flex>
         </Page>
-    )
+    );
 }
 
-HomeLayout.propTypes = {
-    image: PropTypes.string,
-    ctaLink: PropTypes.string
-}
-
-HomeLayout.defaultProps = {
-    image: "https://images.unsplash.com/photo-1608170825938-a8ea0305d46c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1925&q=80",
-    ctaLink: "/movies"
-}
-
-export default HomeLayout;
+export default UnauthorizedErrorLayout;

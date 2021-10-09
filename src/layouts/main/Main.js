@@ -10,6 +10,7 @@ import AccountLayout from "../account/AccountLayout";
 import MovieLayout from "../movie/MovieLayout";
 import MovieListLayout from "../movie/MovieListLayout";
 import ConsoleLayout from "../console/ConsoleLayout";
+import UnauthorizedErrorLayout from "../error/UnauthorizedErrorLayout";
 
 const Main = () => {
     return (
@@ -25,6 +26,7 @@ const Main = () => {
                     <Route path="/about" component={AboutLayout}/>
                     <Route path="/account" component={AccountLayout}/>
                     <Route path="/auth" component={AuthLayout}/>
+                    <Route path="/unauthorized" component={UnauthorizedErrorLayout}/>
                 </Switch>
             </Router>
         </AuthProvider>

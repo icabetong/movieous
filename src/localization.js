@@ -69,14 +69,17 @@ i18n.use(initReactI18next)
                     "read-more": "Read More",
                     "learn-more": "Learn more",
                     "browse-movies": "Browse Movies",
-                    "sign-in-with-google": "Sign-in with Google"
+                    "sign-in-with-google": "Sign-in with Google",
+                    "back-to-home": "Back to Home"
                 },
                 error: {
                     "auth_empty_email": "Email is required",
                     "auth_empty_password": "Password is required",
                     "snack-create-error": "Error creating snack",
                     "snack-update-error": "Error updating snack",
-                    "snack-remove-error": "Error removing snack"
+                    "snack-remove-error": "Error removing snack",
+                    "unauthorized-title": "Insufficient Permissions",
+                    "unauthorized-message": "I'm afraid that you do not have the permission to do that..."
                 },
                 feedback: {
                     "creating-account": "Creating Account...",

@@ -5,7 +5,7 @@ import {
     TabPanels, 
     Tab, 
     TabPanel 
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
 import Page from "../../components/Page";
 import SnackPanel from "./snacks/SnackPanel";
 
