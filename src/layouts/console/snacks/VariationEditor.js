@@ -45,22 +45,23 @@ export const VariantEditor = (props) => {
                         <FormLabel>{t("field.variant-name")}</FormLabel>
                         <Input 
                             type="text"
+                            
                             defaultValue={props.variation.name ? props.variation.name : "" }
                             focusBorderColor="primary.300"
-                            {...register("name")}/>
+                            {...register("name", { required: "error.empty-name" })}/>
                     </FormControl>
                     <FormControl id="quantity" isRequired>
                         <FormLabel>{t("field.quantity")}</FormLabel>
-                        <NumberInput 
+                        <NumberInput
                             max={15} 
                             min={1}
                             defaultValue={props.variation.quantity ? props.variation.quantity : 1 }
-                            focusBorderColor="primary.300"
-                            {...register("quantity")}>
-                            <NumberInputField />
+                            focusBorderColor="primary.300" >
+                            <NumberInputField
+                                {...register("quantity", { required: "error.empty-quantity" })}/>
                             <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
                             </NumberInputStepper>
                         </NumberInput>
                     </FormControl>
@@ -71,11 +72,11 @@ export const VariantEditor = (props) => {
                                 pointerEvents="none"
                                 children={<BiDollar color="gray.300" />}/>
                             <Input 
-                                type="number" 
+                                type="number"
                                 defaultValue={props.variation.price ? props.variation.price : 0 }
                                 focusBorderColor="primary.300"
                                 placeholder={t("placeholder.price")}
-                                {...register("price", { required: "error.empty-price"})} />
+                                {...register("price", { required: "error.empty-price" })} />
                         </InputGroup>
                     </FormControl>
                 </Stack>

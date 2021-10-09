@@ -29,7 +29,7 @@ import {
     VariantEditor, variantEditorState, variantEditorReducer
 } from "./VariationEditor";
 import { generate } from "../../../utils/id";
-import { create } from "../../../infrastructure/SnackRepository";
+import { create, update } from "../../../infrastructure/SnackRepository";
 
 export const SnackEditor = (props) => {
     const { t } = useTranslation();
@@ -50,24 +50,45 @@ export const SnackEditor = (props) => {
             ...data
         }
 
-        create(snack)
-            .then(() => 
-                toast({  
-                    title: t("feedback.snack-created"),
-                    status: "success",
-                    isClosable: true
+        if (editorState.isCreate) {
+            create(snack)
+                .then(() => 
+                    toast({  
+                        title: t("feedback.snack-created"),
+                        status: "success",
+                        isClosable: true
+                    })
+                ).catch((error) => 
+                    toast({
+                        title: t("feedback.snack-create-error"),
+                        message: error.message,
+                        status: "error",
+                        isClosable: true,
+                    })
+                ).finally(() => {
+                    setWritePending(false);
+                    onDismiss();
                 })
-            ).catch((error) => 
-                toast({
-                    title: t("feedback.snack-create-error"),
-                    message: error.message,
-                    status: "error",
-                    isClosable: true,
+        } else {
+            update(snack)
+                .then(() => {
+                    toast({
+                        title: t("feedback.snack-updated"),
+                        status: "success",
+                        isClosable: true
+                    })
+                }).catch((error) => 
+                    toast({
+                        title: t("feedback.snack-update-error"),
+                        message: error.message,
+                        status: "error",
+                        isClosable: true,
+                    })
+                ).finally(() => {
+                    setWritePending(false);
+                    onDismiss();
                 })
-            ).finally(() => {
-                setWritePending(false);
-                onDismiss();
-            })
+        }
     }
 
     const onDismiss = () => {

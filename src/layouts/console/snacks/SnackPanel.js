@@ -13,7 +13,8 @@ import {
     SnackEditor, initialEditorState, editorReducer
 } from "./SnackEditor";
 import SnackList from "./SnackList";
-import { fetch } from "../../../infrastructure/SnackRepository";
+import { collection, onSnapshot } from "firebase/firestore";
+import { firestore } from "../../../index";
 
 const SnackPanel = () => {
     const { t } = useTranslation();
@@ -24,9 +25,12 @@ const SnackPanel = () => {
     const onEditorUpdate = (snack) => editorDispatch({ type: "update", payload: snack })
 
     useEffect(() => {
-        fetch()
-            .then((data) => {setSnacks(data); console.log(data)})
-            .catch((error) => console.log(error))
+        const unsubscribe = onSnapshot(collection(firestore, "snacks"), (snapshot) => {
+            const data = [];
+            snapshot.forEach(doc => data.push(doc.data())); 
+            setSnacks(data);
+        });
+        return () => unsubscribe();
     }, []);
 
     return (
