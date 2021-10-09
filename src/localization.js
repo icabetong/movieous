@@ -104,7 +104,8 @@ i18n.use(initReactI18next)
                     "release-date": "Release Date: {{date}}",
                     "price": "Price: $ {{price}}",
                     "available": " - {{stock}} Available",
-                    "variations": "{{variation}} Variations"
+                    "variations": "{{variation}} Variations",
+                    "price-ranges": "$ {{lowest}} - $ {{highest}}"
                 },
                 console: {
                     "snacks": "Snacks",

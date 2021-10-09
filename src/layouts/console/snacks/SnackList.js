@@ -15,6 +15,9 @@ const SnackList = (props) => {
 
 const SnackItem = (props) => {
     const { t } = useTranslation(); 
+    const variants = Object.values(props.snack.variations);
+    const lowest = variants.reduce((prev, curr) => prev.price < curr.price ? prev : curr );
+    const highest = variants.reduce((prev, curr) => prev.price > curr.price ? prev : curr );
     
     return (
         <GridItem cursor="pointer" onClick={() => props.onClick(props.snack)}>
@@ -32,9 +35,8 @@ const SnackItem = (props) => {
                     fontWeight="semibold"
                     letterSpacing="wide"
                     fontSize="xs"
-                    textTransform="uppercase"
-                    ml="2">
-                    {t("concat.variations", { variation: new Map(Object.entries(props.snack.variations)).size })}
+                    textTransform="uppercase">
+                    {t("concat.variations", { variation: variants.length })}
                 </Box>
                 <Box 
                     fontWeight="semibold"
@@ -43,6 +45,7 @@ const SnackItem = (props) => {
                     isTruncated>
                     {props.snack.name}
                 </Box>
+                <Box>{t("concat.price-ranges", { lowest: lowest.price.toFixed(2), highest: highest.price.toFixed(2) })}</Box>
             </Box>
         </GridItem>
     )

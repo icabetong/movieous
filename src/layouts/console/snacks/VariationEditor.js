@@ -45,7 +45,6 @@ export const VariantEditor = (props) => {
                         <FormLabel>{t("field.variant-name")}</FormLabel>
                         <Input 
                             type="text"
-                            
                             defaultValue={props.variation.name ? props.variation.name : "" }
                             focusBorderColor="primary.300"
                             {...register("name", { required: "error.empty-name" })}/>
@@ -73,6 +72,7 @@ export const VariantEditor = (props) => {
                                 children={<BiDollar color="gray.300" />}/>
                             <Input 
                                 type="number"
+                                step="0.01"
                                 defaultValue={props.variation.price ? props.variation.price : 0 }
                                 focusBorderColor="primary.300"
                                 placeholder={t("placeholder.price")}

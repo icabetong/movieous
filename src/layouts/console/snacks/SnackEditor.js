@@ -46,7 +46,7 @@ export const SnackEditor = (props) => {
         setWritePending(true);
         const snack = {
             snackId: props.snack.snackId,
-            variations: { ...variations },
+            variations: Object.fromEntries(variations),
             ...data
         }
 
@@ -61,7 +61,7 @@ export const SnackEditor = (props) => {
                 ).catch((error) => 
                     toast({
                         title: t("feedback.snack-create-error"),
-                        message: error.message,
+                        description: error.message,
                         status: "error",
                         isClosable: true,
                     })
@@ -80,7 +80,7 @@ export const SnackEditor = (props) => {
                 }).catch((error) => 
                     toast({
                         title: t("feedback.snack-update-error"),
-                        message: error.message,
+                        description: error.message,
                         status: "error",
                         isClosable: true,
                     })
@@ -100,10 +100,15 @@ export const SnackEditor = (props) => {
         const id = editorState.variation.variantId;
 
         const variants = variations;
-        variants.set(id, {variantId: id, ...data});
+        variants.set(id, {
+            ...data,
+            variantId: id, 
+            price: parseFloat(data.price),
+            quantity: parseInt(data.quantity)
+        });
         setVariations(variants);
 
-        editorDispatch({  type: "dismiss" });
+        editorDispatch({ type: "dismiss" });
     }
 
     const onVariantClicked = (variant) => {
@@ -209,7 +214,7 @@ const Variation = (props) => {
                 </Box>
             </Box>
             <Box color="gray.400">
-                {t("concat.price", { price: props.variant.price })}
+                {t("concat.price", { price: props.variant.price.toFixed(2) })}
             </Box>
         </Box>
     )
