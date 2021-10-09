@@ -23,7 +23,6 @@ const SnackPanel = () => {
     return (
         <Box>
             <HStack
-                autoFlow="column"
                 spacing={4}>
                 <Button size="sm" leftIcon={<HiPlus/>} colorScheme="primary" onClick={onEditorCreate}>
                     {t("button.add")}

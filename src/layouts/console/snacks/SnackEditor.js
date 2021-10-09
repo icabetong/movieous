@@ -43,11 +43,11 @@ export const SnackEditor = (props) => {
     }
 
     const onEditorCommit = (data) => {
+        const id = editorState.variation.variantId;
+
         const variants = variations;
-        console.log({...editorState.variation, ...data});
-        variants.set(data.variantId, data);
+        variants.set(id, {variantId: id, ...data});
         setVariations(variants);
-        console.log(variants);
 
         editorDispatch({  type: "dismiss" });
     }
@@ -98,6 +98,7 @@ export const SnackEditor = (props) => {
                             Array.from(variations.values())
                                 .map(v => 
                                     <Variation 
+                                        key={v.variantId}
                                         variant={v} 
                                         onClick={onVariantClicked}/>
                                 ) 
@@ -128,11 +129,12 @@ export const SnackEditor = (props) => {
             </Modal>
             { editorState.variation &&
                 <VariantEditor 
-                    isOpen={editorState.isOpen} 
-                    isCreate={editorState.isCreate}
-                    variation={editorState.variation}
-                    onClose={onEditorDimiss}
-                    onCommit={onEditorCommit}/>
+                key={editorState.variation}
+                isOpen={editorState.isOpen} 
+                isCreate={editorState.isCreate}
+                variation={editorState.variation}
+                onClose={onEditorDimiss}
+                onCommit={onEditorCommit}/>
             }
         </>
     )
@@ -151,7 +153,7 @@ const Variation = (props) => {
             <Box fontWeight="medium">
                 {props.variant.name}
                 <Box as="span" color="gray.600" fontSize="sm">
-                    - {props.variant.quantity}
+                    {t("concat.available", { stock: props.variant.quantity })}
                 </Box>
             </Box>
             <Box color="gray.400">

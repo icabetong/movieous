@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import {
@@ -31,31 +30,31 @@ export const VariantEditor = (props) => {
     const { t } = useTranslation();
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const onSubmit = (data) => { props.onCommit(data); };
+    const onDismiss = () => { props.onClose() }
+
     return (
-        <Modal isOpen={props.isOpen} onClose={props.onClose}>
+        <Modal isOpen={props.isOpen} onClose={onDismiss}>
             <ModalOverlay />
-            <ModalContent as="form" onSubmit={handleSubmit(props.onCommit)}>
+            <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
             <ModalHeader>{t(props.isCreate ? "modal.editor-variant-create" : "modal.editor-variant-update")}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
                 <Stack spacing={4}>
-                    <input 
-                        type="hidden" 
-                        value={props.variation.variantId}
-                        {...register("variantId")}/>
                     <FormControl id="name" isInvalid={errors.name} isRequired>
                         <FormLabel>{t("field.variant-name")}</FormLabel>
                         <Input 
-                            type="name"
+                            type="text"
+                            defaultValue={props.variation.name }
                             focusBorderColor="primary.300"
-                            {...register("name", { required: "error.empty-variant-name"})} />
+                            {...register("name")}/>
                     </FormControl>
                     <FormControl id="quantity" isRequired>
                         <FormLabel>{t("field.quantity")}</FormLabel>
                         <NumberInput 
                             max={15} 
                             min={1}
-                            defaultValue={1}
+                            defaultValue={props.variation.quantity ? props.variation.quantity : 1 }
                             focusBorderColor="primary.300"
                             {...register("quantity")}>
                             <NumberInputField />
@@ -73,6 +72,7 @@ export const VariantEditor = (props) => {
                                 children={<BiDollar color="gray.300" />}/>
                             <Input 
                                 type="number" 
+                                defaultValue={props.variation.price ? props.variation.price : 0 }
                                 focusBorderColor="primary.300"
                                 placeholder={t("placeholder.price")}
                                 {...register("price", { required: "error.empty-price"})} />
@@ -88,7 +88,7 @@ export const VariantEditor = (props) => {
                         type="submit">
                         {t("button.save")}
                     </Button>
-                    <Button onClick={props.onClose}>{t("button.cancel")}</Button>
+                    <Button onClick={onDismiss}>{t("button.cancel")}</Button>
                 </Stack>
             </ModalFooter>
             </ModalContent>
@@ -108,7 +108,7 @@ export const variantEditorReducer = (state, action) => {
     switch(type) {
         case "create":
             return {
-                ...state,
+                variation: { variantId: generate() },
                 isCreate: true,
                 isOpen: true,
             }
@@ -122,7 +122,7 @@ export const variantEditorReducer = (state, action) => {
             return {
                 ...state,
                 isOpen: false,
-                variation: { variantId: generate() }
+                variation: undefined
             }
         default: return state;
     }
