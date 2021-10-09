@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
     Box,
@@ -12,13 +12,22 @@ import {
 import {
     SnackEditor, initialEditorState, editorReducer
 } from "./SnackEditor";
-import "firebase/compat/firestore";
+import SnackList from "./SnackList";
+import { fetch } from "../../../infrastructure/SnackRepository";
 
 const SnackPanel = () => {
     const { t } = useTranslation();
+    const [snacks, setSnacks] = useState([]);
     const [editorState, editorDispatch] = useReducer(editorReducer, initialEditorState);
     const onEditorCreate = () => editorDispatch({ type: "create" })
     const onEditorDismiss = () => editorDispatch({ type: "dismiss" })
+    const onEditorUpdate = (snack) => editorDispatch({ type: "update", payload: snack })
+
+    useEffect(() => {
+        fetch()
+            .then((data) => {setSnacks(data); console.log(data)})
+            .catch((error) => console.log(error))
+    }, []);
 
     return (
         <Box>
@@ -31,6 +40,7 @@ const SnackPanel = () => {
                     {t("button.refresh")}
                 </Button>
             </HStack>
+            <SnackList snacks={snacks} onClick={onEditorUpdate}/>
             { editorState.snack &&
                 <SnackEditor
                     key={editorState.snack.snackId}

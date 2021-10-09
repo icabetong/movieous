@@ -103,7 +103,8 @@ i18n.use(initReactI18next)
                     "rating-and-votes": "Rating {{rating}} &bull; {{votes}} Votes",
                     "release-date": "Release Date: {{date}}",
                     "price": "Price: $ {{price}}",
-                    "available": " - {{stock}} Available"
+                    "available": " - {{stock}} Available",
+                    "variations": "{{variation}} Variations"
                 },
                 console: {
                     "snacks": "Snacks",

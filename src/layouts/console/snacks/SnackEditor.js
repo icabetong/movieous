@@ -34,7 +34,7 @@ import { create } from "../../../infrastructure/SnackRepository";
 export const SnackEditor = (props) => {
     const { t } = useTranslation();
     const [isWritePending, setWritePending] = useState(false);
-    const [variations, setVariations] = useState(props.snack.variations ? props.snack.variations : new Map());
+    const [variations, setVariations] = useState(props.snack.variations ? new Map(Object.entries(props.snack.variations)) : new Map());
     const [editorState, editorDispatch] = useReducer(variantEditorReducer, variantEditorState);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const toast = useToast();
@@ -124,14 +124,14 @@ export const SnackEditor = (props) => {
                         </FormControl>
                         <FormControl>
                             <FormLabel>{t("field.variations")}</FormLabel>
-                            {
-                            Array.from(variations.values())
-                                .map(v => 
-                                    <Variation 
-                                        key={v.variantId}
-                                        variant={v} 
-                                        onClick={onVariantClicked}/>
-                                ) 
+                            { variations &&
+                                Array.from(variations.values())
+                                    .map(v => 
+                                        <Variation 
+                                            key={v.variantId}
+                                            variant={v} 
+                                            onClick={onVariantClicked}/>
+                                    ) 
                             } 
                             <Center>
                                 <Button 
