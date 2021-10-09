@@ -73,11 +73,18 @@ i18n.use(initReactI18next)
                 },
                 error: {
                     "auth_empty_email": "Email is required",
-                    "auth_empty_password": "Password is required"
+                    "auth_empty_password": "Password is required",
+                    "snack-create-error": "Error creating snack",
+                    "snack-update-error": "Error updating snack",
+                    "snack-remove-error": "Error removing snack"
                 },
                 feedback: {
                     "creating-account": "Creating Account...",
-                    "signing-in": "Signing-in..."
+                    "signing-in": "Signing-in...",
+                    "snack-created": "Snack created",
+                    "snack-updated": "Snack updated",
+                    "snack-removed": "Snack removed",
+                    "reservation-created": "Reservation created"
                 },
                 modal: {
                     "sign-out-title": "Sign-out?",

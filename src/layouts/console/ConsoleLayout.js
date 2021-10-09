@@ -18,16 +18,12 @@ const ConsoleLayout = () => {
                 <TabList>
                     <Tab>{t("console.snacks")}</Tab>
                     <Tab>{t("console.reservations")}</Tab>
-                    <Tab>{t("console.users")}</Tab>
                 </TabList>
 
                 <TabPanels>
                     <TabPanel><SnackPanel/></TabPanel>
                     <TabPanel>
                     <p>two!</p>
-                    </TabPanel>
-                    <TabPanel>
-                    <p>three!</p>
                     </TabPanel>
                 </TabPanels>
             </Tabs>

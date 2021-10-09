@@ -19,6 +19,7 @@ import {
     Radio,
     RadioGroup,
     Stack,
+    useToast,
 } from "@chakra-ui/react";
 import {
     HiPlus
@@ -28,14 +29,46 @@ import {
     VariantEditor, variantEditorState, variantEditorReducer
 } from "./VariationEditor";
 import { generate } from "../../../utils/id";
+import { create } from "../../../infrastructure/SnackRepository";
 
 export const SnackEditor = (props) => {
     const { t } = useTranslation();
-    const [variations, setVariations] = useState(new Map());
+    const [isWritePending, setWritePending] = useState(false);
+    const [variations, setVariations] = useState(props.snack.variations ? props.snack.variations : new Map());
     const [editorState, editorDispatch] = useReducer(variantEditorReducer, variantEditorState);
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const toast = useToast();
+
     const onEditorCreate = () => editorDispatch({ type: "create" })
     const onEditorDimiss = () => editorDispatch({ type: "dismiss" })
+
+    const onSubmit = (data) => {
+        setWritePending(true);
+        const snack = {
+            snackId: props.snack.snackId,
+            variations: { ...variations },
+            ...data
+        }
+
+        create(snack)
+            .then(() => 
+                toast({  
+                    title: t("feedback.snack-created"),
+                    status: "success",
+                    isClosable: true
+                })
+            ).catch((error) => 
+                toast({
+                    title: t("feedback.snack-create-error"),
+                    message: error.message,
+                    status: "error",
+                    isClosable: true,
+                })
+            ).finally(() => {
+                setWritePending(false);
+                onDismiss();
+            })
+    }
 
     const onDismiss = () => {
         setVariations(new Map());
@@ -59,10 +92,6 @@ export const SnackEditor = (props) => {
         })
     }
 
-    const onSubmit = (data) => {
-        console.log(data);
-    }
-    
     return (
         <>
             <Modal isOpen={props.isOpen} onClose={onDismiss}>
@@ -78,6 +107,7 @@ export const SnackEditor = (props) => {
                             <FormLabel>{t("field.snack-name")}</FormLabel>
                             <Input 
                                 type="text"
+                                defaultValue={props.snack.name}
                                 placeholder={t("placeholder.snack-name")}
                                 focusBorderColor="primary.300"
                                 {...register("name", { required: "error.snack-name-empty"})}/>
@@ -85,7 +115,7 @@ export const SnackEditor = (props) => {
                         </FormControl>
                         <FormControl as="fieldset">
                             <FormLabel as="legend">{t("field.snack-type")}</FormLabel>
-                            <RadioGroup defaultValue="food">
+                            <RadioGroup defaultValue={props.snack.type} {...register("type")}>
                                 <Stack direction="row" spacing="24px">
                                     <Radio value="food" colorScheme="primary">{t("field.type-food")}</Radio>
                                     <Radio value="drink" colorScheme="primary">{t("field.type-drink")}</Radio>
@@ -119,6 +149,7 @@ export const SnackEditor = (props) => {
                         <Stack spacing={4} direction="row">
                             <Button 
                                 colorScheme="primary" 
+                                isLoading={isWritePending}
                                 type="submit">
                                 {t("button.save")}
                             </Button>
@@ -129,12 +160,12 @@ export const SnackEditor = (props) => {
             </Modal>
             { editorState.variation &&
                 <VariantEditor 
-                key={editorState.variation}
-                isOpen={editorState.isOpen} 
-                isCreate={editorState.isCreate}
-                variation={editorState.variation}
-                onClose={onEditorDimiss}
-                onCommit={onEditorCommit}/>
+                    key={editorState.variation.variationId}
+                    isOpen={editorState.isOpen} 
+                    isCreate={editorState.isCreate}
+                    variation={editorState.variation}
+                    onClose={onEditorDimiss}
+                    onCommit={onEditorCommit}/>
             }
         </>
     )
@@ -164,7 +195,7 @@ const Variation = (props) => {
 }
 
 export const initialEditorState = {
-    snack: { snackId: generate() },
+    snack: { snackId: generate(), type: "food" },
     isCreate: false,
     isOpen: false,
 }
@@ -173,7 +204,7 @@ export const editorReducer = (state, action) => {
     switch(type) {
         case "create":
             return {
-                ...state,
+                snack: { snackId: generate(), type: "food" },
                 isCreate: true,
                 isOpen: true
             }

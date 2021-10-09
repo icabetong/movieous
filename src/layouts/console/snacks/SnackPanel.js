@@ -9,7 +9,6 @@ import {
     HiPlus,
     HiRefresh
 } from "react-icons/hi";
-
 import {
     SnackEditor, initialEditorState, editorReducer
 } from "./SnackEditor";
@@ -31,7 +30,14 @@ const SnackPanel = () => {
                     {t("button.refresh")}
                 </Button>
             </HStack>
-            <SnackEditor isOpen={editorState.isOpen} onClose={onEditorDismiss}/>
+            { editorState.snack &&
+                <SnackEditor
+                    key={editorState.snack.snackId}
+                    snack={editorState.snack}
+                    isOpen={editorState.isOpen} 
+                    isCreate={editorState.isCreate}
+                    onClose={onEditorDismiss}/>
+            }
         </Box>
     )
 }
