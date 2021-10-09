@@ -21,7 +21,7 @@ const config = {
   appId: "1:524928142230:web:f288fb61088c84e38cabb7",
   measurementId: "G-DP0S7LGZ0G"
 };
-const app = initializeApp(config);
+export const app = initializeApp(config);
 export const auth = getAuth(app);
 export const firestore = getFirestore(app);
 

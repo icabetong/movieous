@@ -45,7 +45,7 @@ export const VariantEditor = (props) => {
                         <FormLabel>{t("field.variant-name")}</FormLabel>
                         <Input 
                             type="text"
-                            defaultValue={props.variation.name }
+                            defaultValue={props.variation.name ? props.variation.name : "" }
                             focusBorderColor="primary.300"
                             {...register("name")}/>
                     </FormControl>
@@ -108,7 +108,7 @@ export const variantEditorReducer = (state, action) => {
     switch(type) {
         case "create":
             return {
-                variation: { variantId: generate() },
+                variation: { variantId: generate(), name: "", quantity: 0, price: 0 },
                 isCreate: true,
                 isOpen: true,
             }

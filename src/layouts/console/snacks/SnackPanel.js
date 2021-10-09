@@ -12,6 +12,7 @@ import {
 import {
     SnackEditor, initialEditorState, editorReducer
 } from "./SnackEditor";
+import "firebase/compat/firestore";
 
 const SnackPanel = () => {
     const { t } = useTranslation();
