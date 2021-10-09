@@ -9,14 +9,14 @@ i18n.use(initReactI18next)
                 app_name: "Movieous",
                 landing_title: "The Gateway to your entertainment",
                 landing_summary: "Book and reserve to watch thousands of available movies in millions of locations worldwide.",
-                landing_action: "Create an Account",
                 navigation: {
                     home: "Home",
                     movies: "Movies",
                     blogs: "Blogs",
                     contact: "Contact Us",
                     about: "About",
-                    account: "Account"
+                    account: "Account",
+                    console: "Console"
                 },
                 auth: {
                     "sign-in": "Let's get you signed-in",
@@ -35,14 +35,24 @@ i18n.use(initReactI18next)
                     "firstname": "First Name",
                     "lastname": "Last Name",
                     "birthday": "Birthday",
-                    "gender": "Gender"
+                    "gender": "Gender",
+                    "snack-name": "Snack Name",
+                    "snack-type": "Snack Type",
+                    "variations": "Variations",
+                    "type-food": "Food",
+                    "type-drink": "Drink",
+                    "variant-name": "Variant Name",
+                    "quantity": "Quantity",
+                    "price": "Price",
                 },
                 placeholder: {
                     "email": "someone@example.com",
                     "password": "password",
                     "firstname": "John",
                     "lastname": "Doe",
-                    "gender": "Select one"
+                    "gender": "Select one",
+                    "price": "Enter amount",
+                    "snack-name": "Cotton Candy, Popcorn or etc."
                 },
                 button: {
                     "show": "Show",
@@ -52,9 +62,13 @@ i18n.use(initReactI18next)
                     "sign-out": "Sign-out",
                     "continue": "Continue",
                     "cancel": "Cancel",
+                    "add": "Add",
+                    "refresh": "Refresh",
+                    "save": "Save",
                     "book": "Book",
                     "read-more": "Read More",
                     "learn-more": "Learn more",
+                    "browse-movies": "Browse Movies",
                     "sign-in-with-google": "Sign-in with Google"
                 },
                 error: {
@@ -67,13 +81,23 @@ i18n.use(initReactI18next)
                 },
                 modal: {
                     "sign-out-title": "Sign-out?",
-                    "sign-out-body": "You'll need to enter your information again next time you'll need to access the service."
+                    "sign-out-body": "You'll need to enter your information again next time you'll need to access the service.",
+                    "editor-snack-create": "Create Snack",
+                    "editor-snack-update": "Update Snack",
+                    "editor-variant-create": "Create Variant",
+                    "editor-variant-update": "Update Variant"
                 },
                 concat: {
                     "rating": "Rating: {{rating}}",
                     "popularity": "Popularity: {{popularity}}",
                     "rating-and-votes": "Rating {{rating}} &bull; {{votes}} Votes",
-                    "release-date": "Release Date: {{date}}"
+                    "release-date": "Release Date: {{date}}",
+                    "price": "Price: {{price}}"
+                },
+                console: {
+                    "snacks": "Snacks",
+                    "reservations": "Reservations",
+                    "users": "Users"
                 },
                 "gender-option-male": "Male",
                 "gender-option-female": "Female",

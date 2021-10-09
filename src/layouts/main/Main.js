@@ -9,6 +9,7 @@ import AboutLayout from "../about/AboutLayout";
 import AccountLayout from "../account/AccountLayout";
 import MovieLayout from "../movie/MovieLayout";
 import MovieListLayout from "../movie/MovieListLayout";
+import ConsoleLayout from "../console/ConsoleLayout";
 
 const Main = () => {
     return (
@@ -16,6 +17,7 @@ const Main = () => {
             <Router history={history}>
                 <Switch>
                     <Route path="/" component={HomeLayout} exact/>
+                    <Route path="/console" component={ConsoleLayout}/>
                     <Route path="/movies" component={MovieListLayout}/>
                     <Route path="/movie/:id" component={MovieLayout}/>
                     <Route path="/reserve/:id" component={ReservationLayout}/>

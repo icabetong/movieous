@@ -2,7 +2,7 @@ import Page from "../../components/Page";
 
 const AboutLayout = () => {
     return (
-        <Page></Page>
+        <Page title="navigation.about"></Page>
     )
 }
 

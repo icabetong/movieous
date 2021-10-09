@@ -49,7 +49,7 @@ const HomeLayout = ({image, ctaLink, ...rest}) => {
                         {t("landing_summary")}
                     </Heading>
                     <Link to={ctaLink}>
-                        <Button borderRadius="8px" lineHeight="1" >{t("landing_action")}</Button>
+                        <Button colorScheme="primary" borderRadius="8px" lineHeight="1" >{t("button.browse-movies")}</Button>
                     </Link>
                 </Stack>
                 <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>

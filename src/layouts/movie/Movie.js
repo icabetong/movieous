@@ -7,7 +7,7 @@ import {
     GridItem,
     SimpleGrid
 } from "@chakra-ui/react";
-import { IMAGE_URL } from "../../infrastructure/Movie";
+import { IMAGE_URL } from "../../infrastructure/MovieRepository";
 
 const MovieList = (props) => {
     return (

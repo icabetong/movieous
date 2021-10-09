@@ -7,12 +7,13 @@ import {
     Button,
     Flex,
     Heading,
+    HStack,
     Image,
     Stack,
     Text
 } from "@chakra-ui/react";
 import Page from "../../components/Page";
-import { fetchSingle, buildImageUrl } from "../../infrastructure/Movie";
+import { fetchSingle, buildImageUrl } from "../../infrastructure/MovieRepository";
 
 const MovieLayout = () => {
     const { t } = useTranslation();
@@ -68,14 +69,14 @@ const MovieLayout = () => {
                     </Heading>
                     <Text>{t("concat.release-date", { date: movie.release_date })}</Text>
                     
-                    <Flex direction="row">
+                    <HStack spacing={4}>
                         <Link to="/booking">
                             <Button borderRadius="8px" lineHeight="1" >{t("button.book")}</Button>
                         </Link>
-                        <Button variant="ghost" mx={4} onClick={(e) => { e.preventDefault();window.location.href = movie.homepage}}>
+                        <Button variant="ghost" onClick={(e) => { e.preventDefault();window.location.href = movie.homepage}}>
                             {t("button.learn-more")}
                         </Button>
-                    </Flex>
+                    </HStack>
                 </Stack>
                 <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
                     <Image loading="lazy" src={buildImageUrl(movie.poster_path)} size="100%" rounded="1rem" shadow="2xl" />

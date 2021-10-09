@@ -5,7 +5,8 @@ import {
     Box, 
     Button, 
     Flex, 
-    Text
+    Text,
+    useBreakpointValue
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { ReactComponent as Logo } from "../assets/Logo.svg" 
@@ -30,6 +31,7 @@ const MenuItems = (props) => {
 const Header = (props) => {
     const [show, setShow] = React.useState(false);
     const toggleMenu = () => setShow(!show);
+    const iconColor = useBreakpointValue({ base: "white", md: "primary.300" })
 
     return (
         <Flex
@@ -43,7 +45,7 @@ const Header = (props) => {
             bg={["primary.300", "primary.300", "transparent", "transparent"]}
             color={["white", "white", "primary.300", "primary.300"]}
             {...props} >
-            <Flex align="center">
+            <Flex align="center" color={iconColor}>
                 <Logo/>
             </Flex>
 

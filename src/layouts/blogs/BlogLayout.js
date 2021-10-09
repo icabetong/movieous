@@ -2,7 +2,7 @@ import Page from "../../components/Page";
 
 const BlogLayout = () => {
     return (
-        <Page></Page>
+        <Page title="navigation.blogs"></Page>
     )
 }
 

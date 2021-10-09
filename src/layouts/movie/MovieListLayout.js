@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
 import ReactPaginate from "react-paginate";
-import { Box, Heading, useBreakpointValue } from "@chakra-ui/react";
+import { useBreakpointValue } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import Page from "../../components/Page";
-import { fetch } from "../../infrastructure/Movie";
+import { fetch } from "../../infrastructure/MovieRepository";
 import history from "../../utils/history";
 import MovieList from "./Movie";
 
 import "./custom.css";
 
 const MovieListLayout = () => {
-    const { t } = useTranslation();
     const [response, setResponse] = useState({ movies: [], pages: 0, items: 0 });
     const [currentPage, setCurrentPage] = useState(1);
     const range = useBreakpointValue({ base: 2, md: 5 });
@@ -23,7 +21,7 @@ const MovieListLayout = () => {
                 setResponse({
                     movies: data.results,
                     pages: data.total_pages,
-                    items: data.total_results
+                    items: data.total_results,
                 });
             }).catch((error) => { 
                 console.log(error)
@@ -39,19 +37,17 @@ const MovieListLayout = () => {
     }
 
     return (
-        <Page>
-            <Heading as="h2" size="xl">{t("navigation.movies")}</Heading>
+        <Page title="navigation.movies">
             <MovieList movies={response.movies} onMovieSelected={onMovieSelected}/>
-            <Box>
-                <ReactPaginate
-                    previousLabel={<ChevronLeftIcon/>}
-                    nextLabel={<ChevronRightIcon/>}
-                    onPageChange={onPageChange}
-                    pageCount={response.pages}
-                    marginPagesDisplayed={breakRange}
-                    pageRangeDisplayed={range}
-                    containerClassName="container"/>
-            </Box>
+            <ReactPaginate
+                previousLabel={<ChevronLeftIcon/>}
+                nextLabel={<ChevronRightIcon/>}
+                onPageChange={onPageChange}
+                pageCount={response.pages}
+                currentPage={currentPage}
+                marginPagesDisplayed={breakRange}
+                pageRangeDisplayed={range}
+                containerClassName="container"/>
         </Page>
     )
 }
