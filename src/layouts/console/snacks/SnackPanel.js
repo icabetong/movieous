@@ -6,8 +6,7 @@ import {
     HStack
 } from "@chakra-ui/react";
 import {
-    HiPlus,
-    HiRefresh
+    HiPlus
 } from "react-icons/hi";
 import {
     SnackEditor, initialEditorState, editorReducer
@@ -38,9 +37,6 @@ const SnackPanel = () => {
                 spacing={4}>
                 <Button size="sm" leftIcon={<HiPlus/>} colorScheme="primary" onClick={onEditorCreate}>
                     {t("button.add")}
-                </Button>
-                <Button size="sm" leftIcon={<HiRefresh/>}>
-                    {t("button.refresh")}
                 </Button>
             </HStack>
             <SnackList snacks={snacks} onClick={onEditorUpdate}/>

@@ -43,6 +43,7 @@ i18n.use(initReactI18next)
                     "variations": "Variations",
                     "type-food": "Food",
                     "type-drink": "Drink",
+                    "type-bundle": "Bundle",
                     "variant-name": "Variant Name",
                     "quantity": "Quantity",
                     "price": "Price",
@@ -55,7 +56,8 @@ i18n.use(initReactI18next)
                     "lastname": "Doe",
                     "gender": "Select one",
                     "price": "Enter amount",
-                    "snack-name": "Cotton Candy, Popcorn or etc."
+                    "snack-name": "Cotton Candy, Popcorn or etc.",
+                    "variant-name": "ex. Soda Large or Medium Variant"
                 },
                 button: {
                     "show": "Show",
@@ -73,7 +75,9 @@ i18n.use(initReactI18next)
                     "learn-more": "Learn more",
                     "browse-movies": "Browse Movies",
                     "sign-in-with-google": "Sign-in with Google",
-                    "back-to-home": "Back to Home"
+                    "back-to-home": "Back to Home",
+                    "change-password": "Change Password",
+                    "reset-password": "Reset Password"
                 },
                 error: {
                     "auth_empty_email": "Email is required",
@@ -117,7 +121,11 @@ i18n.use(initReactI18next)
                 console: {
                     "snacks": "Snacks",
                     "reservations": "Reservations",
-                    "users": "Users"
+                },
+                account: {
+                    "account": "Account",
+                    "reservations": "Reservations",
+                    "information": "Basic Information"
                 },
                 "gender-option-male": "Male",
                 "gender-option-female": "Female",

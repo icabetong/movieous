@@ -1,29 +1,30 @@
 import { useTranslation } from "react-i18next";
 import { 
-    Button,
     Tabs, 
     TabList, 
     TabPanels, 
     Tab, 
     TabPanel,
 } from "@chakra-ui/react"
-import Page from "../../components/Page";
-import { auth } from "../../index";
+import Page from "../../components/Page";   
+import InformationPanel from "./InformationPanel";
+import { useUserData } from "../../utils/auth";
 
 const AccountLayout = () => {
     const { t } = useTranslation();
+    const user = useUserData();
 
     return (
-        <Page title="navigation.account">
+        <Page title={`${user.firstname} ${user.lastname}`}>
             <Tabs colorScheme="primary">
                 <TabList>
-                    <Tab>{t("console.snacks")}</Tab>
-                    <Tab>{t("console.reservations")}</Tab>
+                    <Tab>{t("account.account")}</Tab>
+                    <Tab>{t("account.reservations")}</Tab>
                 </TabList>
 
                 <TabPanels>
                     <TabPanel>
-                        <Button onClick={() => auth.signOut()}>Sign Out</Button>
+                        <InformationPanel/>
                     </TabPanel>
                     <TabPanel>
                     </TabPanel>

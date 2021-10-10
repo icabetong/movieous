@@ -141,10 +141,11 @@ export const SnackEditor = (props) => {
                         </FormControl>
                         <FormControl as="fieldset">
                             <FormLabel as="legend">{t("field.snack-type")}</FormLabel>
-                            <RadioGroup defaultValue={props.snack.type} {...register("type")}>
+                            <RadioGroup defaultValue={props.snack.type}>
                                 <Stack direction="row" spacing="24px">
-                                    <Radio value="food" colorScheme="primary">{t("field.type-food")}</Radio>
-                                    <Radio value="drink" colorScheme="primary">{t("field.type-drink")}</Radio>
+                                    <Radio {...register("type")} value="food" colorScheme="primary">{t("field.type-food")}</Radio>
+                                    <Radio {...register("type")} value="drink" colorScheme="primary">{t("field.type-drink")}</Radio>
+                                    <Radio {...register("type")} value="bundle" colorScheme="primary">{t("field.type-bundle")}</Radio>
                                 </Stack>
                             </RadioGroup>
                         </FormControl>
@@ -159,7 +160,7 @@ export const SnackEditor = (props) => {
                                             onClick={onVariantClicked}/>
                                     ) 
                             } 
-                            <Center>
+                            <Center mt={4}>
                                 <Button 
                                     size="sm" 
                                     leftIcon={<HiPlus/>}
@@ -203,7 +204,7 @@ const Variation = (props) => {
     return (
         <Box 
             borderRadius="md"
-            px={2}
+            px={4}
             py={2}
             cursor="pointer" 
             display="flex" 

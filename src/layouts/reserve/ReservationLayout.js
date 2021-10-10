@@ -43,7 +43,7 @@ const ReservationLayout = () => {
     const [movie, setMovie] = useState({});
     const [snacks, setSnacks] = useState([]);
     const [selectedSnack, setSelectedSnack] = useState({});
-    const { register, handleSubmit, setValue } = useForm();
+    const { handleSubmit, setValue } = useForm();
     const [state, dispatcher] = useReducer(reducer, initialSelectorState);
 
     const onSelectorView = () => dispatcher({ type: "select" });
@@ -126,13 +126,12 @@ const ReservationLayout = () => {
                         <SnackList
                             maxW="100%"
                             snacks={snacks}
-                            register={register}
                             setValue={setValue}/>
 
                         <Box
                             display="flex"
                             flexDirection="column"
-                            alignItems="baseline">
+                            alignItems={{base: "center", md: "baseline"}}>
                             <Button
                                 colorScheme="primary"
                                 type="submit" 
@@ -162,7 +161,7 @@ const ReservationLayout = () => {
 const SnackList = (props) => {
     const { getRootProps, getRadioProps } = useRadioGroup({ 
         name: "snack", 
-        onChange: props.setValue
+        onChange: (v) => props.setValue("snack", v)
     });
 
     const group = getRootProps();
@@ -170,16 +169,15 @@ const SnackList = (props) => {
         <SimpleGrid 
             {...group}
             columns={{ base: 1, sm: 2, md: 3 }}
-            spacing={4}
-            {...props.register("snack")}>
-        {props.snacks.map((snack) => {
-            return (
-            <SnackItem 
-                key={snack.snackId}
-                snack={snack} 
-                {...getRadioProps({ value: JSON.stringify(snack, (k, v) => v === undefined ? null : v) })}/>
-            )
-        })}
+            spacing={4}>
+            {props.snacks.map((snack) => {
+                return (
+                    <SnackItem 
+                        key={snack.snackId}
+                        snack={snack} 
+                        {...getRadioProps({ value: JSON.stringify(snack) })}/>
+                )
+            })}
         </SimpleGrid>
     )
 }
@@ -204,18 +202,20 @@ const SnackItem = (props) => {
                 borderWidth="1px"
                 borderRadius="md"
                 boxShadow="md"
-                _checked={{ bg: "primary.300", color: "white", borderColor: "primary.300", }}
+                color="gray.600"
+                _checked={{ bg: "primary.300", color: "primary.100", borderColor: "primary.300", }}
                 _focus={{ boxShadow: "outline" }}>
                 <Box
+                    color="white"
                     fontWeight="medium"
                     textAlign="center"
                     isTruncated>{props.snack.name}
                 </Box>
-                <Box>
-                    <Box as="span" color="gray.600" fontSize="sm">
-                        { t("concat.price-start-at") }
+                <Box fontSize="sm">
+                    { t("concat.price-start-at") }
+                    <Box as="span" fontSize="md" color="white">
+                        {t("concat.price-sign-only", { price: lowest.price.toFixed(2) })}
                     </Box>
-                    {t("concat.price-sign-only", { price: lowest.price.toFixed(2) })}
                 </Box>
             </Box>
         </GridItem>
@@ -227,7 +227,7 @@ const SnackVariationSelector = (props) => {
     const { register, handleSubmit, setValue } = useForm();
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: "variant",
-        onChange: setValue
+        onChange: (v) => setValue("variant", v)
     });
     const variations = props.variations ? Object.values(props.variations) : [] ;
 
@@ -265,7 +265,7 @@ const SnackVariationSelector = (props) => {
                     </Text>
                     <FormControl>
                         <FormLabel>{t("field.snack-variant")}</FormLabel>
-                        <Stack {...group} {...register("variant")}>
+                        <Stack {...group}>
                             { variations.map(v => {
                                 return (
                                     <SnackVariationCheckBox
@@ -329,16 +329,14 @@ const SnackVariationCheckBox = (props) => {
                 cursor="pointer"
                 borderWidth="1px"
                 borderRadius="md"
-                _checked={{ bg: "gray.600", borderColor: "primary.300" }}
+                color="gray.600"
+                _checked={{ bg: "primary.300", borderColor: "primary.300", color: "primary.100" }}
                 _focus={{ boxShadow: "none" }}>
-                <Box 
-                    fontWeight="medium" 
-                    fontSize="md"
-                    isTruncated>
-                    {`${props.variation.name} - `}
-                    <Box as="span" fontWeight="400" color="gray.500">
-                        {t("concat.price-sign-only", { price: props.variation.price.toFixed(2) } )}
+                <Box isTruncated>
+                    <Box as="span" fontSize="md" fontWeight="medium" color="white">
+                        {`${props.variation.name} - `}
                     </Box>
+                    {t("concat.price-sign-only", { price: props.variation.price.toFixed(2) } )}
                 </Box>
             </Box>
         </Box>

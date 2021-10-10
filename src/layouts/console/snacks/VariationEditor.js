@@ -45,6 +45,7 @@ export const VariantEditor = (props) => {
                         <FormLabel>{t("field.variant-name")}</FormLabel>
                         <Input 
                             type="text"
+                            placeholder={t("placeholder.variant-name")}
                             defaultValue={props.variation.name ? props.variation.name : "" }
                             focusBorderColor="primary.300"
                             {...register("name", { required: "error.empty-name" })}/>
