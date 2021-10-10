@@ -7,7 +7,10 @@ import {
 
 const SnackList = (props) => {
     return (
-        <SimpleGrid mt={4} spacing={4}>
+        <SimpleGrid 
+            columns={{ base: 1, md: 4, lg: 5 }}
+            mt={4} 
+            spacing={4}>
             { props.snacks.map(snack => <SnackItem key={snack.snackId} snack={snack} onClick={props.onClick}/>) }
         </SimpleGrid>
     )
@@ -20,7 +23,9 @@ const SnackItem = (props) => {
     const highest = variants.reduce((prev, curr) => prev.price > curr.price ? prev : curr );
     
     return (
-        <GridItem cursor="pointer" onClick={() => props.onClick(props.snack)}>
+        <GridItem 
+            cursor="pointer" 
+            onClick={() => props.onClick(props.snack)}>
             <Box 
                 p={6} 
                 maxW="xs"
@@ -29,7 +34,8 @@ const SnackItem = (props) => {
                 alignItems="baseline" 
                 borderWidth="1px" 
                 borderRadius="lg" 
-                overflow="hidden">
+                overflow="hidden"
+                _hover={{ borderColor: "primary.300", bg: "surface.700" }}>
                 <Box
                     color="gray.500"
                     fontWeight="semibold"

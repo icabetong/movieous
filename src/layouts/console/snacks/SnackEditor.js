@@ -202,14 +202,18 @@ const Variation = (props) => {
 
     return (
         <Box 
+            borderRadius="md"
+            px={2}
+            py={2}
             cursor="pointer" 
             display="flex" 
             flexDirection="column" 
             alignItems="baseline"
-            onClick={() => props.onClick(props.variant)}>
+            onClick={() => props.onClick(props.variant)}
+            _hover={{ bg: "surface.700" }}>
             <Box fontWeight="medium">
                 {props.variant.name}
-                <Box as="span" color="gray.600" fontSize="sm">
+                <Box as="span" color="gray.400" fontSize="sm">
                     {t("concat.available", { stock: props.variant.quantity })}
                 </Box>
             </Box>

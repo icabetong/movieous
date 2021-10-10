@@ -7,7 +7,8 @@ import {
     GridItem,
     SimpleGrid
 } from "@chakra-ui/react";
-import { IMAGE_URL } from "../../infrastructure/MovieRepository";
+import history from "../../utils/history";
+import { buildImageUrl } from "../../infrastructure/MovieRepository";
 
 const MovieList = (props) => {
     return (
@@ -23,7 +24,7 @@ const MovieItem = (props) => {
     return (
         <GridItem>
             <Box maxW="md" borderWidth="1px" borderRadius="lg" overflow="hidden">
-                <Image src={`${IMAGE_URL}${props.movie.backdrop_path}`}/>
+                <Image src={buildImageUrl(props.movie.backdrop_path)}/>
 
                 <Box p="6">
                     <Box display="flex" alignItems="baseline">
@@ -55,8 +56,12 @@ const MovieItem = (props) => {
                     <Button variant="link" size="sm" onClick={() => props.onMovieSelect(props.movie)}>{t("button.read-more")}</Button>
 
                     <Box display="flex" justifyContent="flex-end">
-                        <Button borderRadius="md" size="sm" mt={8}>
-                            {t("button.book")}
+                        <Button
+                            size="sm" mt={8} 
+                            borderRadius="md" 
+                            colorScheme="primary"
+                            onClick={() => history.push(`/reserve/${props.movie.id}`)}>
+                            {t("button.reserve")}
                         </Button>
                     </Box>
                 </Box>

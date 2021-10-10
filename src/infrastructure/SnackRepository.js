@@ -1,4 +1,4 @@
-import { setDoc, updateDoc, deleteDoc, getDocs, doc, collection } from "firebase/firestore";
+import { setDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { firestore } from "../index";
 
 export const create = async (snack) => {
@@ -13,10 +13,9 @@ export const remove = async (snack) => {
     return await deleteDoc(doc(firestore, "snacks", snack.snackId));
 }
 
-export const fetch = async () => {
+export const transform = (snapshot) => {
     let docs = [];
+    snapshot.forEach((doc) => docs.push(doc.data()));
 
-    let snapshot = await getDocs(collection(firestore, "snacks"));
-    snapshot.forEach(doc => docs.push(doc.data()));
     return docs;
 }

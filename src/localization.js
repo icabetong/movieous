@@ -16,7 +16,8 @@ i18n.use(initReactI18next)
                     contact: "Contact Us",
                     about: "About",
                     account: "Account",
-                    console: "Console"
+                    console: "Console",
+                    reservation: "Reservation"
                 },
                 auth: {
                     "sign-in": "Let's get you signed-in",
@@ -38,12 +39,14 @@ i18n.use(initReactI18next)
                     "gender": "Gender",
                     "snack-name": "Snack Name",
                     "snack-type": "Snack Type",
+                    "snack-variant": "Snack Variant",
                     "variations": "Variations",
                     "type-food": "Food",
                     "type-drink": "Drink",
                     "variant-name": "Variant Name",
                     "quantity": "Quantity",
                     "price": "Price",
+                    "available-snacks": "Available Snacks: "
                 },
                 placeholder: {
                     "email": "someone@example.com",
@@ -65,7 +68,7 @@ i18n.use(initReactI18next)
                     "add": "Add",
                     "refresh": "Refresh",
                     "save": "Save",
-                    "book": "Book",
+                    "reserve": "Reserve",
                     "read-more": "Read More",
                     "learn-more": "Learn more",
                     "browse-movies": "Browse Movies",
@@ -95,7 +98,8 @@ i18n.use(initReactI18next)
                     "editor-snack-create": "Create Snack",
                     "editor-snack-update": "Update Snack",
                     "editor-variant-create": "Create Variant",
-                    "editor-variant-update": "Update Variant"
+                    "editor-variant-update": "Update Variant",
+                    "select-variant": "Select Snack Variant"
                 },
                 concat: {
                     "rating": "Rating: {{rating}}",
@@ -105,7 +109,10 @@ i18n.use(initReactI18next)
                     "price": "Price: $ {{price}}",
                     "available": " - {{stock}} Available",
                     "variations": "{{variation}} Variations",
-                    "price-ranges": "$ {{lowest}} - $ {{highest}}"
+                    "price-ranges": "$ {{lowest}} - $ {{highest}}",
+                    "price-start-at": "Prices start at ",
+                    "price-sign-only": "$ {{price}}",
+                    "selected-movie": "Selected Movie: "
                 },
                 console: {
                     "snacks": "Snacks",

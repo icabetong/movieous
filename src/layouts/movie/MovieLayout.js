@@ -22,7 +22,7 @@ const MovieLayout = () => {
 
     useEffect(() => {
         fetchSingle(id)
-            .then((response) => {setMovie(response.data) })
+            .then((response) => { setMovie(response.data) })
             .catch((error) => console.log(error))
     }, [id]);
 
@@ -70,7 +70,7 @@ const MovieLayout = () => {
                     <Text>{t("concat.release-date", { date: movie.release_date })}</Text>
                     
                     <HStack spacing={4}>
-                        <Link to="/booking">
+                        <Link to="/reserve">
                             <Button borderRadius="8px" lineHeight="1" >{t("button.book")}</Button>
                         </Link>
                         <Button variant="ghost" onClick={(e) => { e.preventDefault();window.location.href = movie.homepage}}>

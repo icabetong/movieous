@@ -14,6 +14,7 @@ import {
 } from "./SnackEditor";
 import SnackList from "./SnackList";
 import { collection, onSnapshot } from "firebase/firestore";
+import { transform } from "../../../infrastructure/SnackRepository";
 import { firestore } from "../../../index";
 
 const SnackPanel = () => {
@@ -26,9 +27,7 @@ const SnackPanel = () => {
 
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(firestore, "snacks"), (snapshot) => {
-            const data = [];
-            snapshot.forEach(doc => data.push(doc.data())); 
-            setSnacks(data);
+            setSnacks(transform(snapshot));
         });
         return () => unsubscribe();
     }, []);

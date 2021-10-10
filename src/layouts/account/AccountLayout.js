@@ -5,7 +5,7 @@ import {
     TabList, 
     TabPanels, 
     Tab, 
-    TabPanel 
+    TabPanel,
 } from "@chakra-ui/react"
 import Page from "../../components/Page";
 import { auth } from "../../index";
@@ -26,7 +26,6 @@ const AccountLayout = () => {
                         <Button onClick={() => auth.signOut()}>Sign Out</Button>
                     </TabPanel>
                     <TabPanel>
-                    <p>two!</p>
                     </TabPanel>
                 </TabPanels>
             </Tabs>
