@@ -33,6 +33,8 @@ i18n.use(initReactI18next)
                     "email": "Email",
                     "password": "Password",
                     "confirm-password": "Confirm Password",
+                    "old-password": "Old Password",
+                    "new-password": "New Password",
                     "firstname": "First Name",
                     "lastname": "Last Name",
                     "birthday": "Birthday",
@@ -84,17 +86,20 @@ i18n.use(initReactI18next)
                 error: {
                     "generic-title": "Ooops!",
                     "generic-message": "We can't seem to find the page you're looking for.",
+                    "auth-generic": "Authentication Error",
                     "auth_empty_email": "Email is required",
                     "auth_empty_password": "Password is required",
                     "snack-create-error": "Error creating snack",
                     "snack-update-error": "Error updating snack",
                     "snack-remove-error": "Error removing snack",
                     "unauthorized-title": "Insufficient Permissions",
-                    "unauthorized-message": "I'm afraid that you do not have the permission to do that..."
+                    "unauthorized-message": "I'm afraid that you do not have the permission to do that...",
+                    "passwords-not-matched": "Passwords do not match"
                 },
                 feedback: {
                     "creating-account": "Creating Account...",
                     "signing-in": "Signing-in...",
+                    "authenticating": "Authenticating...",
                     "snack-created": "Snack created",
                     "snack-updated": "Snack updated",
                     "snack-removed": "Snack removed",
@@ -103,6 +108,8 @@ i18n.use(initReactI18next)
                 modal: {
                     "sign-out-title": "Sign-out?",
                     "sign-out-body": "You'll need to enter your information again next time you'll need to access the service.",
+                    "change-password-title": "Change Password",
+                    "change-password-body": "You can change your account's password here, be remember to first enter your old one to do so.",
                     "request-password-title": "Send Password Reset Link",
                     "request-password-body": "If you have forgotten your password, we can send you a reset link in your email account associated with this account.",
                     "delete-snack-title": "Delete this snack?",

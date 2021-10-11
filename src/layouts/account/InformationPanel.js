@@ -5,6 +5,7 @@ import {
     Box,
     Button,
     FormControl,
+    FormErrorMessage,
     FormLabel,
     HStack,
     Input,
@@ -19,7 +20,7 @@ import {
     Text,
     useToast,
 } from "@chakra-ui/react";
-import { sendPasswordResetEmail } from "@firebase/auth";
+import { sendPasswordResetEmail, reauthenticateWithCredential, updatePassword, EmailAuthProvider } from "@firebase/auth";
 import { useUserData } from "../../utils/auth";
 import history from "../../utils/history";
 import { auth } from "../../index";
@@ -39,6 +40,9 @@ const InformationPanel = () => {
         auth.signOut();
         history.push("/auth");
     }
+
+    const onChangePasswordRequest = () => setRequestChangePassword(true);
+    const onChangePasswordDismiss = () => setRequestChangePassword(false);
 
     const onResetPasswordRequest = () => setRequestResetPassword(true);
     const onResetPasswordDismiss = () => setRequestResetPassword(false);
@@ -69,7 +73,7 @@ const InformationPanel = () => {
         <Box>
             <HStack spacing={4}>
                 <Button size="sm" onClick={onSignOutRequest}>{t("button.sign-out")}</Button>
-                <Button size="sm">{t("button.change-password")}</Button>
+                <Button size="sm" onClick={onChangePasswordRequest}>{t("button.change-password")}</Button>
                 <Button size="sm" onClick={onResetPasswordRequest}>{t("button.reset-password")}</Button>
             </HStack>
 
@@ -140,13 +144,18 @@ const InformationPanel = () => {
                     </ModalContent>
                 </Modal>
             }
+            { requestChangePassword &&
+                <ChangePasswordModal
+                    isOpen={requestChangePassword}
+                    onClose={onChangePasswordDismiss} />
+            }
             { requestResetPassword &&
                 <Modal isOpen={requestResetPassword} onClose={onResetPasswordDismiss}>
                     <ModalOverlay />
                     <ModalContent>
                     <ModalHeader>{t("modal.request-password-title")}</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody>{t("modal.request-password-body")}</ModalBody>
+                    <ModalBody> {t("modal.request-password-body")}</ModalBody>
 
                     <ModalFooter>
                         <Stack direction="row" spacing={4}>
@@ -165,6 +174,110 @@ const InformationPanel = () => {
                 </Modal>
             }
         </Box>
+    )
+}
+
+const ChangePasswordModal = (props) => {
+    const { t } = useTranslation();
+    const toast = useToast();
+    const [authPending, setAuthPending] = useState(false);
+    const { register, handleSubmit, formState: { errors }, setError } = useForm();
+
+    const onSubmit = (data) => {
+        setAuthPending(true);
+        const oldPassword = data.old_password;
+        const newPassword = data.new_password;
+        const confirmPassword = data.confirm_password;
+        if (newPassword !== confirmPassword) {
+            setAuthPending(false);
+            setError("new_password", {
+                type: "manual",
+                message: t("error.passwords-not-matched")
+            }, { shouldFocus: true })
+            return;
+        }
+
+        const user = auth.currentUser;
+        const credential = EmailAuthProvider.credential(user.email, oldPassword);
+        reauthenticateWithCredential(user, credential)
+            .then(() => {
+                updatePassword(user, newPassword)
+                    .then(() => toast({
+                        title: t("feedback.changed-password"),
+                        status: "success",
+                        isClosable: true
+                    })).catch((error) => toast({
+                        title: t("error.changed-password"),
+                        description: error.message,
+                        status: "error",
+                        isClosable: true
+                    }))
+            }).catch(() => 
+                setError("old_password", {
+                    type: "manual",
+                    message: t("error.auth-invalid-password")
+                }, { shouldFocus: true })
+            ).finally(() => {
+                props.onClose();
+                setAuthPending(false);
+            })
+    }
+
+    return (
+        <Modal isOpen={props.isOpen} onClose={props.onClose}>
+            <ModalOverlay />
+            <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
+                <ModalHeader>{t("modal.change-password-title")}</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                    {t("modal.change-password-body")}
+                    <Stack direction="column" spacing={4} mt={4}>
+                        <FormControl id="old-password" isRequired>
+                            <FormLabel>{t("field.old-password")}</FormLabel>
+                            <Input
+                                type="password"
+                                placeholder={t("placeholder.password")}
+                                focusBorderColor="primary.300"
+                                {...register("old_password", { required: true })}/>
+                        </FormControl>
+                        <FormControl id="new-password" isRequired isInvalid={errors.new_password && errors.new_password}>
+                            <FormLabel>{t("field.new-password")}</FormLabel>
+                            <Input
+                                type="password"
+                                placeholder={t("placeholder.password")}
+                                focusBorderColor="primary.300"
+                                {...register("new_password", { required: true })}/>
+                            <FormErrorMessage>{errors.new_password && errors.new_password.message}</FormErrorMessage>
+                        </FormControl>
+                        <FormControl id="confirm-password" isRequired>
+                            <FormLabel>{t("field.confirm-password")}</FormLabel>
+                            <Input
+                                type="password"
+                                placeholder={t("placeholder.password")}
+                                focusBorderColor="primary.300"
+                                {...register("confirm_password", { required: true })}/>
+                        </FormControl>
+                    </Stack>
+                </ModalBody>
+
+                <ModalFooter>
+                    <Stack direction="row" spacing={4}>
+                        <Button
+                            type="submit"
+                            colorScheme="primary"
+                            isLoading={authPending}
+                            loadingText={t("feedback.authenticating")}
+                            onClick={props.onConfirm}>
+                            {t('button.change-password')}
+                        </Button>
+                        <Button
+                            onClick={props.onClose}>
+                            {t("button.cancel")}
+                        </Button>
+                    </Stack>
+                </ModalFooter>
+            </ModalContent>
+        </Modal>
     )
 }
 
