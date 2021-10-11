@@ -35,6 +35,7 @@ export const SnackEditor = (props) => {
     const { t } = useTranslation();
     const [isWritePending, setWritePending] = useState(false);
     const [variations, setVariations] = useState(props.snack.variations ? new Map(Object.entries(props.snack.variations)) : new Map());
+    const [variantToDelete, setVariantToDelete] = useState();
     const [editorState, editorDispatch] = useReducer(variantEditorReducer, variantEditorState);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const toast = useToast();
@@ -118,6 +119,16 @@ export const SnackEditor = (props) => {
         })
     }
 
+    const onVariantDelete = (variant) => setVariantToDelete(variant);
+    const onVariantDeleteDismiss = () => setVariantToDelete(undefined);
+    const onVariantDeleteConfirmed = () => {
+        const variants = variations;
+        variants.delete(variantToDelete.variantId);
+
+        setVariations(variants);
+        onVariantDeleteDismiss();
+    }
+
     return (
         <>
             <Modal isOpen={props.isOpen} onClose={onDismiss}>
@@ -192,7 +203,40 @@ export const SnackEditor = (props) => {
                     isCreate={editorState.isCreate}
                     variation={editorState.variation}
                     onClose={onEditorDimiss}
-                    onCommit={onEditorCommit}/>
+                    onCommit={onEditorCommit}
+                    onDelete={onVariantDelete}/>
+            }
+            { variantToDelete &&
+                <Modal isOpen={variantToDelete} onClose={onVariantDeleteDismiss}>
+                    <ModalOverlay />
+                    <ModalContent>
+                        <ModalHeader>{ t("modal.variation-delete-title") }</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            { t("modal.variation-delete-body") }
+                            <Box mt={4}>
+                                { t("concat.about-to-delete")}
+                                <Box as="span" color="primary.300" fontWeight="semibold">
+                                    { variantToDelete.name }
+                                </Box>
+                            </Box>
+                        </ModalBody>
+                
+                        <ModalFooter>
+                            <Stack direction="row">
+                                <Button
+                                    colorScheme="primary"
+                                    onClick={onVariantDeleteConfirmed}>
+                                    {t("button.delete")}
+                                </Button>
+                                <Button
+                                    onClick={onVariantDeleteDismiss}>
+                                    {t("button.cancel")}
+                                </Button>
+                            </Stack>
+                        </ModalFooter>
+                    </ModalContent>
+              </Modal>
             }
         </>
     )

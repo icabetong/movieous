@@ -104,6 +104,8 @@ i18n.use(initReactI18next)
                     "sign-out-body": "You'll need to enter your information again next time you'll need to access the service.",
                     "delete-snack-title": "Delete this snack?",
                     "delete-snack-body": "Once completed, this action cannot be undone.",
+                    "variation-delete-title": "Delete this variation?",
+                    "variation-delete-body": "Once completed, this action cannot be undone.",
                     "editor-snack-create": "Create Snack",
                     "editor-snack-update": "Update Snack",
                     "editor-variant-create": "Create Variant",

@@ -1,7 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import {
+    Box,
     Button,
+    Flex,
     FormControl,
     FormLabel,
     Input,
@@ -19,6 +21,7 @@ import {
     NumberInputStepper,
     NumberIncrementStepper,
     NumberDecrementStepper,
+    Spacer,
     Stack,
 } from "@chakra-ui/react";
 import {
@@ -84,14 +87,24 @@ export const VariantEditor = (props) => {
             </ModalBody>
 
             <ModalFooter>
-                <Stack spacing={4} direction="row">
-                    <Button 
-                        colorScheme="primary" 
-                        type="submit">
-                        {t("button.save")}
-                    </Button>
-                    <Button onClick={onDismiss}>{t("button.cancel")}</Button>
-                </Stack>
+                <Flex width="100%">
+                    <Box>
+                        <Button
+                            disabled={props.isCreate}
+                            onClick={() => props.onDelete(props.variation)}>
+                            {t("button.delete")}
+                        </Button>
+                    </Box>
+                    <Spacer/>
+                    <Stack direction="row" spacing={4}>
+                        <Button 
+                            colorScheme="primary" 
+                            type="submit">
+                            {t("button.save")}
+                        </Button>
+                        <Button onClick={onDismiss}>{t("button.cancel")}</Button>
+                    </Stack>
+                </Flex>
             </ModalFooter>
             </ModalContent>
       </Modal>
@@ -117,7 +130,7 @@ export const variantEditorReducer = (state, action) => {
         case "update": 
             return {
                 variation: payload,
-                isCreate: true,
+                isCreate: false,
                 isOpen: true
             }
         case "dismiss":
