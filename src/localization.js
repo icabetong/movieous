@@ -71,6 +71,7 @@ i18n.use(initReactI18next)
                     "refresh": "Refresh",
                     "save": "Save",
                     "delete": "Delete",
+                    "send": "Send",
                     "reserve": "Reserve",
                     "read-more": "Read More",
                     "learn-more": "Learn more",
@@ -102,6 +103,8 @@ i18n.use(initReactI18next)
                 modal: {
                     "sign-out-title": "Sign-out?",
                     "sign-out-body": "You'll need to enter your information again next time you'll need to access the service.",
+                    "request-password-title": "Send Password Reset Link",
+                    "request-password-body": "If you have forgotten your password, we can send you a reset link in your email account associated with this account.",
                     "delete-snack-title": "Delete this snack?",
                     "delete-snack-body": "Once completed, this action cannot be undone.",
                     "variation-delete-title": "Delete this variation?",
