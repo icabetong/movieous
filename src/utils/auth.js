@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
 export const useUserData = () => {
     const authContext = useContext(AuthContext);
-    return authContext.user ? authContext.user : { }
+    return authContext.user ? authContext.user : {  }
 }
 
 export const useAuthState = () => {

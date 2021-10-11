@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import Page from "../../components/Page";
 import { fetchSingle, buildImageUrl } from "../../infrastructure/MovieRepository";
+import history from "../../utils/history";
 
 const MovieLayout = () => {
     const { t } = useTranslation();
@@ -23,7 +24,7 @@ const MovieLayout = () => {
     useEffect(() => {
         fetchSingle(id)
             .then((response) => { setMovie(response.data) })
-            .catch((error) => console.log(error))
+            .catch(() => history.push("/error") )
     }, [id]);
 
     return (
@@ -70,8 +71,8 @@ const MovieLayout = () => {
                     <Text>{t("concat.release-date", { date: movie.release_date })}</Text>
                     
                     <HStack spacing={4}>
-                        <Link to="/reserve">
-                            <Button borderRadius="8px" lineHeight="1" >{t("button.book")}</Button>
+                        <Link to={`/reserve/${id}`}>
+                            <Button colorScheme="primary" borderRadius="8px" lineHeight="1" >{t("button.reserve")}</Button>
                         </Link>
                         <Button variant="ghost" onClick={(e) => { e.preventDefault();window.location.href = movie.homepage}}>
                             {t("button.learn-more")}

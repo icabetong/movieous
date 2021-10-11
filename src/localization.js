@@ -70,6 +70,7 @@ i18n.use(initReactI18next)
                     "add": "Add",
                     "refresh": "Refresh",
                     "save": "Save",
+                    "delete": "Delete",
                     "reserve": "Reserve",
                     "read-more": "Read More",
                     "learn-more": "Learn more",
@@ -80,6 +81,8 @@ i18n.use(initReactI18next)
                     "reset-password": "Reset Password"
                 },
                 error: {
+                    "generic-title": "Ooops!",
+                    "generic-message": "We can't seem to find the page you're looking for.",
                     "auth_empty_email": "Email is required",
                     "auth_empty_password": "Password is required",
                     "snack-create-error": "Error creating snack",
@@ -99,6 +102,8 @@ i18n.use(initReactI18next)
                 modal: {
                     "sign-out-title": "Sign-out?",
                     "sign-out-body": "You'll need to enter your information again next time you'll need to access the service.",
+                    "delete-snack-title": "Delete this snack?",
+                    "delete-snack-body": "Once completed, this action cannot be undone.",
                     "editor-snack-create": "Create Snack",
                     "editor-snack-update": "Update Snack",
                     "editor-variant-create": "Create Variant",
@@ -116,11 +121,13 @@ i18n.use(initReactI18next)
                     "price-ranges": "$ {{lowest}} - $ {{highest}}",
                     "price-start-at": "Prices start at ",
                     "price-sign-only": "$ {{price}}",
-                    "selected-movie": "Selected Movie: "
+                    "selected-movie": "Selected Movie: ",
+                    "about-to-delete": "You are about to delete: ",
                 },
                 console: {
                     "snacks": "Snacks",
                     "reservations": "Reservations",
+                    "blogs": "Blogs"
                 },
                 account: {
                     "account": "Account",

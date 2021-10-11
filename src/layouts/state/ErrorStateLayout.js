@@ -10,7 +10,7 @@ import {
 import { ReactComponent as Figure } from "../../assets/error.svg";
 import Page from "../../components/Page";
 
-const UnauthorizedErrorLayout = () => {
+const ErrorStateLayout = () => {
     const { t } = useTranslation();
 
     return ( 
@@ -33,7 +33,7 @@ const UnauthorizedErrorLayout = () => {
                         fontWeight="bold"
                         color="primary.300"
                         textAlign={['center', 'center', "left", 'left']}>
-                        {t("error.unauthorized-title")}
+                        {t("error.generic-title")}
                     </Heading>
                     <Heading
                         as="h2"
@@ -43,7 +43,7 @@ const UnauthorizedErrorLayout = () => {
                         fontWeight="normal"
                         lineHeight={1.5}
                         textAlign={["center", "center", "left", "left"]}>
-                        {t("error.unauthorized-message")}
+                        {t("error.generic-message")}
                     </Heading>
                     <Link to="/">
                         <Button colorScheme="primary" borderRadius="8px" lineHeight="1" >{t("button.back-to-home")}</Button>
@@ -57,4 +57,4 @@ const UnauthorizedErrorLayout = () => {
     );
 }
 
-export default UnauthorizedErrorLayout;
+export default ErrorStateLayout;
