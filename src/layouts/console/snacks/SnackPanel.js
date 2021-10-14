@@ -55,8 +55,7 @@ const SnackPanel = () => {
                 description: error.message,
                 status: "error",
                 isClosable: true,
-            }))
-            .finally(() => onDeleteCancel())
+            })).finally(() => onDeleteCancel())
     }
 
     return (
@@ -102,7 +101,8 @@ const SnackPanel = () => {
                                 onClick={onDeleteConfirmed}>
                                 { t("button.delete") }
                             </Button>
-                            <Button>
+                            <Button
+                                onClick={onDeleteCancel}>
                                 { t("button.cancel") }
                             </Button>
                         </HStack>

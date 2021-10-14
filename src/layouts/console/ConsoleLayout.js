@@ -10,6 +10,7 @@ import {
 import SnackPanel from "./snacks/SnackPanel";
 import ReservationPanel from "./reservations/ReservationPanel";
 import BlogPanel from "./blogs/BlogPanel";
+import TheaterPanel from "./theater/TheaterPanel";
 import LoadingStateLayout from "../state/LoadingStateLayout";
 import Page from "../../components/Page";
 import { useAuthState } from "../../utils/auth";
@@ -26,6 +27,7 @@ const ConsoleLayout = () => {
                     <Tabs colorScheme="primary">
                         <TabList>
                             <Tab>{t("console.snacks")}</Tab>
+                            <Tab>{t("console.theater")}</Tab>
                             <Tab>{t("console.reservations")}</Tab>
                             <Tab>{t("console.blogs")}</Tab>
                         </TabList>
@@ -33,6 +35,9 @@ const ConsoleLayout = () => {
                         <TabPanels>
                             <TabPanel>
                                 <SnackPanel/>
+                            </TabPanel>
+                            <TabPanel>
+                                <TheaterPanel/>
                             </TabPanel>
                             <TabPanel>
                                 <ReservationPanel/>

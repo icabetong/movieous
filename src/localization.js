@@ -49,7 +49,10 @@ i18n.use(initReactI18next)
                     "variant-name": "Variant Name",
                     "quantity": "Quantity",
                     "price": "Price",
-                    "available-snacks": "Available Snacks: "
+                    "available-snacks": "Available Snacks: ",
+                    "movie": "Movie",
+                    "total-seats": "Total Seats",
+                    "is-active": "Is Active"
                 },
                 placeholder: {
                     "email": "someone@example.com",
@@ -59,7 +62,8 @@ i18n.use(initReactI18next)
                     "gender": "Select one",
                     "price": "Enter amount",
                     "snack-name": "Cotton Candy, Popcorn or etc.",
-                    "variant-name": "ex. Soda Large or Medium Variant"
+                    "variant-name": "ex. Soda Large or Medium Variant",
+                    "movie": "Click on the button beside to select one"
                 },
                 button: {
                     "show": "Show",
@@ -74,6 +78,7 @@ i18n.use(initReactI18next)
                     "save": "Save",
                     "delete": "Delete",
                     "send": "Send",
+                    "pick": "Pick",
                     "reserve": "Reserve",
                     "read-more": "Read More",
                     "learn-more": "Learn more",
@@ -114,13 +119,18 @@ i18n.use(initReactI18next)
                     "request-password-body": "If you have forgotten your password, we can send you a reset link in your email account associated with this account.",
                     "delete-snack-title": "Delete this snack?",
                     "delete-snack-body": "Once completed, this action cannot be undone.",
+                    "delete-theater-title": "Delete this theater?",
+                    "delete-theater-body": "Once completed, this action cannot be undone.",
                     "variation-delete-title": "Delete this variation?",
                     "variation-delete-body": "Once completed, this action cannot be undone.",
                     "editor-snack-create": "Create Snack",
                     "editor-snack-update": "Update Snack",
                     "editor-variant-create": "Create Variant",
                     "editor-variant-update": "Update Variant",
-                    "select-variant": "Select Snack Variant"
+                    "editor-theater-create": "Create Theater",
+                    "editor-theater-update": "Update Theater",
+                    "select-variant": "Select Snack Variant",
+                    "select-movie": "Select Movie"
                 },
                 concat: {
                     "rating": "Rating: {{rating}}",
@@ -135,11 +145,13 @@ i18n.use(initReactI18next)
                     "price-sign-only": "$ {{price}}",
                     "selected-movie": "Selected Movie: ",
                     "about-to-delete": "You are about to delete: ",
+                    "number-of-seats": "{{seats}} Seats"
                 },
                 console: {
                     "snacks": "Snacks",
+                    "theater": "Theater",
                     "reservations": "Reservations",
-                    "blogs": "Blogs"
+                    "blogs": "Blogs",
                 },
                 account: {
                     "account": "Account",

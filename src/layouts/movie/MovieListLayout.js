@@ -38,7 +38,9 @@ const MovieListLayout = () => {
 
     return (
         <Page title="navigation.movies">
-            <MovieList movies={response.movies} onMovieSelected={onMovieSelected}/>
+            <MovieList 
+                movies={response.movies} 
+                onMovieSelected={onMovieSelected}/>
             <ReactPaginate
                 previousLabel={<ChevronLeftIcon/>}
                 nextLabel={<ChevronRightIcon/>}

@@ -24,9 +24,6 @@ import {
     Spacer,
     Stack,
 } from "@chakra-ui/react";
-import {
-    BiDollar
-} from "react-icons/bi";
 import { generate } from "../../../utils/id";
 
 export const VariantEditor = (props) => {
@@ -73,7 +70,7 @@ export const VariantEditor = (props) => {
                         <InputGroup>
                             <InputLeftElement
                                 pointerEvents="none"
-                                children={<BiDollar color="gray.300" />}/>
+                                children="$"/>
                             <Input 
                                 type="number"
                                 step="0.01"
