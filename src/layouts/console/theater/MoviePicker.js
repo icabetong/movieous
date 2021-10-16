@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import ReactPaginate from "react-paginate";
 import {
     Box,
-    Button,
     GridItem,
     Modal,
     ModalOverlay,

@@ -75,7 +75,7 @@ const Navigation = () => {
                 direction={["column", "row", "row", "row"]}
                 pt={[4, 4, 0, 0]}>
                 <MenuItems to="/">{t("navigation.home")}</MenuItems>
-                <MenuItems to="/movies">{t("navigation.movies")}</MenuItems>
+                <MenuItems to="/theater">{t("navigation.theater")}</MenuItems>
                 <MenuItems to="/blogs">{t("navigation.blogs")}</MenuItems>
                 {/* <MenuItems to="/contact">Contact</MenuItems> */}
                 <MenuItems to="/about">{t("navigation.about")}</MenuItems>

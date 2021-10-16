@@ -38,7 +38,7 @@ import { transform } from "../../infrastructure/SnackRepository";
 import { firestore } from "../../index";
 
 const ReservationLayout = () => {
-    const { id } = useParams();
+    const { id, total, free, price } = useParams();
     const { t } = useTranslation();
     const [movie, setMovie] = useState({});
     const [snacks, setSnacks] = useState([]);
@@ -110,6 +110,9 @@ const ReservationLayout = () => {
                     </Text>
                     <Text>{t("concat.release-date", { date: movie.release_date })}</Text>
 
+                    <Box fontWeight="medium" fontSize="xl">{ t("concat.available-seats", { free: parseInt(free), total: parseInt(total) }) }</Box>
+                    <Box fontWeight="medium" fontSize="lg">{ t("concat.price", { price: parseFloat(price).toFixed(2) }) }</Box>
+
                     <Box
                         fontSize="lg"
                         fontWeight="medium"
@@ -133,6 +136,7 @@ const ReservationLayout = () => {
                             flexDirection="column"
                             alignItems={{base: "center", md: "baseline"}}>
                             <Button
+                                disabled={free < 1}
                                 colorScheme="primary"
                                 type="submit" 
                                 borderRadius="8px" 

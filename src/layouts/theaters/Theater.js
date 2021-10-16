@@ -10,26 +10,33 @@ import {
 import history from "../../utils/history";
 import { buildImageUrl } from "../../infrastructure/MovieRepository";
 
-const MovieList = (props) => {
+const TheaterList = (props) => {
     return (
         <SimpleGrid columns={{base: 1, md: 2, lg: 4}} spacing={{base: 2, md: 4}} my={8} mx={2}>
-            { props.movies.map((movie) => { return <MovieItem key={movie.id} onMovieSelect={props.onMovieSelected} movie={movie}/>}) }
+            { props.theaters.map((theater) => { 
+                return (
+                    <TheaterCard 
+                        key={theater.theaterId}
+                        theater={theater}
+                        onTheaterSelect={props.onTheaterSelected}/>
+                )
+            })}
         </SimpleGrid>
     )
 }
 
-const MovieItem = (props) => {
+const TheaterCard = (props) => {
     const { t } = useTranslation();
 
     return (
         <GridItem>
             <Box maxW="md" borderWidth="1px" borderRadius="lg" overflow="hidden">
-                <Image src={buildImageUrl(props.movie.backdrop_path)}/>
+                <Image src={buildImageUrl(props.theater.movie.backdrop_path)}/>
 
                 <Box p="6">
                     <Box display="flex" alignItems="baseline">
                         <Badge borderRadius="full" px="2" colorScheme="primary">
-                            {props.movie.original_language}
+                            {props.theater.movie.original_language}
                         </Badge>
                         <Box
                             color="gray.500"
@@ -39,7 +46,11 @@ const MovieItem = (props) => {
                             textTransform="uppercase"
                             ml="2"
                             isTruncated>
-                            { t("concat.rating-and-votes", { rating: props.movie.vote_average, votes: props.movie.vote_count}) }
+                            { t("concat.available-seats", { 
+                                free: props.theater.freeSeats ? props.theater.freeSeats : 0,
+                                total: props.theater.totalSeats ? props.theater.totalSeats : 0
+                            }) 
+                            }
                         </Box>
                     </Box>
                     <Box
@@ -48,19 +59,20 @@ const MovieItem = (props) => {
                         as="h2"
                         lineHeight="tight"
                         isTruncated >
-                        {props.movie.title}
+                        {props.theater.movie.title}
                     </Box>
                     <Box noOfLines={3} color="gray.300">
-                        {props.movie.overview}
+                        {props.theater.movie.overview}
                     </Box>
-                    <Button variant="link" size="sm" onClick={() => props.onMovieSelect(props.movie)}>{t("button.read-more")}</Button>
+                    <Button variant="link" size="sm" onClick={() => props.onMovieSelect(props.theater.movie)}>{t("button.read-more")}</Button>
 
                     <Box display="flex" justifyContent="flex-end">
                         <Button
                             size="sm" mt={8} 
                             borderRadius="md" 
                             colorScheme="primary"
-                            onClick={() => history.push(`/reserve/${props.movie.id}`)}>
+                            disabled={props.theater.freeSeats < 1}
+                            onClick={() => history.push(`/reserve/${props.theater.movie.id}/${props.theater.totalSeats}/${props.theater.freeSeats}/${props.theater.price}`)}>
                             {t("button.reserve")}
                         </Button>
                     </Box>
@@ -70,4 +82,4 @@ const MovieItem = (props) => {
     )
 }
 
-export default MovieList;
+export default TheaterList;

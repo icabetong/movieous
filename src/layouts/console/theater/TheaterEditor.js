@@ -45,7 +45,9 @@ export const TheaterEditor = (props) => {
         let theater = {
             theaterId: generate(),
             movie: { ...movie },
-            ...data
+            totalSeats: parseInt(data.totalSeats),
+            freeSeats: parseInt(data.freeSeats),
+            price: parseFloat(data.price)
         }
         
         if (props.isCreate) {
@@ -138,13 +140,15 @@ export const TheaterEditor = (props) => {
                                     defaultValue={props.isCreate ? 0 : props.theater.seats} 
                                     min={0} 
                                     max={100}>
-                                    <NumberInputField {...register("seats")}/>
+                                    <NumberInputField {...register("totalSeats")}/>
                                     <NumberInputStepper>
                                         <NumberIncrementStepper />
                                         <NumberDecrementStepper />
                                     </NumberInputStepper>
                                 </NumberInput>
                             </FormControl>
+
+                            <input type="hidden" value={props.theater.freeSeats} {...register("freeSeats")}/>
 
                             <FormControl display="flex" alignItems="center">
                                 <FormLabel htmlFor="active" mb="0">

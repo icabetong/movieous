@@ -8,7 +8,7 @@ import BlogLayout from "../blogs/BlogLayout";
 import AboutLayout from "../about/AboutLayout";
 import AccountLayout from "../account/AccountLayout";
 import MovieLayout from "../movie/MovieLayout";
-import MovieListLayout from "../movie/MovieListLayout";
+import TheaterLayout from "../theaters/TheaterLayout";
 import ConsoleLayout from "../console/ConsoleLayout";
 import ErrorStateLayout from "../state/ErrorStateLayout";
 
@@ -19,9 +19,9 @@ const Main = () => {
                 <Switch>
                     <Route path="/" component={HomeLayout} exact/>
                     <Route path="/console" component={ConsoleLayout}/>
-                    <Route path="/movies" component={MovieListLayout}/>
+                    <Route path="/theater" component={TheaterLayout}/>
                     <Route path="/movie/:id" component={MovieLayout}/>
-                    <Route path="/reserve/:id" component={ReservationLayout}/>
+                    <Route path="/reserve/:id/:total/:free/:price" component={ReservationLayout}/>
                     <Route path="/blogs" component={BlogLayout}/>
                     <Route path="/about" component={AboutLayout}/>
                     <Route path="/account" component={AccountLayout}/>

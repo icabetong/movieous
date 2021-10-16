@@ -6,6 +6,7 @@ import { getAuth } from '@firebase/auth';
 import { getFirestore } from '@firebase/firestore';
 
 import './localization';
+import './custom.css';
 import theme from "./utils/theme";
 import Main from "./layouts/main/Main";
 import reportWebVitals from './reportWebVitals';
