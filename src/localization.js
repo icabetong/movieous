@@ -52,7 +52,9 @@ i18n.use(initReactI18next)
                     "available-snacks": "Available Snacks: ",
                     "movie": "Movie",
                     "total-seats": "Total Seats",
-                    "is-active": "Is Active"
+                    "is-active": "Is Active",
+                    "type": "Type",
+                    "message": "Message"
                 },
                 placeholder: {
                     "email": "someone@example.com",
@@ -63,7 +65,8 @@ i18n.use(initReactI18next)
                     "price": "Enter amount",
                     "snack-name": "Cotton Candy, Popcorn or etc.",
                     "variant-name": "ex. Soda Large or Medium Variant",
-                    "movie": "Click on the button beside to select one"
+                    "movie": "Click on the button beside to select one",
+                    "message": "Type your message here"
                 },
                 button: {
                     "show": "Show",
@@ -86,7 +89,8 @@ i18n.use(initReactI18next)
                     "sign-in-with-google": "Sign-in with Google",
                     "back-to-home": "Back to Home",
                     "change-password": "Change Password",
-                    "reset-password": "Reset Password"
+                    "reset-password": "Reset Password",
+                    "submit": "Submit"
                 },
                 error: {
                     "generic-title": "Ooops!",
@@ -99,7 +103,8 @@ i18n.use(initReactI18next)
                     "snack-remove-error": "Error removing snack",
                     "unauthorized-title": "Insufficient Permissions",
                     "unauthorized-message": "I'm afraid that you do not have the permission to do that...",
-                    "passwords-not-matched": "Passwords do not match"
+                    "passwords-not-matched": "Passwords do not match",
+                    "feedback-send-error": "Error sending feedback"
                 },
                 feedback: {
                     "creating-account": "Creating Account...",
@@ -108,7 +113,8 @@ i18n.use(initReactI18next)
                     "snack-created": "Snack created",
                     "snack-updated": "Snack updated",
                     "snack-removed": "Snack removed",
-                    "reservation-created": "Reservation created"
+                    "reservation-created": "Reservation created",
+                    "feedback-sent": "Feedback sent"
                 },
                 modal: {
                     "sign-out-title": "Sign-out?",
@@ -160,11 +166,16 @@ i18n.use(initReactI18next)
                     "information": "Basic Information"
                 },
                 info: {
-                    "now-showing": "Now Showing"
+                    "now-showing": "Now Showing",
+                    "got-feedback-or-concern": "Got a feedback or concern?"
                 },
                 "gender-option-male": "Male",
                 "gender-option-female": "Female",
-                "gender-option-unspecified": "Unspecified"
+                "gender-option-unspecified": "Unspecified",
+                type: {
+                    "suggestion": "Suggestion",
+                    "feedback": "Feedback"
+                }
             }
         }
     },
