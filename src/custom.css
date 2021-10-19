@@ -21,3 +21,7 @@ li > a {
 li > a:hover {
     border: 1px solid var(--chakra-colors-primary-300);
 }
+
+.rc-md-editor {
+    height: 100%
+}

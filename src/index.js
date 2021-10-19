@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { initializeApp } from "firebase/app";
 import { getAuth } from '@firebase/auth';
 import { getFirestore } from '@firebase/firestore';
+import { getStorage } from "@firebase/storage";
 
 import './localization';
 import './custom.css';
@@ -25,6 +26,7 @@ const config = {
 export const app = initializeApp(config);
 export const auth = getAuth(app);
 export const firestore = getFirestore(app);
+export const storage = getStorage(app);
 
 ReactDOM.render(
   <React.StrictMode>

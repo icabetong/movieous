@@ -137,7 +137,9 @@ i18n.use(initReactI18next)
                     "editor-theater-create": "Create Theater",
                     "editor-theater-update": "Update Theater",
                     "select-variant": "Select Snack Variant",
-                    "select-movie": "Select Movie"
+                    "select-movie": "Select Movie",
+                    "editor-blog-create": "Create Blog Entry",
+                    "editor-blog-update": "Update Blog Entry"
                 },
                 concat: {
                     "rating": "Rating: {{rating}}",
