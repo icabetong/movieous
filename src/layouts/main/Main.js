@@ -21,7 +21,7 @@ const Main = () => {
                     <Route path="/console" component={ConsoleLayout}/>
                     <Route path="/theater" component={TheaterLayout}/>
                     <Route path="/movie/:id" component={MovieLayout}/>
-                    <Route path="/reserve/:id/:total/:free/:price" component={ReservationLayout}/>
+                    <Route path="/reserve/:id" component={ReservationLayout}/>
                     <Route path="/blogs" component={BlogLayout}/>
                     <Route path="/about" component={AboutLayout}/>
                     <Route path="/account" component={AccountLayout}/>

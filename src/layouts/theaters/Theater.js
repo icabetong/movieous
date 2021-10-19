@@ -47,8 +47,7 @@ const TheaterCard = (props) => {
                             ml="2"
                             isTruncated>
                             { t("concat.available-seats", { 
-                                free: props.theater.freeSeats ? props.theater.freeSeats : 0,
-                                total: props.theater.totalSeats ? props.theater.totalSeats : 0
+                                free: props.theater.freeSeats ? props.theater.freeSeats : 0
                             }) 
                             }
                         </Box>
@@ -72,7 +71,7 @@ const TheaterCard = (props) => {
                             borderRadius="md" 
                             colorScheme="primary"
                             disabled={props.theater.freeSeats < 1}
-                            onClick={() => history.push(`/reserve/${props.theater.movie.id}/${props.theater.totalSeats}/${props.theater.freeSeats}/${props.theater.price}`)}>
+                            onClick={() => history.push(`/reserve/${props.theater.theaterId}`)}>
                             {t("button.reserve")}
                         </Button>
                     </Box>

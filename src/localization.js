@@ -11,7 +11,7 @@ i18n.use(initReactI18next)
                 landing_summary: "Book and reserve to watch thousands of available movies in millions of locations worldwide.",
                 navigation: {
                     home: "Home",
-                    theater: "Theater",
+                    theater: "Now Showing",
                     blogs: "Blogs",
                     contact: "Contact Us",
                     about: "About",
@@ -54,7 +54,8 @@ i18n.use(initReactI18next)
                     "total-seats": "Total Seats",
                     "is-active": "Is Active",
                     "type": "Type",
-                    "message": "Message"
+                    "message": "Message",
+                    "seats-to-reserve": "Tickets to Reserve"
                 },
                 placeholder: {
                     "email": "someone@example.com",
@@ -152,7 +153,7 @@ i18n.use(initReactI18next)
                     "selected-movie": "Selected Movie: ",
                     "about-to-delete": "You are about to delete: ",
                     "number-of-seats": "{{seats}} Seats",
-                    "available-seats": "{{free}} out of {{total}} Available Seats"
+                    "available-seats": "{{free}} Available Tickets"
                 },
                 console: {
                     "snacks": "Snacks",

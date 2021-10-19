@@ -28,20 +28,25 @@ import {
     Stack,
     Text,
     useRadio,
-    useRadioGroup
+    useRadioGroup,
+    useToast
 } from "@chakra-ui/react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot } from "firebase/firestore";
 
 import Page from "../../components/Page";
-import { fetchSingle, buildImageUrl } from "../../infrastructure/MovieRepository";
+import { buildImageUrl } from "../../infrastructure/MovieRepository";
 import { transform } from "../../infrastructure/SnackRepository";
+import { reserve } from "../../infrastructure/ReservationRepository";
+import { useAuthState } from "../../utils/auth";
 import { firestore } from "../../index";
+import { generate } from "../../utils/id";
 
 const ReservationLayout = () => {
-    const { id, total, free, price } = useParams();
+    const { id } = useParams();
     const { t } = useTranslation();
-    const [movie, setMovie] = useState({});
+    const [theater, setTheater] = useState({});
     const [snacks, setSnacks] = useState([]);
+    const [seats, setSeats] = useState(1);
     const [selectedSnack, setSelectedSnack] = useState({});
     const { handleSubmit, setValue } = useForm();
     const [state, dispatcher] = useReducer(reducer, initialSelectorState);
@@ -50,9 +55,10 @@ const ReservationLayout = () => {
     const onSelectorDismiss = () => dispatcher({ type: "dismiss" });
 
     useEffect(() => {
-        fetchSingle(id)
-            .then((response) => { setMovie(response.data); })
-            .catch((error) => { console.log(error) })
+        const unsubscribe = onSnapshot(doc(firestore, "theaters", id), (snapshot) => {
+            setTheater(snapshot.data());
+        })
+        return () => unsubscribe();
     }, [id]);
 
     useEffect(() => {
@@ -60,7 +66,7 @@ const ReservationLayout = () => {
             setSnacks(transform(snapshot));
         })
         return () => unsubscribe();
-    }, [])
+    }, []);
 
     const onSubmit = (data) => {
         setSelectedSnack(JSON.parse(data.snack));
@@ -88,7 +94,7 @@ const ReservationLayout = () => {
                         fontWeight="bold"
                         color="primary.300"
                         textAlign={['center', 'center', "left", 'left']}>
-                        {movie.title}
+                        {theater.movie ? theater.movie.title : ""}
                     </Heading>
                     <Box
                         color="gray.500"
@@ -97,7 +103,7 @@ const ReservationLayout = () => {
                         fontSize="xs"
                         textTransform="uppercase"
                         ml="2">
-                        {t("concat.rating", { rating: movie.vote_average})}
+                        {t("concat.rating", { rating: theater.movie ? theater.movie.vote_average : 0})}
                     </Box>
                     <Text
                         size="md"
@@ -106,12 +112,12 @@ const ReservationLayout = () => {
                         fontWeight="normal"
                         lineHeight={1.5}
                         textAlign={["center", "center", "left", "left"]}>
-                        {movie.overview}
+                        {theater.movie ? theater.movie.overview : ""}
                     </Text>
-                    <Text>{t("concat.release-date", { date: movie.release_date })}</Text>
+                    <Text>{t("concat.release-date", { date: theater.movie ? theater.movie.release_date : "" })}</Text>
 
-                    <Box fontWeight="medium" fontSize="xl">{ t("concat.available-seats", { free: parseInt(free), total: parseInt(total) }) }</Box>
-                    <Box fontWeight="medium" fontSize="lg">{ t("concat.price", { price: parseFloat(price).toFixed(2) }) }</Box>
+                    <Box fontWeight="medium" fontSize="xl">{ t("concat.available-seats", { free: parseInt(theater.freeSeats) }) }</Box>
+                    <Box fontWeight="medium" fontSize="lg">{ t("concat.price", { price: parseFloat(theater.price).toFixed(2) }) }</Box>
 
                     <Box
                         fontSize="lg"
@@ -126,6 +132,17 @@ const ReservationLayout = () => {
                         onSubmit={handleSubmit(onSubmit)} 
                         spacing={8}>
 
+                        <FormControl id="seats">
+                            <FormLabel>{t("field.seats-to-reserve")}</FormLabel>
+                            <NumberInput defaultValue={1} min={1}>
+                                <NumberInputField value={seats} onChange={(e) => setSeats(parseInt(e.target.value))}/>
+                                <NumberInputStepper>
+                                    <NumberIncrementStepper />
+                                    <NumberDecrementStepper />
+                                </NumberInputStepper>
+                            </NumberInput>
+                        </FormControl>
+
                         <SnackList
                             maxW="100%"
                             snacks={snacks}
@@ -136,7 +153,7 @@ const ReservationLayout = () => {
                             flexDirection="column"
                             alignItems={{base: "center", md: "baseline"}}>
                             <Button
-                                disabled={free < 1}
+                                disabled={theater.free < 1}
                                 colorScheme="primary"
                                 type="submit" 
                                 borderRadius="8px" 
@@ -148,14 +165,16 @@ const ReservationLayout = () => {
                     </Stack>
                 </Stack>
                 <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
-                    <Image loading="lazy" src={buildImageUrl(movie.poster_path)} size="100%" rounded="1rem" shadow="2xl" />
+                    <Image loading="lazy" src={theater.movie ? buildImageUrl(theater.movie.poster_path) : ""} size="100%" rounded="1rem" shadow="2xl" />
                 </Box>
             </Flex>
             { selectedSnack &&
                 <SnackVariationSelector
                     isOpen={state.isOpen}
-                    movie={movie}
+                    theater={theater.theaterId}
+                    movie={theater.movie}
                     snack={selectedSnack}
+                    seats={seats}
                     variations={selectedSnack.variations}
                     onClose={onSelectorDismiss}/>}
         </Page>
@@ -228,16 +247,22 @@ const SnackItem = (props) => {
 
 const SnackVariationSelector = (props) => {
     const { t } = useTranslation();
+    const [isWritePending, setWritePending] = useState(false);
     const { register, handleSubmit, setValue } = useForm();
     const { getRootProps, getRadioProps } = useRadioGroup({
         name: "variant",
         onChange: (v) => setValue("variant", v)
     });
     const variations = props.variations ? Object.values(props.variations) : [] ;
+    const toast = useToast();
+    const { user } = useAuthState();
 
     const onSubmit = (data) => {
+        setWritePending(true);
+
         const variant = JSON.parse(data.variant);
         const reservation = {
+            reservationId: generate(),
             movie: {
                 id: props.movie.id,
                 title: props.movie.title
@@ -247,9 +272,22 @@ const SnackVariationSelector = (props) => {
                 variantName: variant.name,
                 price: variant.price,
             },
-            dateTime: Date.now()
+            dateTime: Date.now(),
+            seats: props.seats,
+            email: user.email
         }
-        console.log(reservation);
+        
+        reserve(reservation, props.theater)
+            .then(() => toast({
+                title: t("feedback.reservation-created"),
+                status: "success",
+                isClosable: true
+            })).catch((error) => () => toast({
+                title: t("error.reservation-create-error"),
+                description: error.message,
+                status: "error",
+                isClosable: true
+            })).finally(() => { setWritePending(false); props.onClose() })
     }
 
     const group = getRootProps();
@@ -264,7 +302,7 @@ const SnackVariationSelector = (props) => {
                     <Text mb={4}>
                         {t("concat.selected-movie")}
                         <Box as="span" fontWeight="semibold" color="primary.300">
-                            {props.movie.title}
+                            {props.movie ? props.movie.title : ""}
                         </Box>
                     </Text>
                     <FormControl>
@@ -302,6 +340,7 @@ const SnackVariationSelector = (props) => {
                     <HStack direction="horizontal" spacing={4}>
                         <Button
                             type="submit"
+                            isLoading={isWritePending}
                             colorScheme="primary">
                                 {t("button.reserve")}
                         </Button>
