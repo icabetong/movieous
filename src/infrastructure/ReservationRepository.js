@@ -6,6 +6,7 @@ const HOST = "https://server-production-1055.up.railway.app";
 const ACTION = `${HOST}/reserve-success`;
 
 export const reserve = async (reservation, theaterId) => {
+    console.log(reservation.seats);
     await setDoc(doc(firestore, "reservations", reservation.reservationId), reservation)
     await updateDoc(doc(firestore, "theaters", theaterId), { freeSeats: increment(reservation.seats * -1) })
 

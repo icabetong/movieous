@@ -134,8 +134,8 @@ const ReservationLayout = () => {
 
                         <FormControl id="seats">
                             <FormLabel>{t("field.seats-to-reserve")}</FormLabel>
-                            <NumberInput defaultValue={1} min={1}>
-                                <NumberInputField value={seats} onChange={(e) => setSeats(parseInt(e.target.value))}/>
+                            <NumberInput min={1} defaultValue={1} onChange={(s, v) => setSeats(parseInt(v))}>
+                                <NumberInputField value={seats}/>
                                 <NumberInputStepper>
                                     <NumberIncrementStepper />
                                     <NumberDecrementStepper />
