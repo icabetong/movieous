@@ -31,7 +31,7 @@ const MenuItems = (props) => {
 const Header = (props) => {
     const [show, setShow] = React.useState(false);
     const toggleMenu = () => setShow(!show);
-    const iconColor = useBreakpointValue({ base: "white", md: "primary.300" })
+    const iconColor = useBreakpointValue({ base: "white", md: "blue.500" })
 
     return (
         <Flex
@@ -42,8 +42,8 @@ const Header = (props) => {
             w="100%"
             mb={8}
             p={8}
-            bg={["primary.300", "primary.300", "transparent", "transparent"]}
-            color={["white", "white", "primary.300", "primary.300"]}
+            bg={["blue.500", "blue.500", "transparent", "transparent"]}
+            color={["white", "white", "blue.500", "blue.500"]}
             {...props} >
             <Flex align="center" color={iconColor}>
                 <Logo/>
@@ -84,14 +84,14 @@ const Navigation = () => {
                         isLoading={status === "pending"}
                         size="sm"
                         rounded="md"
-                        color={["primary.300", "primary.300", "white", "white"]}
-                        bg={["white", "white", "primary.300", "primary.300"]}
+                        color={["blue.500", "blue.500", "white", "white"]}
+                        bg={["white", "white", "blue.500", "blue.500"]}
                         _hover={{
                             bg: [
-                                "primary.100",
-                                "primary.100",
-                                "primary.600",
-                                "primary.600"
+                                "blue.100",
+                                "blue.100",
+                                "blue.700",
+                                "blue.700"
                             ]
                         }}>
                         {t(hasUser ? "navigation.account" : "button.sign-in")}

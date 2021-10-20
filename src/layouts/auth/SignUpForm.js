@@ -33,9 +33,9 @@ const SignUpForm = (props) => {
     return (
         <Stack
             border="1px"
-            borderColor="surface.400"
+            borderColor="gray.600"
             borderRadius="md"
-            bg="surface.700"
+            bg="gray.700"
             spacing={{base: 2, md: 4}}
             w={{base: "90%", md: "60%"}}
             p={12}
@@ -44,14 +44,14 @@ const SignUpForm = (props) => {
                 as="h1"
                 size="lg"
                 fontWeight="bold"
-                color="primary.300"
+                color="blue.300"
                 textAlign="center" >
                 { t("auth.sign-up") }
             </Heading>
             <Heading
                 as="h2"
                 size="sm"
-                color="text.secondary"
+                color="gray.200"
                 opacity="0.8"
                 fontWeight="normal"
                 textAlign="center">
@@ -70,7 +70,6 @@ const SignUpForm = (props) => {
                         id="email"
                         placeholder={t("placeholder.email")}
                         isDisabled={isCreating}
-                        focusBorderColor="primary.300"
                         {...register("email", { required: "error.auth_empty_email" })}/>
                     <FormErrorMessage>{t(errors.email && errors.email.message)}</FormErrorMessage>
                 </FormControl>
@@ -83,7 +82,6 @@ const SignUpForm = (props) => {
                             type={showPassword ? "text" : "password"}
                             placeholder={t("field.password")}
                             isDisabled={isCreating}
-                            focusBorderColor="primary.300"
                             {...register("password", { 
                                 required: "error.auth_empty_password", 
                                 min: 8,
@@ -106,7 +104,6 @@ const SignUpForm = (props) => {
                             type={showPassword ? "text" : "password"}
                             placeholder={t("field.confirm-password")}
                             isDisabled={isCreating}
-                            focusBorderColor="primary.300"
                             {...register("confirm_password", { 
                                 required: "error.auth_empty_confirm_password", 
                                 min: 8,
@@ -121,7 +118,7 @@ const SignUpForm = (props) => {
                     <FormErrorMessage>{t(errors.confirm_password && errors.confirm_password)}</FormErrorMessage>
                 </FormControl>
                 
-                <Button colorScheme="primary" type="submit" mb="4" borderRadius="md" isLoading={isCreating} loadingText={t("feedback.creating-account")}>
+                <Button colorScheme="blue" type="submit" mb="4" borderRadius="md" isLoading={isCreating} loadingText={t("feedback.creating-account")}>
                     {t("button.sign-up")}
                 </Button>
             </Stack>
@@ -130,7 +127,7 @@ const SignUpForm = (props) => {
                 variant="link" 
                 borderRadius="md"
                 onClick={() => props.setMode("sign-in")} >
-                {t("auth.sign-in-secondary-action")}
+                {t("auth.sign-up-secondary-action")}
             </Button>
         </Stack>
         

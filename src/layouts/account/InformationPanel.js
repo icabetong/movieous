@@ -83,7 +83,7 @@ const InformationPanel = () => {
                 maxWidth="50%" 
                 spacing={4}
                 onSubmit={handleSubmit(onSubmit)}>
-                <Text fontWeight="medium" color="primary.300" mb={4}>
+                <Text fontWeight="medium" color="blue.500" mb={4}>
                     {t("account.information")}
                 </Text>
 
@@ -93,7 +93,6 @@ const InformationPanel = () => {
                         type="text"
                         defaultValue={user.firstname}
                         placeholder={t("placeholder.firstname")}
-                        focusBorderColor="primary.300"
                         {...register("firstname", { required: true })}/>
                 </FormControl>
                 <FormControl id="lastname" isRequired>
@@ -102,7 +101,6 @@ const InformationPanel = () => {
                         type="text"
                         defaultValue={user.lastname}
                         placeholder={t("placeholder.lastname")}
-                        focusBorderColor="primary.300"
                         {...register("lastname", { required: true })}/>
                 </FormControl>
                 <FormControl id="email" isRequired>
@@ -111,12 +109,11 @@ const InformationPanel = () => {
                         type="text"
                         defaultValue={user.email}
                         placeholder={t("placeholder.email")}
-                        focusBorderColor="primary.300"
                         {...register("email", { required: true })}/>
                 </FormControl>
                 <Button
                     type="submit"
-                    colorScheme="primary">
+                    colorScheme="blue">
                     { t("button.save") }
                 </Button>
             </Stack>
@@ -131,7 +128,7 @@ const InformationPanel = () => {
                     <ModalFooter>
                         <Stack direction="row" spacing={4}>
                             <Button
-                                colorScheme="primary"
+                                colorScheme="blue"
                                 onClick={onSignOut}>
                                 {t('button.sign-out')}
                             </Button>
@@ -160,7 +157,7 @@ const InformationPanel = () => {
                     <ModalFooter>
                         <Stack direction="row" spacing={4}>
                             <Button
-                                colorScheme="primary"
+                                colorScheme="blue"
                                 onClick={onResetPasswordConfirm}>
                                 {t('button.send')}
                             </Button>
@@ -237,7 +234,7 @@ const ChangePasswordModal = (props) => {
                             <Input
                                 type="password"
                                 placeholder={t("placeholder.password")}
-                                focusBorderColor="primary.300"
+                                focusBorderColor="blue.500"
                                 {...register("old_password", { required: true })}/>
                         </FormControl>
                         <FormControl id="new-password" isRequired isInvalid={errors.new_password && errors.new_password}>
@@ -245,7 +242,7 @@ const ChangePasswordModal = (props) => {
                             <Input
                                 type="password"
                                 placeholder={t("placeholder.password")}
-                                focusBorderColor="primary.300"
+                                focusBorderColor="blue.500"
                                 {...register("new_password", { required: true })}/>
                             <FormErrorMessage>{errors.new_password && errors.new_password.message}</FormErrorMessage>
                         </FormControl>
@@ -254,7 +251,7 @@ const ChangePasswordModal = (props) => {
                             <Input
                                 type="password"
                                 placeholder={t("placeholder.password")}
-                                focusBorderColor="primary.300"
+                                focusBorderColor="blue.500"
                                 {...register("confirm_password", { required: true })}/>
                         </FormControl>
                     </Stack>
@@ -264,7 +261,7 @@ const ChangePasswordModal = (props) => {
                     <Stack direction="row" spacing={4}>
                         <Button
                             type="submit"
-                            colorScheme="primary"
+                            colorScheme="blue"
                             isLoading={authPending}
                             loadingText={t("feedback.authenticating")}
                             onClick={props.onConfirm}>

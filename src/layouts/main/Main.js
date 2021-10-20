@@ -11,6 +11,7 @@ import MovieLayout from "../movie/MovieLayout";
 import TheaterLayout from "../theaters/TheaterLayout";
 import ConsoleLayout from "../console/ConsoleLayout";
 import ErrorStateLayout from "../state/ErrorStateLayout";
+import EntryLayout from "../blogs/EntryLayout";
 
 const Main = () => {
     return (
@@ -22,6 +23,7 @@ const Main = () => {
                     <Route path="/theater" component={TheaterLayout}/>
                     <Route path="/movie/:id" component={MovieLayout}/>
                     <Route path="/reserve/:id" component={ReservationLayout}/>
+                    <Route path="/entry/:id" component={EntryLayout}/>
                     <Route path="/blogs" component={BlogLayout}/>
                     <Route path="/about" component={AboutLayout}/>
                     <Route path="/account" component={AccountLayout}/>

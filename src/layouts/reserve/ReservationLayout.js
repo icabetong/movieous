@@ -92,7 +92,7 @@ const ReservationLayout = () => {
                         as="h1"
                         size="xl"
                         fontWeight="bold"
-                        color="primary.300"
+                        color="blue.500"
                         textAlign={['center', 'center', "left", 'left']}>
                         {theater.movie ? theater.movie.title : ""}
                     </Heading>
@@ -122,7 +122,7 @@ const ReservationLayout = () => {
                     <Box
                         fontSize="lg"
                         fontWeight="medium"
-                        color="primary.300">
+                        color="blue.300">
                         {t("field.available-snacks")}
                     </Box>
 
@@ -154,7 +154,7 @@ const ReservationLayout = () => {
                             alignItems={{base: "center", md: "baseline"}}>
                             <Button
                                 disabled={theater.free < 1}
-                                colorScheme="primary"
+                                colorScheme="blue"
                                 type="submit" 
                                 borderRadius="8px" 
                                 lineHeight="1" >
@@ -226,7 +226,7 @@ const SnackItem = (props) => {
                 borderRadius="md"
                 boxShadow="md"
                 color="gray.600"
-                _checked={{ bg: "primary.300", color: "primary.100", borderColor: "primary.300", }}
+                _checked={{ bg: "blue.700", color: "blue.100", borderColor: "blue.300", }}
                 _focus={{ boxShadow: "outline" }}>
                 <Box
                     color="white"
@@ -301,7 +301,7 @@ const SnackVariationSelector = (props) => {
                 <ModalBody>
                     <Text mb={4}>
                         {t("concat.selected-movie")}
-                        <Box as="span" fontWeight="semibold" color="primary.300">
+                        <Box as="span" fontWeight="semibold" color="blue.500">
                             {props.movie ? props.movie.title : ""}
                         </Box>
                     </Text>
@@ -325,7 +325,7 @@ const SnackVariationSelector = (props) => {
                             max={10} 
                             min={1}
                             defaultValue={1}
-                            focusBorderColor="primary.300" >
+                            focusBorderColor="blue.500" >
                             <NumberInputField
                                 {...register("quantity", { required: "error.empty-quantity" })}/>
                             <NumberInputStepper>
@@ -341,7 +341,7 @@ const SnackVariationSelector = (props) => {
                         <Button
                             type="submit"
                             isLoading={isWritePending}
-                            colorScheme="primary">
+                            colorScheme="blue">
                                 {t("button.reserve")}
                         </Button>
                         <Button 
@@ -373,7 +373,7 @@ const SnackVariationCheckBox = (props) => {
                 borderWidth="1px"
                 borderRadius="md"
                 color="gray.600"
-                _checked={{ bg: "primary.300", borderColor: "primary.300", color: "primary.100" }}
+                _checked={{ bg: "blue.500", borderColor: "blue.500", color: "blue.100" }}
                 _focus={{ boxShadow: "none" }}>
                 <Box isTruncated>
                     <Box as="span" fontSize="md" fontWeight="medium" color="white">

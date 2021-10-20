@@ -44,7 +44,7 @@ const BlogEntryCard = (props) => {
                     letterSpacing="wide"
                     fontSize="xs"
                     textTransform="uppercase">
-                    {dateFormat(props.entry.timestamp.toDate(),"paddedShortDate")}
+                    {props.entry.timestamp !== null && dateFormat(props.entry.timestamp.toDate(),"paddedShortDate")}
                 </Box>
                 <Box 
                     fontWeight="semibold"

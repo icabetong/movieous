@@ -35,7 +35,7 @@ const TheaterCard = (props) => {
 
                 <Box p="6">
                     <Box display="flex" alignItems="baseline">
-                        <Badge borderRadius="full" px="2" colorScheme="primary">
+                        <Badge borderRadius="full" px="2" colorScheme="blue">
                             {props.theater.movie.original_language}
                         </Badge>
                         <Box
@@ -69,7 +69,7 @@ const TheaterCard = (props) => {
                         <Button
                             size="sm" mt={8} 
                             borderRadius="md" 
-                            colorScheme="primary"
+                            colorScheme="blue"
                             disabled={props.theater.freeSeats < 1}
                             onClick={() => history.push(`/reserve/${props.theater.theaterId}`)}>
                             {t("button.reserve")}

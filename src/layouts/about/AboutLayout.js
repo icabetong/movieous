@@ -39,14 +39,14 @@ const AboutLayout = () => {
                         as="h1"
                         size="xl"
                         fontWeight="bold"
-                        color="primary.300"
+                        color="blue.500"
                         textAlign={['center', 'center', "left", 'left']}>
                         {t("landing_title")}
                     </Heading>
                     <Heading
                         as="h2"
                         size="md"
-                        color="primary.100"
+                        color="blue.100"
                         opacity="0.8"
                         fontWeight="normal"
                         lineHeight={1.5}
@@ -97,7 +97,6 @@ const FeedbackForm = () => {
                     <FormLabel>{t("field.email")}</FormLabel>
                     <Input 
                         type="email"
-                        focusBorderColor="primary.300"
                         placeholder={t("placeholder.email")}
                         {...register("email")}/>
                 </FormControl>
@@ -106,8 +105,8 @@ const FeedbackForm = () => {
                     <FormLabel as="type">{t("field.type")}</FormLabel>
                     <RadioGroup defaultValue="suggestion">
                         <Stack direction="row" spacing={4}>
-                            <Radio {...register("type")} colorScheme="primary" value="suggestion">{t("type.suggestion")}</Radio>
-                            <Radio {...register("type")} colorScheme="primary" value="feedback">{t("type.feedback")}</Radio>
+                            <Radio {...register("type")} colorScheme="blue" value="suggestion">{t("type.suggestion")}</Radio>
+                            <Radio {...register("type")} colorScheme="blue" value="feedback">{t("type.feedback")}</Radio>
                         </Stack>
                     </RadioGroup>
                 </FormControl>
@@ -115,7 +114,6 @@ const FeedbackForm = () => {
                 <FormControl id="concern">
                     <FormLabel>{t("field.message")}</FormLabel>
                     <Textarea
-                        focusBorderColor="primary.300"
                         placeholder={t("placeholder.message")}
                         {...register("message")}/>
                 </FormControl>
@@ -123,7 +121,7 @@ const FeedbackForm = () => {
                 <Button
                     type="submit"
                     isLoading={isSending}
-                    colorScheme="primary">
+                    colorScheme="blue">
                     {t("button.submit")}
                 </Button>
             </Stack>

@@ -37,9 +37,9 @@ const UserInformationForm = () => {
     return (
         <Stack
             border="1px"
-            borderColor="surface.400"
+            borderColor="gray.600"
             borderRadius="md"
-            bg="surface.700"
+            bg="gray.700"
             spacing={{base: 2, md: 4}}
             w={{base: "90%", md: "60%"}}
             p={12}
@@ -48,14 +48,14 @@ const UserInformationForm = () => {
                 as="h1"
                 size="lg"
                 fontWeight="bold"
-                color="primary.300"
+                color="blue.200"
                 textAlign="center" >
                 { t("auth.getting-started-title") }
             </Heading>
             <Heading
                 as="h2"
                 size="sm"
-                color="text.secondary"
+                color="gray.200"
                 opacity="0.8"
                 fontWeight="normal"
                 textAlign="center">
@@ -73,7 +73,6 @@ const UserInformationForm = () => {
                         type="text"
                         id="firstname"
                         placeholder={t("placeholder.firstname")}
-                        focusBorderColor="primary.300"
                         {...register("firstname", { required: "error.auth_empty_firstname", min: 3 })}/>
                     <FormErrorMessage>{t(errors.firstname && errors.firstname.message)}</FormErrorMessage>
                 </FormControl>
@@ -83,13 +82,12 @@ const UserInformationForm = () => {
                         type="text"
                         id="lastname"
                         placeholder={t("placeholder.lastname")}
-                        focusBorderColor="primary.300"
                         {...register("lastname", { required: "error.auth_empty_lastname", min: 2 })}/>
                     <FormErrorMessage>{t(errors.lastname && errors.lastname.message)}</FormErrorMessage>
                 </FormControl>
                 <FormControl id="gender">
                     <FormLabel>{t("field.gender")}</FormLabel>
-                    <Select focusBorderColor="primary.300" placeholder={t("placeholder.gender")} {...register("gender", { required: "error.auth_empty_gender"})}>
+                    <Select placeholder={t("placeholder.gender")} {...register("gender", { required: "error.auth_empty_gender"})}>
                         <option>{t("gender-option-male")}</option>
                         <option>{t("gender-option-female")}</option>
                         <option>{t("gender-option-unspecified")}</option>

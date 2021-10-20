@@ -1,8 +1,36 @@
+import { useEffect, useState } from "react";
+import {
+    Flex
+} from "@chakra-ui/react";
 import Page from "../../components/Page";
+import BlogEntryList from "./BlogList";
+import { transform } from "../../infrastructure/BlogEntryRepository";
+import { onSnapshot, collection } from "@firebase/firestore";
+import history from "../../utils/history";
+import { firestore } from "../..";
 
 const BlogLayout = () => {
+    const [entries, setEntries] = useState([]);
+
+    useEffect(() => {
+        const unsubscribe = onSnapshot(collection(firestore, "entries"), (snapshot) => {
+            setEntries(transform(snapshot))
+        })
+        return () => unsubscribe();
+    }, []);
+
+    const onEntryClicked = (entry) => {
+        history.push(`/entry/${entry.entryId}`)
+    }
+
     return (
-        <Page title="navigation.blogs"></Page>
+        <Page title="navigation.blogs">
+            <Flex>
+                <BlogEntryList
+                    entries={entries}
+                    onClick={onEntryClicked}/>
+            </Flex>
+        </Page>
     )
 }
 

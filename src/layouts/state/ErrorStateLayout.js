@@ -31,7 +31,7 @@ const ErrorStateLayout = () => {
                         as="h1"
                         size="xl"
                         fontWeight="bold"
-                        color="primary.300"
+                        color="blue.500"
                         textAlign={['center', 'center', "left", 'left']}>
                         {t("error.generic-title")}
                     </Heading>
@@ -46,7 +46,7 @@ const ErrorStateLayout = () => {
                         {t("error.generic-message")}
                     </Heading>
                     <Link to="/">
-                        <Button colorScheme="primary" borderRadius="8px" lineHeight="1" >{t("button.back-to-home")}</Button>
+                        <Button colorScheme="blue" borderRadius="8px" lineHeight="1" >{t("button.back-to-home")}</Button>
                     </Link>
                 </Stack>
                 <Box w="80%" mb={{ base: 12, md: 0 }}>

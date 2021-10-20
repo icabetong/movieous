@@ -34,14 +34,14 @@ const HomeLayout = ({image, ctaLink, ...rest}) => {
                         as="h1"
                         size="xl"
                         fontWeight="bold"
-                        color="primary.300"
+                        color="blue.500"
                         textAlign={['center', 'center', "left", 'left']}>
                         {t("landing_title")}
                     </Heading>
                     <Heading
                         as="h2"
                         size="md"
-                        color="primary.100"
+                        color="blue.100"
                         opacity="0.8"
                         fontWeight="normal"
                         lineHeight={1.5}
@@ -49,7 +49,7 @@ const HomeLayout = ({image, ctaLink, ...rest}) => {
                         {t("landing_summary")}
                     </Heading>
                     <Link to={ctaLink}>
-                        <Button colorScheme="primary" borderRadius="8px" lineHeight="1" >{t("button.browse-movies")}</Button>
+                        <Button colorScheme="blue" borderRadius="8px" lineHeight="1" >{t("button.browse-movies")}</Button>
                     </Link>
                 </Stack>
                 <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>

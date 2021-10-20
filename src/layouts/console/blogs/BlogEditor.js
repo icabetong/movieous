@@ -40,7 +40,7 @@ export const BlogEditor = (props) => {
     useEffect(() => {
         if (props.isOpen && !props.isCreate) {
             setContentLoading(true);
-            download(props.entry && props.entry)
+            download(props.entry && props.entry.entryId)
                 .then((response) => setMd(response))
                 .catch((error) => console.log(error))
                 .finally(() => setContentLoading(false))
@@ -57,9 +57,11 @@ export const BlogEditor = (props) => {
     const onSubmit = (data) => {
         setWritePending(true);
         const markdown = new Blob([editor.current.getMdValue()], { type: "text/markdown" });
+        const string = editor.current.getMdValue().length <= 100 ? editor.current.getMdValue() : editor.current.getMdValue().substring(0, 100);
 
         const entry = {
             entryId: props.entry !== undefined ? props.entry.entryId : generate(),
+            preview: string,
             title: data.title,
         }
         if (props.isCreate) {

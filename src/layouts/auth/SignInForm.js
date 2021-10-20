@@ -51,9 +51,9 @@ const SignInForm = (props) => {
     return (
         <Stack
             border="1px"
-            borderColor="surface.400"
+            borderColor="gray.600"
             borderRadius="md"
-            bg="surface.700"
+            bg="gray.700"
             spacing={{base: 2, md: 4}}
             w={{base: "90%", md: "60%"}}
             p={12}
@@ -62,14 +62,14 @@ const SignInForm = (props) => {
                 as="h1"
                 size="lg"
                 fontWeight="bold"
-                color="primary.300"
+                color="blue.300"
                 textAlign="center" >
                 { t("auth.sign-in") }
             </Heading>
             <Heading
                 as="h2"
                 size="sm"
-                color="text.secondary"
+                color="gray.200"
                 opacity="0.8"
                 fontWeight="normal"
                 textAlign="center">
@@ -87,7 +87,6 @@ const SignInForm = (props) => {
                         type="email"
                         id="email"
                         placeholder={t("placeholder.email")}
-                        focusBorderColor="primary.300"
                         {...register("email", { required: "error.auth_empty_email" })}/>
                     <FormErrorMessage>{t(errors.email && errors.email.message)}</FormErrorMessage>
                 </FormControl>
@@ -99,7 +98,6 @@ const SignInForm = (props) => {
                             id="password"
                             type={showPassword ? "text" : "password"}
                             placeholder={t("placeholder.password")}
-                            focusBorderColor="primary.300"
                             {...register("password", { required: "error.auth_empty_password", min: 8 })}/>
                         <InputRightElement width="4.5rem">
                             <Button variant="ghost" h="1.75rem" size="sm" onClick={() => setShowPassword(!showPassword)}>
@@ -110,7 +108,7 @@ const SignInForm = (props) => {
                     <FormErrorMessage>{t(errors.password && errors.password.message)}</FormErrorMessage>
                 </FormControl>
 
-                <Button colorScheme="primary" type="submit" mb="4" borderRadius="md" isLoading={isAuthenticating} loadingText={t("feedback.signing-in")}>
+                <Button colorScheme="blue" type="submit" mb="4" borderRadius="md" isLoading={isAuthenticating} loadingText={t("feedback.signing-in")}>
                     {t("button.sign-in")}
                 </Button>
                 <Button colorScheme="gray" variant="outline" leftIcon={<FaGoogle/>} onClick={onSignInWithGoogle}>
@@ -122,7 +120,7 @@ const SignInForm = (props) => {
                 variant="link" 
                 borderRadius="md"
                 onClick={() => props.setMode("sign-up")} >
-                {t("auth.sign-up-secondary-action")}
+                {t("auth.sign-in-secondary-action")}
             </Button>
         </Stack>
     )

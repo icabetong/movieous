@@ -19,7 +19,7 @@ const AccountLayout = () => {
         <>
         { status === "fetched" 
             ? <Page title={`${user.firstname} ${user.lastname}`}>
-                <Tabs colorScheme="primary">
+                <Tabs>
                     <TabList>
                         <Tab>{t("account.account")}</Tab>
                         <Tab>{t("account.reservations")}</Tab>

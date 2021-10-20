@@ -56,7 +56,6 @@ const theme = extendTheme({
 	styles: {
 		global: {
 			"body": {
-				bg: "surface.800",
 			}
 		}
 	}

@@ -10,21 +10,21 @@ export const create = async (entry, content) => {
     }
 
     await setDoc(doc(firestore, "entries", entry.entryId), data)
-    return await uploadBytes(ref(storage, `entries/${entry.entryId}.md`), content);
+    return uploadBytes(ref(storage, `entries/${entry.entryId}.md`), content);
 }
 
 export const update = async (entry, content) => {
     await updateDoc(doc(firestore, "entries", entry.entryId), entry)
-    return await uploadBytes(ref(storage, `entries/${entry.entryId}.md`), content)
+    return uploadBytes(ref(storage, `entries/${entry.entryId}.md`), content)
 }
 
 export const remove = async (entry) => {
     await deleteDoc(doc(firestore, "entries", entry.entryId));
-    return await deleteObject(ref(storage, `entries/${entry.entryId}.md`))
+    return deleteObject(ref(storage, `entries/${entry.entryId}.md`))
 }
 
 export const download = async (entry) => {
-    let url = await getDownloadURL(ref(storage, `entries/${entry.entryId}.md`));
+    let url = await getDownloadURL(ref(storage, `entries/${entry}.md`));
     let response = await axios({
         url: url,
         method: 'GET',
