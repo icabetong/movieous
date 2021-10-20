@@ -14,7 +14,7 @@ const ReservationPanel = () => {
         <Box>
             <HStack
                 spacing={4}>
-                <Button size="sm" leftIcon={<HiPlus/>} colorScheme="primary">
+                <Button size="sm" leftIcon={<HiPlus/>} colorScheme="blue">
                     {t("button.add")}
                 </Button>
             </HStack>

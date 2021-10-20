@@ -146,7 +146,6 @@ export const SnackEditor = (props) => {
                                 type="text"
                                 defaultValue={props.snack.name}
                                 placeholder={t("placeholder.snack-name")}
-                                focusBorderColor="primary.300"
                                 {...register("name", { required: "error.snack-name-empty"})}/>
                             <FormErrorMessage>{t(errors.name && errors.name.message)}</FormErrorMessage>
                         </FormControl>
@@ -154,9 +153,9 @@ export const SnackEditor = (props) => {
                             <FormLabel as="legend">{t("field.snack-type")}</FormLabel>
                             <RadioGroup defaultValue={props.snack.type}>
                                 <Stack direction="row" spacing="24px">
-                                    <Radio {...register("type")} value="food" colorScheme="primary">{t("field.type-food")}</Radio>
-                                    <Radio {...register("type")} value="drink" colorScheme="primary">{t("field.type-drink")}</Radio>
-                                    <Radio {...register("type")} value="bundle" colorScheme="primary">{t("field.type-bundle")}</Radio>
+                                    <Radio {...register("type")} value="food">{t("field.type-food")}</Radio>
+                                    <Radio {...register("type")} value="drink">{t("field.type-drink")}</Radio>
+                                    <Radio {...register("type")} value="bundle">{t("field.type-bundle")}</Radio>
                                 </Stack>
                             </RadioGroup>
                         </FormControl>
@@ -186,7 +185,7 @@ export const SnackEditor = (props) => {
                     <ModalFooter>
                         <Stack spacing={4} direction="row">
                             <Button 
-                                colorScheme="primary" 
+                                colorScheme="blue" 
                                 isLoading={isWritePending}
                                 type="submit">
                                 {t("button.save")}

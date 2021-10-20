@@ -86,7 +86,7 @@ const MovieCard = (props) => {
             as="button"
             borderRadius="md"
             onClick={(e) => props.onItemSelect(e, props.movie)}
-            _hover={{bg: "gray.600", color: "primary.300"}}>
+            _hover={{bg: "gray.600", color: "blue.300"}}>
             <Box p="4">
                 <Box
                     fontWeight="medium"

@@ -62,7 +62,7 @@ const SnackPanel = () => {
         <Box>
             <HStack
                 spacing={4}>
-                <Button size="sm" leftIcon={<HiPlus/>} colorScheme="primary" onClick={onEditorCreate}>
+                <Button size="sm" leftIcon={<HiPlus/>} colorScheme="blue" onClick={onEditorCreate}>
                     {t("button.add")}
                 </Button>
             </HStack>
@@ -70,12 +70,14 @@ const SnackPanel = () => {
                 snacks={snacks} 
                 onClick={onEditorUpdate}
                 onDelete={onDeleteSnack}/>
-            <SnackEditor
-                key={editorState.snack.snackId}
-                snack={editorState.snack}
-                isOpen={editorState.isOpen} 
-                isCreate={editorState.isCreate}
-                onClose={onEditorDismiss}/>
+            { editorState.snack &&
+                <SnackEditor
+                    key={editorState.snack.snackId}
+                    snack={editorState.snack}
+                    isOpen={editorState.isOpen} 
+                    isCreate={editorState.isCreate}
+                    onClose={onEditorDismiss}/>
+            }
             { snackToDelete &&
                 <Modal isOpen={snackToDelete && snackToDelete} onClose={onDeleteCancel}>
                     <ModalOverlay />
@@ -86,7 +88,7 @@ const SnackPanel = () => {
                         {t("modal.delete-snack-body")}
                         <Box mt={4}>
                             { t("concat.about-to-delete")}
-                            <Box as="span" color="primary.300" fontWeight="semibold">
+                            <Box as="span" color="blue.200" fontWeight="semibold">
                                 { snackToDelete.name }
                             </Box>
                         </Box>
@@ -95,7 +97,7 @@ const SnackPanel = () => {
                     <ModalFooter>
                         <HStack spacing={4}>
                             <Button
-                                colorScheme="primary"
+                                colorScheme='blue'
                                 onClick={onDeleteConfirmed}>
                                 { t("button.delete") }
                             </Button>

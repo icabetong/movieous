@@ -3,12 +3,13 @@
     margin-bottom: var(--chakra-space-12);
 }
 .selected {
-    color: var(--chakra-colors-primary-200);
+    color: var(--chakra-colors-blue-500);
 }
 ul, li { 
     display: inline-block;
 }
 li > a {
+    color: var(--chakra-colors-gray-400);
     min-width: var(--chakra-space-6);
     min-height: var(--chakra-space-6);
     border: 1px solid transparent;
@@ -19,7 +20,8 @@ li > a {
     padding-bottom: var(--chakra-space-2);
 }
 li > a:hover {
-    border: 1px solid var(--chakra-colors-primary-300);
+    color: white;
+    border: 1px solid var(--chakra-colors-blue-500);
 }
 
 .rc-md-editor {

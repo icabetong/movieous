@@ -68,7 +68,7 @@ const BlogPanel = () => {
             <Box>
                 <HStack
                     spacing={4}>
-                    <Button size="sm" leftIcon={<HiPlus/>} colorScheme="primary" onClick={onEditorCreate}>
+                    <Button size="sm" leftIcon={<HiPlus/>} colorScheme="blue" onClick={onEditorCreate}>
                         {t("button.add")}
                     </Button>
                 </HStack>
@@ -92,7 +92,7 @@ const BlogPanel = () => {
                         {t("modal.delete-snack-body")}
                         <Box mt={4}>
                             { t("concat.about-to-delete")}
-                            <Box as="span" color="primary.300" fontWeight="semibold">
+                            <Box as="span" color="blue.200" fontWeight="semibold">
                                 { entryToDelete.title }
                             </Box>
                         </Box>
@@ -101,7 +101,7 @@ const BlogPanel = () => {
                     <ModalFooter>
                         <HStack spacing={4}>
                             <Button
-                                colorScheme="primary"
+                                colorScheme="blue"
                                 onClick={onDeleteConfirmed}>
                                 { t("button.delete") }
                             </Button>

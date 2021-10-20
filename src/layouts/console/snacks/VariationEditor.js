@@ -47,7 +47,6 @@ export const VariantEditor = (props) => {
                             type="text"
                             placeholder={t("placeholder.variant-name")}
                             defaultValue={props.variation.name ? props.variation.name : "" }
-                            focusBorderColor="primary.300"
                             {...register("name", { required: "error.empty-name" })}/>
                     </FormControl>
                     <FormControl id="quantity" isRequired>
@@ -55,8 +54,7 @@ export const VariantEditor = (props) => {
                         <NumberInput
                             max={15} 
                             min={1}
-                            defaultValue={props.variation.quantity ? props.variation.quantity : 1 }
-                            focusBorderColor="primary.300" >
+                            defaultValue={props.variation.quantity ? props.variation.quantity : 1 }>
                             <NumberInputField
                                 {...register("quantity", { required: "error.empty-quantity" })}/>
                             <NumberInputStepper>
@@ -75,7 +73,6 @@ export const VariantEditor = (props) => {
                                 type="number"
                                 step="0.01"
                                 defaultValue={props.variation.price ? props.variation.price : 0 }
-                                focusBorderColor="primary.300"
                                 placeholder={t("placeholder.price")}
                                 {...register("price", { required: "error.empty-price" })} />
                         </InputGroup>
@@ -95,7 +92,7 @@ export const VariantEditor = (props) => {
                     <Spacer/>
                     <Stack direction="row" spacing={4}>
                         <Button 
-                            colorScheme="primary" 
+                            colorScheme="blue" 
                             type="submit">
                             {t("button.save")}
                         </Button>

@@ -106,7 +106,6 @@ export const TheaterEditor = (props) => {
                                         pr="4.5rem" 
                                         defaultValue={movie !== undefined ? movie.title : ""}
                                         placeholder={t("placeholder.movie")}
-                                        focusBorderColor="primary.300"
                                         isReadOnly/>
                                     <InputRightElement width="4.5rem">
                                         <Button h="1.75rem" size="sm" onClick={onPickerShow}>
@@ -128,7 +127,6 @@ export const TheaterEditor = (props) => {
                                         step="0.01"
                                         defaultValue={props.isCreate ? 0 : props.theater.price}
                                         placeholder={t("placeholder.price")}
-                                        focusBorderColor="primary.300"
                                         {...register("price")}/>
                                 </InputGroup>
                             </FormControl>
@@ -136,7 +134,6 @@ export const TheaterEditor = (props) => {
                             <FormControl id="seats">
                                 <FormLabel>{t("field.total-seats")}</FormLabel>
                                 <NumberInput 
-                                    focusBorderColor="primary.300"
                                     defaultValue={props.isCreate ? 0 : props.theater.seats} 
                                     min={0} 
                                     max={100}>
@@ -155,8 +152,7 @@ export const TheaterEditor = (props) => {
                                     { t("field.is-active") }
                                 </FormLabel>
                                 <Switch 
-                                    id="active" 
-                                    colorScheme="primary"
+                                    id="active"
                                     {...register("is-active")}/>
                             </FormControl>
                         </Stack>
@@ -166,7 +162,7 @@ export const TheaterEditor = (props) => {
                     <Stack spacing={4} direction="row">
                         <Button 
                             isLoading={isWritePending}
-                            colorScheme="primary"
+                            colorScheme="blue"
                             type="submit">
                             {t("button.save")}
                         </Button>

@@ -64,7 +64,7 @@ const TheaterPanel = () => {
                     <Button 
                         size="sm" 
                         leftIcon={<HiPlus/>} 
-                        colorScheme="primary"
+                        colorScheme="blue"
                         onClick={onEditorCreate}>
                         {t("button.add")}
                     </Button>
@@ -91,7 +91,7 @@ const TheaterPanel = () => {
                         {t("modal.delete-theater-body")}
                         <Box mt={4}>
                             { t("concat.about-to-delete")}
-                            <Box as="span" color="primary.300" fontWeight="semibold">
+                            <Box as="span" color="blue.200" fontWeight="semibold">
                                 { theaterToDelete.movie.title }
                             </Box>
                         </Box>
@@ -100,7 +100,7 @@ const TheaterPanel = () => {
                     <ModalFooter>
                         <HStack spacing={4}>
                             <Button
-                                colorScheme="primary"
+                                colorScheme="blue"
                                 onClick={onDeleteConfirmed}>
                                 { t("button.delete") }
                             </Button>

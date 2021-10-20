@@ -41,7 +41,7 @@ const TheaterItem = (props) => {
                 borderWidth="1px" 
                 borderRadius="lg" 
                 overflow="hidden"
-                _hover={{ borderColor: "primary.300", bg: "surface.700" }}>
+                _hover={{ borderColor: "blue.300", bg: "surface.700" }}>
                 <Box
                     color="gray.500"
                     fontWeight="semibold"

@@ -110,7 +110,6 @@ export const BlogEditor = (props) => {
                                 disabled={isWritePending}
                                 defaultValue={props.entry ? props.entry.title : ""}
                                 placeholder={t("placeholder.entry-title")}
-                                focusBorderColor="primary.300"
                                 {...register("title", { required: "feedback.empty-title" })} />
                             <FormHelperText>{errors.title && errors.title.message}</FormHelperText>
                         </FormControl>
@@ -147,7 +146,7 @@ export const BlogEditor = (props) => {
                         <Button
                             isLoading={isWritePending}
                             type="submit"
-                            colorScheme="primary">
+                            colorScheme="blue">
                             {t("button.save")}
                         </Button>
                         <Button

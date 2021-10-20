@@ -24,7 +24,7 @@ const ConsoleLayout = () => {
         { status === "fetched"
             ? user.isAdmin
                 ? <Page title="navigation.console">
-                    <Tabs colorScheme="primary">
+                    <Tabs colorScheme="blue">
                         <TabList>
                             <Tab>{t("console.snacks")}</Tab>
                             <Tab>{t("console.theater")}</Tab>
