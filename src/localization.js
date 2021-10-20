@@ -91,7 +91,7 @@ i18n.use(initReactI18next)
                     "back-to-home": "Back to Home",
                     "change-password": "Change Password",
                     "reset-password": "Reset Password",
-                    "submit": "Submit"
+                    "submit": "Submit",
                 },
                 error: {
                     "generic-title": "Ooops!",
@@ -170,7 +170,8 @@ i18n.use(initReactI18next)
                 },
                 info: {
                     "now-showing": "Now Showing",
-                    "got-feedback-or-concern": "Got a feedback or concern?"
+                    "got-feedback-or-concern": "Got a feedback or concern?",
+                    "markdown-guide": "The editor is using Markdown as syntax. "
                 },
                 "gender-option-male": "Male",
                 "gender-option-female": "Female",

@@ -55,7 +55,7 @@ const SnackPanel = () => {
                 description: error.message,
                 status: "error",
                 isClosable: true,
-            })).finally(() => onDeleteCancel())
+            })).finally(onDeleteCancel)
     }
 
     return (
@@ -70,14 +70,12 @@ const SnackPanel = () => {
                 snacks={snacks} 
                 onClick={onEditorUpdate}
                 onDelete={onDeleteSnack}/>
-            { editorState.snack &&
-                <SnackEditor
-                    key={editorState.snack.snackId}
-                    snack={editorState.snack}
-                    isOpen={editorState.isOpen} 
-                    isCreate={editorState.isCreate}
-                    onClose={onEditorDismiss}/>
-            }
+            <SnackEditor
+                key={editorState.snack.snackId}
+                snack={editorState.snack}
+                isOpen={editorState.isOpen} 
+                isCreate={editorState.isCreate}
+                onClose={onEditorDismiss}/>
             { snackToDelete &&
                 <Modal isOpen={snackToDelete && snackToDelete} onClose={onDeleteCancel}>
                     <ModalOverlay />

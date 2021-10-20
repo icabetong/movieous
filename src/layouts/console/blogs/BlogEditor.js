@@ -1,8 +1,11 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import {
+    Box,
     Button,
+    Flex,
     FormControl,
     FormHelperText,
     FormLabel,
@@ -14,27 +17,49 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
+    Spinner,
     Stack,
     useToast
 } from "@chakra-ui/react";
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
 import { generate } from "../../../utils/id";
-import { create } from "../../../infrastructure/BlogEntryRepository";
+import { create, update, download } from "../../../infrastructure/BlogEntryRepository";
 import 'react-markdown-editor-lite/lib/index.css';
 
 export const BlogEditor = (props) => {
     const { t } = useTranslation();
-    const toast = useToast();
+    const [md, setMd] = useState("");
+    const [isContentLoading, setContentLoading] = useState(false);
+    const [isWritePending, setWritePending] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const editor = useRef(undefined);
+    const toast = useToast();
     const parser = MarkdownIt();
 
+    useEffect(() => {
+        if (props.isOpen && !props.isCreate) {
+            setContentLoading(true);
+            download(props.entry && props.entry)
+                .then((response) => setMd(response))
+                .catch((error) => console.log(error))
+                .finally(() => setContentLoading(false))
+        }
+    }, [props.entry, props.isOpen, props.isCreate]);
+
+    const onEditorChange = ({ text }) => setMd(text);
+    
+    const onDismiss = () => {
+        setMd("");
+        props.onClose()
+    }
+
     const onSubmit = (data) => {
-        const markdown = new Blob([editor.current.getMdValue()], { type: "text/markdown"} );
+        setWritePending(true);
+        const markdown = new Blob([editor.current.getMdValue()], { type: "text/markdown" });
 
         const entry = {
-            entryId: generate(),
+            entryId: props.entry !== undefined ? props.entry.entryId : generate(),
             title: data.title,
         }
         if (props.isCreate) {
@@ -48,12 +73,30 @@ export const BlogEditor = (props) => {
                     desc: error.message,
                     status: "error",
                     isClosable: true
-                })).finally(props.onClose)
+                })).finally(() => {
+                    setWritePending(false);
+                    onDismiss()
+                })
+        } else {
+            update(entry, markdown)
+                .then(() => toast({
+                    title: t("feedback.entry-updated"),
+                    status: "success",
+                    isClosable: true
+                })).catch((error) => toast({
+                    title: "feedback.entry-update-error",
+                    description: error.message,
+                    status: "error",
+                    isClosable: true
+                })).finally(() => {
+                    setWritePending(false);
+                    onDismiss()
+                })
         }
     }
 
     return (
-        <Modal isOpen={props.isOpen} onClose={props.onClose} size="full">
+        <Modal isOpen={props.isOpen} onClose={onDismiss} size="full">
             <ModalOverlay />
             <ModalContent as="form" onSubmit={handleSubmit(onSubmit)}>
                 <ModalHeader>{t(props.isCreate ? "modal.editor-blog-create" : "modal.editor-blog-update")}</ModalHeader>
@@ -64,28 +107,52 @@ export const BlogEditor = (props) => {
                             <FormLabel>{t("field.title")}</FormLabel>
                             <Input 
                                 type="text"
+                                disabled={isWritePending}
                                 defaultValue={props.entry ? props.entry.title : ""}
                                 placeholder={t("placeholder.entry-title")}
                                 focusBorderColor="primary.300"
                                 {...register("title", { required: "feedback.empty-title" })} />
                             <FormHelperText>{errors.title && errors.title.message}</FormHelperText>
                         </FormControl>
+                        
+                        <Box fontSize="sm" color="gray.300">
+                            {t("info.markdown-guide")}
+                            <Link to="cheatsheet">
+                                <Box as="span" color="white">
+                                    {t("button.learn-more")}
+                                </Box>
+                            </Link>
+                        </Box>
 
-                        <MdEditor
-                            ref={editor}
-                            renderHTML={text => parser.render(text)}/>
+                        { !isContentLoading
+                            ? <MdEditor
+                                ref={editor}
+                                value={md}
+                                readOnly={isWritePending}
+                                onChange={onEditorChange}
+                                renderHTML={text => parser.render(text)}/>
+                            : <Flex 
+                                w="100%" 
+                                h="100%"
+                                alignItems="center"
+                                justifyContent="center">
+                                <Spinner size="lg"/>
+                             </Flex>
+                        }
                     </Stack>
                 </ModalBody>
 
                 <ModalFooter>
                     <Stack direction="row" spacing={4}>
                         <Button
+                            isLoading={isWritePending}
                             type="submit"
                             colorScheme="primary">
                             {t("button.save")}
                         </Button>
                         <Button
-                            onClick={props.onClose}>
+                            disabled={isWritePending}
+                            onClick={onDismiss}>
                             {t("button.cancel")}
                         </Button>
                     </Stack>
