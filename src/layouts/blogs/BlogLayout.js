@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react";
-import {
-    Flex
-} from "@chakra-ui/react";
 import Page from "../../components/Page";
 import BlogEntryList from "./BlogList";
 import { transform } from "../../infrastructure/BlogEntryRepository";
@@ -25,11 +22,9 @@ const BlogLayout = () => {
 
     return (
         <Page title="navigation.blogs">
-            <Flex>
-                <BlogEntryList
-                    entries={entries}
-                    onClick={onEntryClicked}/>
-            </Flex>
+            <BlogEntryList
+                entries={entries}
+                onClick={onEntryClicked}/>
         </Page>
     )
 }

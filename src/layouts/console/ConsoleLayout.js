@@ -8,7 +8,6 @@ import {
     TabPanel 
 } from "@chakra-ui/react";
 import SnackPanel from "./snacks/SnackPanel";
-import ReservationPanel from "./reservations/ReservationPanel";
 import BlogPanel from "./blogs/BlogPanel";
 import TheaterPanel from "./theater/TheaterPanel";
 import LoadingStateLayout from "../state/LoadingStateLayout";
@@ -28,7 +27,6 @@ const ConsoleLayout = () => {
                         <TabList>
                             <Tab>{t("console.snacks")}</Tab>
                             <Tab>{t("console.theater")}</Tab>
-                            <Tab>{t("console.reservations")}</Tab>
                             <Tab>{t("console.blogs")}</Tab>
                         </TabList>
 
@@ -38,9 +36,6 @@ const ConsoleLayout = () => {
                             </TabPanel>
                             <TabPanel>
                                 <TheaterPanel/>
-                            </TabPanel>
-                            <TabPanel>
-                                <ReservationPanel/>
                             </TabPanel>
                             <TabPanel>
                                 <BlogPanel/>

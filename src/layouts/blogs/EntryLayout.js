@@ -34,7 +34,7 @@ const EntryLayout = () => {
         <>
         { entry 
           ?  <Page title={entry.title}>
-                <Box>
+                <Box mb={16}>
                     <ReactMarkdown children={content}/>
                 </Box>
             </Page>

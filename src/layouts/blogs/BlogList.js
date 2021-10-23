@@ -5,7 +5,7 @@ import {
 
 const BlogEntryList = (props) => {
     return (
-        <Stack spacing={4}>
+        <Stack direction="row">
         { props.entries.map(entry => (
             <BlogEntryCard
                 key={entry.entryId}
@@ -19,6 +19,7 @@ const BlogEntryList = (props) => {
 const BlogEntryCard = (props) => {
     return (
         <Box
+            maxW="100%"
             p={4}
             borderRadius="md"
             borderWidth="1px"
@@ -30,13 +31,10 @@ const BlogEntryCard = (props) => {
                 color: "blue.400"
             }}
             onClick={() => props.onClick(props.entry)}>
-            <Box fontWeight="medium" fontSize="lg">
+            <Box fontWeight="medium" fontSize="lg" as="h4">
                 {props.entry.title}
             </Box>
-            <Box 
-                color="gray.400"
-                noOfLines="2"
-                isTruncated>
+            <Box as="h6" color="gray.400" lineHeight="tight" noOfLines={2} isTruncated>
                 {props.entry.preview}
             </Box>
         </Box>

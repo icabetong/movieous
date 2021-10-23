@@ -13,7 +13,7 @@ const Page = (props) => {
             minH="100vh"
             m="0 auto">
             <Header/>
-            <Box minW="100%" minH="70vh" px={8}>
+            <Box minW="100%" maxW="100%" minH="70vh" px={8}>
                 { props.title && <Heading as="h2" size="xl" mb={4}>{t(props.title)}</Heading> }
             {props.children}
             </Box>

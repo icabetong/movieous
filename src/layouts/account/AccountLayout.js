@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react"
 import Page from "../../components/Page";   
 import InformationPanel from "./InformationPanel";
+import ReservationPanel from "./ReservationPanel";
 import { useAuthState } from "../../utils/auth";
 
 const AccountLayout = () => {
@@ -30,6 +31,7 @@ const AccountLayout = () => {
                             <InformationPanel/>
                         </TabPanel>
                         <TabPanel>
+                            <ReservationPanel/>
                         </TabPanel>
                     </TabPanels>
                 </Tabs>

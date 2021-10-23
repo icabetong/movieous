@@ -9,6 +9,8 @@ i18n.use(initReactI18next)
                 app_name: "Movieous",
                 landing_title: "The Gateway to your entertainment",
                 landing_summary: "Book and reserve to watch thousands of available movies in millions of locations worldwide.",
+                about_title: "About Our Services",
+                about_summary: "Movieous, launched in 2021, is the premier search and discovery platform for Movies always looking for new opportunities to improve the movies streaming experience. We offer thousands of new releases and catalog movies in millions of locations worldwide to book and reserve your desire movies. At Movieous, We aim to entertain the entire world. We provide you with access to the best-in-class movies, regardless of your taste or where you live.",
                 navigation: {
                     home: "Home",
                     theater: "Now Showing",
@@ -155,7 +157,8 @@ i18n.use(initReactI18next)
                     "selected-movie": "Selected Movie: ",
                     "about-to-delete": "You are about to delete: ",
                     "number-of-seats": "{{seats}} Seats",
-                    "available-seats": "{{free}} Available Tickets"
+                    "available-seats": "{{free}} Available Tickets",
+                    "tickets": "{{tickets}} Tickets"
                 },
                 console: {
                     "snacks": "Snacks",

@@ -41,7 +41,7 @@ const AboutLayout = () => {
                         fontWeight="bold"
                         color="blue.500"
                         textAlign={['center', 'center', "left", 'left']}>
-                        {t("landing_title")}
+                        {t("about_title")}
                     </Heading>
                     <Heading
                         as="h2"
@@ -51,7 +51,7 @@ const AboutLayout = () => {
                         fontWeight="normal"
                         lineHeight={1.5}
                         textAlign={["center", "center", "left", "left"]}>
-                        {t("landing_summary")}
+                        {t("about_summary")}
                     </Heading>
                 </Stack>
                 <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>

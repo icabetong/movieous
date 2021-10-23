@@ -18,3 +18,10 @@ export const reserve = async (reservation, theaterId) => {
 
     return await axios.post(ACTION, reserve);
 }   
+
+export const transform = (snapshot) => {
+    const data = [];
+
+    snapshot.docs.forEach(doc => data.push(doc.data()));
+    return data;
+}

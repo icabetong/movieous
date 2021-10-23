@@ -86,7 +86,7 @@ const ReservationLayout = () => {
                 mb={16}>
                 <Stack
                     spacing={4}
-                    w={{base: "80%", md: "40%"}}
+                    w={{base: "100%", md: "40%"}}
                     align={['center', 'center', 'flex-start', 'flex-start']} >
                     <Heading
                         as="h1"
@@ -164,7 +164,7 @@ const ReservationLayout = () => {
 
                     </Stack>
                 </Stack>
-                <Box w={{ base: "80%", sm: "60%", md: "50%" }} mb={{ base: 12, md: 0 }}>
+                <Box display="flex" justifyContent="center" w={{ base: "100%", sm: "100%", md: "50%" }} mb={{ base: 12, md: 0 }}>
                     <Image loading="lazy" src={theater.movie ? buildImageUrl(theater.movie.poster_path) : ""} size="100%" rounded="1rem" shadow="2xl" />
                 </Box>
             </Flex>
@@ -274,7 +274,8 @@ const SnackVariationSelector = (props) => {
             },
             dateTime: Date.now(),
             seats: props.seats,
-            email: user.email
+            email: user.email,
+            userId: user.userId
         }
         
         reserve(reservation, props.theater)

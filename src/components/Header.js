@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { 
     Box, 
     Button, 
-    Flex, 
+    Flex,
     Text,
     useBreakpointValue
 } from "@chakra-ui/react";
@@ -29,6 +29,7 @@ const MenuItems = (props) => {
 }
 
 const Header = (props) => {
+    const { t } = useTranslation();
     const [show, setShow] = React.useState(false);
     const toggleMenu = () => setShow(!show);
     const iconColor = useBreakpointValue({ base: "white", md: "blue.500" })
@@ -47,6 +48,7 @@ const Header = (props) => {
             {...props} >
             <Flex align="center" color={iconColor}>
                 <Logo/>
+                <Text ml={4} as="h4" fontWeight="bold" fontSize="lg">{t("app_name")}</Text>
             </Flex>
 
             <Box display={{base: "block", md: "none"}} onClick={toggleMenu}>
