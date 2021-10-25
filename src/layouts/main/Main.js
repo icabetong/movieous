@@ -18,6 +18,8 @@ const Main = () => {
         <AuthProvider>
             <Router history={history}>
                 <Switch>
+                    <Route path="*" component={ErrorStateLayout}/>
+
                     <Route path="/" component={HomeLayout} exact/>
                     <Route path="/console" component={ConsoleLayout}/>
                     <Route path="/theater" component={TheaterLayout}/>
