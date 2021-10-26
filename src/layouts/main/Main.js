@@ -18,7 +18,6 @@ const Main = () => {
         <AuthProvider>
             <Router history={history}>
                 <Switch>
-                    <Route path="*" component={ErrorStateLayout}/>
 
                     <Route path="/" component={HomeLayout} exact/>
                     <Route path="/console" component={ConsoleLayout}/>
@@ -36,6 +35,7 @@ const Main = () => {
                         window.location.href = "https://www.markdownguide.org/cheat-sheet/"
                         return null;
                     }}/>
+                    <Route path="*" component={ErrorStateLayout}/>
                 </Switch>
             </Router>
         </AuthProvider>
